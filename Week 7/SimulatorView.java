@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -26,6 +28,13 @@ public class SimulatorView extends JFrame
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
     private FieldView fieldView;
+    private JButton stepOne;
+    private JButton step100;
+    private JPanel rightPanel;
+    private JPanel mainPanel;
+    private JPanel centerPanel;
+    private JPanel rightFlow;
+    
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
@@ -44,18 +53,48 @@ public class SimulatorView extends JFrame
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
-        population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
+        population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);     
         
         setLocation(100, 50);
         
         fieldView = new FieldView(height, width);
+        
+        rightPanel = new JPanel();
+        rightPanel.setLayout(new GridLayout(0,1));
+        stepOne = new JButton("Step 1");
+        rightPanel.add(stepOne);        
+        step100 = new JButton("Step 100");
+        rightPanel.add(step100);
+        
+        rightFlow = new JPanel();
+        rightFlow.add(rightPanel);
+        
+        centerPanel = new JPanel();
+        centerPanel.setLayout(new BorderLayout());
+        centerPanel.add(fieldView, BorderLayout.CENTER);
+        centerPanel.add(stepLabel, BorderLayout.NORTH);
+        centerPanel.add(population, BorderLayout.SOUTH);       
+        
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(rightFlow, BorderLayout.WEST);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
 
         Container contents = getContentPane();
-        contents.add(stepLabel, BorderLayout.NORTH);
-        contents.add(fieldView, BorderLayout.CENTER);
-        contents.add(population, BorderLayout.SOUTH);
+        //contents.add(stepLabel, BorderLayout.NORTH);
+        contents.add(mainPanel, BorderLayout.CENTER);
+        //contents.add(population, BorderLayout.SOUTH);
         pack();
         setVisible(true);
+        
+        
+
+        
+    }
+    
+    public void addButtonListeners(ActionListener one, ActionListener hundred){
+    	stepOne.addActionListener(one);
+    	step100.addActionListener(hundred);
     }
     
     /**
