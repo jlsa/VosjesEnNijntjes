@@ -17,16 +17,19 @@ public class Simulator
 {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 120;
+    private static final int DEFAULT_WIDTH = 100;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 80;
+    private static final int DEFAULT_DEPTH = 100;
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
-
+    private static final double RABBIT_CREATION_PROBABILITY = 0.04;  
+    // The probability that a rabbit will be created in any given grid position.
+    private static final double BEAR_CREATION_PROBABILITY = 0.02;  
+    // The probability that a rabbit will be created in any given grid position.
+    private static final double HUNTER_CREATION_PROBABILITY = 0.005;  
     // List of animals in the field.
-    private List<Animal> animals;
+    private List<Actor> actors;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -56,13 +59,16 @@ public class Simulator
             width = DEFAULT_WIDTH;
         }
         
-        animals = new ArrayList<Animal>();
+        actors = new ArrayList<Actor>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
+        view.setColor(Bear.class, Color.RED);
+        view.setColor(Hunter.class, Color.BLACK);
+        
         addListeners();
         
         // Setup a valid starting point.
@@ -115,18 +121,18 @@ public class Simulator
         step++;
 
         // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<Animal>();        
+        List<Actor> newActors = new ArrayList<Actor>();        
         // Let all rabbits act.
-        for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
-            Animal animal = it.next();
-            animal.act(newAnimals);
-            if(! animal.isAlive()) {
+        for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
+            Actor actor = it.next();
+            actor.act(newActors);
+            if(! actor.isActive()) {
                 it.remove();
             }
         }
                
         // Add the newly born foxes and rabbits to the main lists.
-        animals.addAll(newAnimals);
+        actors.addAll(newActors);
 
         view.showStatus(step, field);
     }
@@ -137,7 +143,7 @@ public class Simulator
     public void reset()
     {
         step = 0;
-        animals.clear();
+        actors.clear();
         populate();
         
         // Show the starting state in the view.
@@ -156,13 +162,24 @@ public class Simulator
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, field, location);
-                    animals.add(fox);
+                    actors.add(fox);
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
-                    animals.add(rabbit);
+                    actors.add(rabbit);
                 }
+                else if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Bear bear = new Bear(true, field, location);
+                    actors.add(bear);
+                }
+                else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Hunter hunter = new Hunter(field, location);
+                    actors.add(hunter);
+                }
+                
                 // else leave the location empty.
             }
         }
