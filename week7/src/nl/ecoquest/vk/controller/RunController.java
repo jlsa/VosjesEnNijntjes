@@ -4,8 +4,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import nl.ecoquest.vk.exception.*;
-import nl.ecoquest.vk.logic.*;
+import nl.ecoquest.vk.model.*;
 
 public class RunController extends AbstractController implements ActionListener 
 {
@@ -17,7 +16,7 @@ public class RunController extends AbstractController implements ActionListener
 	private JButton stopSteps;
 	private JLabel stepsTaken;
 	
-	public RunController(FRLogic frLogic) {
+	public RunController(SimulatorModel frLogic) {
 		super(frLogic);
 		setSize(450, 50);
 			
@@ -54,16 +53,16 @@ public class RunController extends AbstractController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == stepOne) {
-			try {
+			/*try {
 				frLogic.doStep();
 			} catch(FRException ex) {
 				ex.getStackTrace();
-			}
+			}*/
 			return;
 		}
 		
 		if(e.getSource() == startSteps) {
-			try {
+			/*try {
 				int steps = parseSteps();
 				if(steps < 1 || steps > 1000) {
 					throw new FRException("Illigal number of steps");	
@@ -71,12 +70,12 @@ public class RunController extends AbstractController implements ActionListener
 				frLogic.doSteps(steps); //.doSteps(steps);
 			} catch(Exception ex) {
 				ex.printStackTrace();
-			}
+			}*/
 			return;
 		}
 		
 		if(e.getSource() == stopSteps) {
-			frLogic.stopSteps();
+			//frLogic.stopSteps();
 		}
 	}
 	
@@ -85,7 +84,7 @@ public class RunController extends AbstractController implements ActionListener
 	}
 	
 	public void setSteps() {
-		stepsTaken.setText("Steps: " + frLogic.getStepsTaken());
-		System.out.println("steps: " + frLogic.getStepsTaken());
+		//stepsTaken.setText("Steps: " + frLogic.getStepsTaken());
+		//System.out.println("steps: " + frLogic.getStepsTaken());
 	}
 }

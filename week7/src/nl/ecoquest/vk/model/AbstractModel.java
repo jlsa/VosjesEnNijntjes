@@ -1,4 +1,4 @@
-package nl.ecoquest.vk.logic;
+package nl.ecoquest.vk.model;
 
 import nl.ecoquest.vk.view.*;
 

@@ -1,16 +1,16 @@
 package nl.ecoquest.vk.view;
 
 import java.awt.*;
-import nl.ecoquest.vk.logic.*;
+import nl.ecoquest.vk.model.*;
 
 public class FieldView extends AbstractView {
 	
-	private int w = 600;
-	private int h = 600;
+	private int w = 300;
+	private int h = 300;
 	private static final long serialVersionUID = 1L;
 
-	public FieldView(FRLogic frLogic) {
-		super(frLogic);
+	public FieldView(SimulatorModel model) {
+		super(model);
 		setSize(w, h);
 	}
 	
@@ -18,8 +18,9 @@ public class FieldView extends AbstractView {
 		g.setColor(Color.white);
 		g.fillRect(0, 0, w, h);
 		g.setColor(Color.blue);
-			
-		int[][] state = frLogic.getState();
+		
+		
+		int[][] state = model.getField();
 		
 		if(state == null) {
 			return;
@@ -29,6 +30,11 @@ public class FieldView extends AbstractView {
 		for(int i = 0; i < state.length; i++) {
 			for(int j = 0; j < state[i].length; j++) {
 				if(state[i][j] == 1) {
+					g.setColor(Color.blue);
+					g.fillRect(margin+4*i, margin+4*j, 3, 3);
+				}
+				if(state[i][j] == 2) {
+					g.setColor(Color.red);
 					g.fillRect(margin+4*i, margin+4*j, 3, 3);
 				}
 			}

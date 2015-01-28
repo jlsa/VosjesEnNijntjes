@@ -3,7 +3,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import nl.ecoquest.vk.logic.*;
+import nl.ecoquest.vk.model.*;
 
 public class InitController extends AbstractController implements ActionListener
 {
@@ -12,7 +12,7 @@ public class InitController extends AbstractController implements ActionListener
 	private JTextField degree;
 	private JButton init;
 	
-	public InitController(FRLogic frLogic) {
+	public InitController(SimulatorModel frLogic) {
 		super(frLogic);
 		setSize(90, 130);
 		size = new JTextField("123");
@@ -38,9 +38,9 @@ public class InitController extends AbstractController implements ActionListener
 		try {
 			int sizeField = parseSize();
 			float degreeField = parseDegree();
-			frLogic.setSize(sizeField);
-			frLogic.setDegree(degreeField);
-			frLogic.randomInit();
+			//frLogic.setSize(sizeField);
+			//frLogic.setDegree(degreeField);
+			//frLogic.randomInit();
 			
 		} catch(Exception ex) {
 			ex.printStackTrace();
