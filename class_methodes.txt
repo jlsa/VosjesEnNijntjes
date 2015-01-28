@@ -1,0 +1,48 @@
+nl.ecoquest.vk.actor
+	Actor.java - interface: Act, isActive, setInActive, setLocation, getLocation, setField, getField 
+	Sickness.java - interface: isSick, setSick, incrementSickness, spreadSickness
+
+nl.ecoquest.vk.actor.environment
+	Grass.java implements Actor
+	Water.java implements Actor
+
+nl.ecoquest.vk.actor.animal
+	Animal.java - abstract class implements Actor: 	(vars: breeding_age, max_age, breeding_probability, max_litter_size, food_value, age, food_level, max_food_level) : 
+												   	(methods: incrementAge, incrementHunger, findFood, giveBirth, breed, canBreed, tryToEscape)
+	Fox.java - extends Animal
+	Rabbit.java - extends Animal implements Sickness
+	Bear.java - extends Animal
+
+nl.ecoquest.vk.actor.human
+	Human.java implements Actor
+	Hunter.java implements Actor :	(vars: kills, max_kills, )
+									(methods: hunt)
+
+nl.ecoquest.vk.view
+	AbstractView.java extends JPanel -	(vars: simulatorModel)
+										(methods: getModel, updateView)
+	FieldView.java extends AbstractView: 
+	StatsView.java
+	HistogramView.java
+	OptionsView.java
+
+nl.ecoquest.vk.controller
+	AbstractController.java	
+	OptionsController.java
+	ToolbarController.java
+
+nl.ecoquest.vk.model
+	AbstractModel.java
+	SimulatorModel.java
+
+nl.ecoquest.vk.simulation
+	Counter.java
+	Location.java
+	Field.java
+	Randomizer.java
+
+nl.ecoquest.vk.runner
+	Runner.java
+
+nl.ecoquest.vk.main
+	Main.java
