@@ -28,6 +28,7 @@ public class StatView extends AbstractView {
 		float c2 = 0.0f;
 		float c3 = 0.0f;
 		float c4 = 0.0f;
+		float non = 0.0f;
 		for(int i = 0; i < state.length; i++) {
 			for(int j = 0; j < state[i].length; j++) {
 				if(state[i][j] == 1) {
@@ -42,10 +43,13 @@ public class StatView extends AbstractView {
 				if(state[i][j] == 4) {
 					c4++;
 				}
+				if(state[i][j] == 0) {
+					non++;
+				}
 			}
 		}
 		
-		float total = c1 + c2 + c3 + c4;
+		float total = c1 + c2 + c3 + c4 + non;
 		float temp = 0.0f;
 		
 		temp = (3.6f * ((c1/total) * 100));
@@ -64,6 +68,10 @@ public class StatView extends AbstractView {
 		int begin4 = end1 + end2 + end3;
 		int end4 = Math.round(temp);
 		
+		temp = (3.6f * ((non/total) * 100));
+		int beginNon = end1 + end2 + end3 + end4;
+		int endNon = Math.round(temp);
+		
 		
 		int x = (300 - pieSize) / 2;
 		int y = (300 - pieSize) / 2;
@@ -80,6 +88,9 @@ public class StatView extends AbstractView {
 		
 		g.setColor(Color.green);
 		g.fillArc(x, y, width, height, begin4, end4);
+		
+		g.setColor(Color.lightGray);
+		g.fillArc(x, y, width, height, beginNon, endNon);
 		
 		
 	}

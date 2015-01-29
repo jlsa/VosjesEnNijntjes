@@ -37,6 +37,16 @@ public class FieldView extends AbstractView {
 					g.setColor(Color.red);
 					g.fillRect(margin+4*i, margin+4*j, 3, 3);
 				}
+				
+				if(state[i][j] == 3) {
+					g.setColor(Color.pink);
+					g.fillRect(margin+4*i, margin+4*j, 3, 3);
+				}
+				
+				if(state[i][j] == 3) {
+					g.setColor(Color.green);
+					g.fillRect(margin+4*i, margin+4*j, 3, 3);
+				}
 			}
 		}
 	}
