@@ -1,23 +1,28 @@
 package nl.ecoquest.vk.view;
 
 import javax.swing.*;
-import nl.ecoquest.vk.logic.*;
+
+import nl.ecoquest.vk.model.*;
 
 public abstract class AbstractView extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
-	protected FRLogic frLogic;
+	protected SimulatorModel model;
 	
-	public AbstractView(FRLogic frLogic) {
-		this.frLogic = frLogic;
-		frLogic.addView(this);
+	public AbstractView(SimulatorModel model) {
+		this.model = model;
+		model.addView(this);
 	}
 	
-	public FRLogic getModel() {
-		return frLogic;
+	public SimulatorModel getModel() {
+		return model;
 	}
 	
 	public void updateView() {
 		repaint();
 	}
+	
+	public void preparePaint() {}
+	
+
 }

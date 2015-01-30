@@ -1,11 +1,14 @@
 package nl.ecoquest.vk.controller;
 
 import javax.swing.*;
-import nl.ecoquest.vk.logic.*;
+
+import nl.ecoquest.vk.model.*;
+
+@SuppressWarnings("serial")
 public abstract class AbstractController extends JPanel {
-	protected FRLogic frLogic;
+	protected SimulatorModel model;
 	
-	public AbstractController(FRLogic frLogic) {
-		this.frLogic=frLogic;
+	public AbstractController(SimulatorModel model) {
+		this.model=model;
 	}
 }
