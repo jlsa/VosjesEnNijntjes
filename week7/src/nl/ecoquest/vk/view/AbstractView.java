@@ -1,6 +1,11 @@
 package nl.ecoquest.vk.view;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+
 import javax.swing.*;
+
 import nl.ecoquest.vk.model.*;
 
 public abstract class AbstractView extends JPanel 
@@ -20,4 +25,8 @@ public abstract class AbstractView extends JPanel
 	public void updateView() {
 		repaint();
 	}
+	
+	public void preparePaint() {}
+	
+
 }

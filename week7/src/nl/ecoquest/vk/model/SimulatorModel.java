@@ -6,6 +6,7 @@ import java.awt.Color;
 
 import nl.ecoquest.vk.model.AbstractModel;
 import nl.ecoquest.vk.simulation.*;
+import nl.ecoquest.vk.view.FieldView;
 import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.actor.animal.*;
 
@@ -21,27 +22,29 @@ public class SimulatorModel extends AbstractModel implements Runnable
 {
 	private double FOX_CREATION_PROBABILITY = 0.05;
 	private double RABBIT_CREATION_PROBABILITY = 0.08;
+	
+	private static final Color EMPTY_COLOR = Color.WHITE;
+	private static final Color UNKNOWN_COLOR = Color.GRAY;
+	
 	// The number of steps the simulation has to run
 	private int numOfSteps = 100;
 	
-	private int size = 75;
 	// List of actors in the field
 	private List<Actor> actors;
 	// The current field
 	private Field field;
 	
-	// the field stats
+	// the field statistics
 	private FieldStats fieldStats;
 	
 	// The current step of the simulation
 	private int step;
 	
-	private int[][] grid;
 	
 	private boolean run;
 	private boolean runInfinite;
 	
-	// the time the thread sleeps each cycle (Cannot be lower then 10)
+	// the time in microseconds the thread sleeps each cycle (Cannot be lower then 10)
 	private int sleepTime = 10; // 1000 is 1 second
 	
 	private LinkedHashMap<Class<?>, Color> colors;
@@ -51,7 +54,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		actors = new ArrayList<Actor>();
 		colors = new LinkedHashMap<Class<?>, Color>();
 		fieldStats = new FieldStats();
-		populate();
+		field = new Field(150, 150);
 		run = false;
 		runInfinite = false;
 		
@@ -71,6 +74,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	
 	public void simulateInfinite() {
 		runInfinite = true;
+		if(run) { return; }
 		run = true;
 		new Thread(this).start();
 	}
@@ -94,7 +98,6 @@ public class SimulatorModel extends AbstractModel implements Runnable
 			}
 			
 			actors.addAll(newActors);
-			
 			notifyViews();
 		} catch(Exception e) {
 			System.err.println(e);
@@ -114,53 +117,97 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		step = 0;
 		actors.clear();
 		populate();
-		
 		notifyViews();
 	}
 	
 	/**
 	 * Return the field
-	 * @return int[][] field
+	 * @return field
 	 */
-	public int[][] getField() 
+	public Field getField() 
 	{
-		return grid;
+		return field;
 	}
-	
+	/**
+	 * Random populate the field with Actors
+	 */
 	private void populate() 
 	{
-		grid = new int[size][size];
+		Random rand = Randomizer.getRandom();
+		field.clear();
+		for(int row = 0; row < field.getDepth(); row++) {
+			for(int col = 0; col < field.getWidth(); col++) {
+				if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+					Location location = new Location(row, col);
+					Fox fox = new Fox(field, location);
+					actors.add(fox);
+				}
+				if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
+					Location location = new Location(row, col);
+					Rabbit rabbit = new Rabbit(field, location);
+					actors.add(rabbit);
+				}
+			}
+		}
+		
 		update();
 	}
 	
-	// should not exist eventually - should do the same as simulateOneStep()
+	/**
+	 * Updates the Simulation, counts and renders etc.
+	 */
 	public void update()
 	{
-		/*fieldStats.reset();
-		
-		try {
+		if(views.size() > 0) {
+			if(!views.get(0).isVisible()) {
+				views.get(0).setVisible(true);
+			}
+			fieldStats.reset();
+			
+			views.get(0).preparePaint();
+			
 			for(int row = 0; row < field.getDepth(); row++) {
 				for(int col = 0; col < field.getWidth(); col++) {
 					Object actor = field.getObjectAt(row, col);
 					if(actor != null) {
+						render(col, row, getColor(actor.getClass()));
 						fieldStats.incrementCount(actor.getClass());
+					} else {
+						render(col, row, EMPTY_COLOR);
 					}
 				}
 			}
-		} catch(Exception e) {
-			// do nothing with it.
-		}
-		
-		fieldStats.countFinished();		
-		*/
-		//fieldStats.reset();
-		System.out.println("updating");
-		for(int i = 0; i < size; i++) {
-			for(int j = 0; j < size; j++) {
-				grid[i][j] = Randomizer.getRandom().nextInt(5);
+			
+			fieldStats.countFinished();	
+
+			if(views.get(0) instanceof FieldView) {
+				FieldView fieldView = (FieldView)views.get(0);
+				fieldView.repaint();
 			}
 		}
-		//fieldStats.countFinished();	
+		
+		notifyViews();
+		System.out.println("updating");
+		
+	}
+	
+	private void render(int col, int row, Color color) {
+		if(views.size() > 0) {
+			if(views.get(0) instanceof FieldView) {
+				FieldView view = (FieldView)views.get(0);
+				view.g.setColor(color); //(col, row, color);
+				view.g.fillRect(col * view.xScale, row * view.yScale, view.xScale-1, view.yScale-1);
+			}
+		}
+	}
+	
+	private Color getColor(Class<?> actorClass) {
+		Color c = colors.get(actorClass);
+		if(c == null) {
+			return UNKNOWN_COLOR;
+		} else {
+			return c;
+		}
 	}
 
 	@Override

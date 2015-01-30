@@ -20,6 +20,7 @@ public class StatView extends AbstractView {
 		g.setColor(Color.white);
 		int pieSize = 300;
 		g.fillRect(0, 0, pieSize, pieSize);
+		/*
 		int[][] state = model.getField();
 		
 		if(state == null) return;
@@ -91,7 +92,7 @@ public class StatView extends AbstractView {
 		
 		g.setColor(Color.lightGray);
 		g.fillArc(x, y, width, height, beginNon, endNon);
-		
+		*/
 		
 	}
 }

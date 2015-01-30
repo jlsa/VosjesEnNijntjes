@@ -22,34 +22,42 @@ public class Main implements Runnable {
 	private AbstractView statView;
 	private SimulatorController controller;
 	
+	// list with updateable objects
 	private ArrayList<Updateable> updateableObjects;
 	
 	public Main() {
+		// instantiate
 		updateableObjects = new ArrayList<Updateable>();
 		model = new SimulatorModel();
 		controller = new SimulatorController(model);
 		screen = new JFrame("Predator- pray simulator");
+		fieldView = new FieldView(model);
+		statView = new StatView(model);
+		
+		// setup
 		screen.setSize(800, 600);
 		screen.setLocationRelativeTo(null);
 		screen.setResizable(false);
 		screen.setLayout(null);
 		
-		fieldView = new FieldView(model);
-		statView = new StatView(model);
 		
+		// add
 		screen.getContentPane().add(fieldView);
 		screen.getContentPane().add(statView);
 		screen.getContentPane().add(controller);
+		updateableObjects.add(controller);
 		
+		// give positions
 		fieldView.setBounds(0, 0, 300, 300);
 		statView.setBounds(300, 0, 300, 300);
 		controller.setBounds(0, 300, 300, 300);
-		
-		
-		updateableObjects.add(controller);
-		
+
+		//
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setVisible(true);
+		
+		// start the simulation
+		model.reset();
 		
 		// yes, this is an endless loop on purpose!
 		new Thread(this).start();
