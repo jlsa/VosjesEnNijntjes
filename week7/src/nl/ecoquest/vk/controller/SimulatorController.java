@@ -13,13 +13,14 @@ public class SimulatorController extends AbstractController implements ActionLis
 	
 	private JButton stepOne;
 	private JButton stepHundred;
-	private JLabel stepsTaken;
+	private JLabel stepsTaken, populationDetails;
 	private JButton stopSteps;
 	
 	public SimulatorController(SimulatorModel model) {
 		super(model);	
 		setSize(300, 300);
 		stepsTaken = new JLabel("Step: ");
+		populationDetails = new JLabel("Population: ");
 		
 		stepOne = new JButton("One step");
 		stepOne.addActionListener(this);
@@ -31,13 +32,17 @@ public class SimulatorController extends AbstractController implements ActionLis
 		
 		this.setLayout(null);
 		add(stepsTaken);
+		add(populationDetails);
 		add(stepOne);
 		add(stepHundred);
 		add(stopSteps);
+		
 		stepsTaken.setBounds(0, 0, 100, 50);
 		stepOne.setBounds(0, 50, 100, 50);
 		stepHundred.setBounds(0, 100, 100, 50);
 		stopSteps.setBounds(0, 150, 100, 50);
+		populationDetails.setBounds(0, 200, 300, 50);
+		
 		setVisible(true);
 	}
 
@@ -62,6 +67,7 @@ public class SimulatorController extends AbstractController implements ActionLis
 	@Override
 	public void update()  {
 		stepsTaken.setText("Steps: " + model.getStepsTaken());
+		populationDetails.setText("Population: " + model.getPopulationDetails());
 	}
 
 }

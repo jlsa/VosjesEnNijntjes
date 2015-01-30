@@ -1,16 +1,13 @@
 package nl.ecoquest.vk.model;
 
 
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.awt.Color;
 
-import nl.ecoquest.vk.main.Main;
 import nl.ecoquest.vk.model.AbstractModel;
 import nl.ecoquest.vk.simulation.*;
 import nl.ecoquest.vk.actor.*;
+import nl.ecoquest.vk.actor.animal.*;
 
 
 /**
@@ -22,14 +19,20 @@ import nl.ecoquest.vk.actor.*;
  */
 public class SimulatorModel extends AbstractModel implements Runnable
 {
+	private double FOX_CREATION_PROBABILITY = 0.05;
+	private double RABBIT_CREATION_PROBABILITY = 0.08;
 	// The number of steps the simulation has to run
 	private int numOfSteps = 100;
 	
 	private int size = 75;
 	// List of actors in the field
 	private List<Actor> actors;
-	// The current
+	// The current field
 	private Field field;
+	
+	// the field stats
+	private FieldStats fieldStats;
+	
 	// The current step of the simulation
 	private int step;
 	
@@ -41,15 +44,20 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	// the time the thread sleeps each cycle (Cannot be lower then 10)
 	private int sleepTime = 10; // 1000 is 1 second
 	
-	private Main main; // saddest way of handling this but it works
-	
-	public SimulatorModel(Main main) 
+	private LinkedHashMap<Class<?>, Color> colors;
+		
+	public SimulatorModel() 
 	{
-		this.main = main;
 		actors = new ArrayList<Actor>();
+		colors = new LinkedHashMap<Class<?>, Color>();
+		fieldStats = new FieldStats();
 		populate();
 		run = false;
 		runInfinite = false;
+		
+		// set the color of each actor that is on the field
+		colors.put(Fox.class, Color.ORANGE); // foxes are red/orange in nature
+		colors.put(Rabbit.class, Color.DARK_GRAY); // gray/brown rabbits
 	}
 	
 	public void simulate(int steps) 
@@ -128,13 +136,31 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	// should not exist eventually - should do the same as simulateOneStep()
 	public void update()
 	{
-		main.update();
+		/*fieldStats.reset();
+		
+		try {
+			for(int row = 0; row < field.getDepth(); row++) {
+				for(int col = 0; col < field.getWidth(); col++) {
+					Object actor = field.getObjectAt(row, col);
+					if(actor != null) {
+						fieldStats.incrementCount(actor.getClass());
+					}
+				}
+			}
+		} catch(Exception e) {
+			// do nothing with it.
+		}
+		
+		fieldStats.countFinished();		
+		*/
+		//fieldStats.reset();
 		System.out.println("updating");
 		for(int i = 0; i < size; i++) {
 			for(int j = 0; j < size; j++) {
 				grid[i][j] = Randomizer.getRandom().nextInt(5);
 			}
 		}
+		//fieldStats.countFinished();	
 	}
 
 	@Override
@@ -177,4 +203,14 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	public int getStepsTaken() {
 		return step;
 	}
+	
+	/**
+	 * Returns the populations details
+	 * @return the population details in format
+	 */
+	public String getPopulationDetails() {
+		return fieldStats.getPopulationDetails(field);
+	}
+	
+	
 }
