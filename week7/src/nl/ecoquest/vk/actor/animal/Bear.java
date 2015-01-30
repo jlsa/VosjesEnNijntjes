@@ -1,31 +1,37 @@
 package nl.ecoquest.vk.actor.animal;
 
-import nl.ecoquest.vk.actor.Actor;
+import Bear;
+import Field;
+import Fox;
+import Location;
+import Rabbit;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class Fox extends Animal implements Actor {
-	
-	 public Fox(Field field, Location location)
+import nl.ecoquest.vk.actor.Actor;
+
+public class Bear extends Animal implements Actor {
+	 public Bear(Field field, Location location)
 	    {
 	        super(field, location);
-	        breedingAge = 10;
-	        maxAge = 150;
-	        breedingProbability = 0.11;
-	        maxLitterSize = 4;
-	        foodValue = 3;
+	        breedingAge = 20;
+	        maxAge = 200;
+	        breedingProbability = 0.01;
+	        maxLitterSize = 2;
+	        foodValue = 15;
 	        age = 0;
 	        maxFoodLevel = 100;
 	        foodLevel = 100;
+	        
 	    }
 	 
-	 public void act(List<Actor> newFoxes)
+	 public void act(List<Actor> newActors)
 	    {
 	        incrementAge();
 	        incrementHunger();
 	        if(super.isActive()) {
-	            giveBirth(newFoxes);            
+	            giveBirth(newActors);            
 	            // Move towards a source of food if found.
 	            Location newLocation = findFood();
 	            if(newLocation == null) { 
@@ -42,7 +48,6 @@ public class Fox extends Animal implements Actor {
 	            }
 	        }
 	    }
-	 
 	 public void incrementAge()
 	    {
 	        age++;
@@ -75,11 +80,19 @@ public class Fox extends Animal implements Actor {
 	                    return where;
 	                }
 	            }
+	            if(animal instanceof Fox) {
+	                Fox fox = (Fox) animal;
+	                if(fox.isActive()) { 
+	                    fox.setInActive();
+	                    foodLevel = fox.getFoodValue();
+	                    return where;
+	                }
+	            }
 	        }
 	        return null;
 	    }
 	 
-	 public void giveBirth(List<Actor> newFoxes)
+	 public void giveBirth(List<Actor> newBears)
 	    {
 	        // New foxes are born into adjacent locations.
 	        // Get a list of adjacent free locations.
@@ -88,8 +101,8 @@ public class Fox extends Animal implements Actor {
 	        int births = breed();
 	        for(int b = 0; b < births && free.size() > 0; b++) {
 	            Location loc = free.remove(0);
-	            Fox young = new Fox(field, loc);
-	            newFoxes.add(young);
+	            Bear young = new Bear(field, loc);
+	            newBears.add(young);
 	        }
 	    }
 	 
@@ -118,5 +131,5 @@ public class Fox extends Animal implements Actor {
 	    public void tryToEscape()
 	    {
 	    	
-	    }
+	    }	    
 }

@@ -1,52 +1,30 @@
 package nl.ecoquest.vk.actor.animal;
 
-import java.util.List;
-
-import nl.ecoquest.vk.actor.Actor;
-import nl.ecoquest.vk.simulation.*;
-
 public abstract class Animal implements Actor {
-	
-	private boolean active;
-	
-	protected Field field;
-	protected Location location;
-	
-	public Animal(Field field, Location location) {
-		active = true;
-		this.field = field;
-		this.location = location;
-		field.place(this, location);
-	}
-	
-	@Override
-	public void act(List<Actor> newActors) {
-		
-	}
-
-	@Override
-	public boolean isActive() {
-		return active;
-	}
-
-	protected Field getField() {
-		return field;
-	}
-	
-	/**
-     * Place the animal at the new location in the given field.
-     * @param newLocation The animal's new location.
-     */
-    protected void setLocation(Location newLocation)
-    {
-        if(location != null) {
-            field.clear(location);
-        }
-        location = newLocation;
-        field.place(this, newLocation);
+	protected int breedingAge = 5;
+    protected int maxAge = 40;
+    protected double breedingProbability = 0.85;
+    protected int maxLitterSize = 4;
+    protected int foodValue = 1;
+    protected int age = 1;
+    protected int foodLevel = 100;
+    protected int maxFoodLevel = 100;
+    
+    public void incrementAge() {}
+    
+    public void incrementHunger() {}
+    
+    public Location findFood() {
+    	return null;
     }
-	
-	protected Location getLocation() {
-		return location;
-	}	
+    
+    public void giveBirth(){}
+   
+    public int breed() {}
+    
+    public boolean canBreed() {
+    	return false;
+    }
+    
+    public void tryToEscape() {}
 }
