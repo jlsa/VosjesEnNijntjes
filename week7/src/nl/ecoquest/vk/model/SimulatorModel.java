@@ -55,6 +55,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	public void simulate(int steps) 
 	{
 		if(steps <= 0) { return; }
+		if(run) { return; }
 		numOfSteps = steps;
 		run = true;
 		new Thread(this).start();

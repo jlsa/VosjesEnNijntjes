@@ -12,9 +12,9 @@ import nl.ecoquest.vk.simulation.*;
 public class SimulatorController extends AbstractController implements ActionListener, Updateable {
 	
 	private JButton stepOne;
-	private JTextField steps;
 	private JButton stepHundred;
 	private JLabel stepsTaken;
+	private JButton stopSteps;
 	
 	public SimulatorController(SimulatorModel model) {
 		super(model);	
@@ -26,13 +26,18 @@ public class SimulatorController extends AbstractController implements ActionLis
 		stepHundred = new JButton("Hundred steps");
 		stepHundred.addActionListener(this);
 		
+		stopSteps = new JButton("Stop");
+		stopSteps.addActionListener(this);
+		
 		this.setLayout(null);
 		add(stepsTaken);
 		add(stepOne);
 		add(stepHundred);
+		add(stopSteps);
 		stepsTaken.setBounds(0, 0, 100, 50);
 		stepOne.setBounds(0, 50, 100, 50);
 		stepHundred.setBounds(0, 100, 100, 50);
+		stopSteps.setBounds(0, 150, 100, 50);
 		setVisible(true);
 	}
 
@@ -44,6 +49,10 @@ public class SimulatorController extends AbstractController implements ActionLis
 		
 		if(e.getSource() == stepHundred) {
 			model.simulate(1000);
+		}
+		
+		if(e.getSource() == stopSteps) {
+			model.stop();
 		}
 	}
 	
