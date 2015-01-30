@@ -14,7 +14,7 @@ public class FieldView extends AbstractView {
 	public int xScale, yScale;
 	
 	private int gridWidth, gridHeight;
-	private final int GRID_VIEW_SCALING_FACTOR = 100;
+	private final int GRID_VIEW_SCALING_FACTOR = 1;
 	
 	private Dimension size;
 	private Image fieldImage;
@@ -29,8 +29,8 @@ public class FieldView extends AbstractView {
 		setSize(w, h);
 
 		size = new Dimension(0, 0);
-		gridWidth = 75;
-		gridHeight = 75;
+		gridWidth = 25;
+		gridHeight = 25;
 	}
 	
 	/**

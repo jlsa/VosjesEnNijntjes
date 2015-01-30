@@ -45,7 +45,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	private boolean runInfinite;
 	
 	// the time in microseconds the thread sleeps each cycle (Cannot be lower then 10)
-	private int sleepTime = 10; // 1000 is 1 second
+	private int sleepTime = 100; // 1000 is 1 second
 	
 	private LinkedHashMap<Class<?>, Color> colors;
 		

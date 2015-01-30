@@ -18,7 +18,6 @@ public class SimulatorController extends AbstractController implements ActionLis
 	
 	public SimulatorController(SimulatorModel model) {
 		super(model);	
-		setSize(300, 300);
 		stepsTaken = new JLabel("Step: ");
 		populationDetails = new JLabel("Population: ");
 		

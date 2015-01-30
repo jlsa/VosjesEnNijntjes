@@ -35,7 +35,7 @@ public class Main implements Runnable {
 		statView = new StatView(model);
 		
 		// setup
-		screen.setSize(800, 600);
+		screen.setSize(1024, 768);
 		screen.setLocationRelativeTo(null);
 		screen.setResizable(false);
 		screen.setLayout(null);
