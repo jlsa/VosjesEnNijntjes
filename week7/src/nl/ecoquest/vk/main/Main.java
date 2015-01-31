@@ -24,9 +24,13 @@ public class Main implements Runnable {
 	
 	// list with updateable objects
 	private ArrayList<Updateable> updateableObjects;
+	private OptionsView options;
+	private LegendView legend;
+	private PieView pieChart;
+
 	
 	public Main() {
-		// instantiate
+/*		// instantiate
 		updateableObjects = new ArrayList<Updateable>();
 		model = new SimulatorModel();
 		controller = new SimulatorController(model);
@@ -61,6 +65,15 @@ public class Main implements Runnable {
 		
 		// yes, this is an endless loop on purpose!
 		new Thread(this).start();
+*/
+		model = new SimulatorModel();
+		screen = new DefaultView(model);
+		options = new OptionsView(model);
+		legend = new LegendView();
+		pieChart = new PieView(model);
+		screen.setVisible(true);
+		options.setVisible(false);
+		legend.setVisible(false);
 	}
 	
 	/**
