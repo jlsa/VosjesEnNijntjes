@@ -23,6 +23,7 @@ public class Bear extends Animal implements Actor {
 	        age = 0;
 	        maxFoodLevel = 100;
 	        foodLevel = 100;
+	        alive = true;
 	        
 	    }
 	 
@@ -132,4 +133,60 @@ public class Bear extends Animal implements Actor {
 	    {
 	    	
 	    }	    
+	    
+	    @Override
+		public boolean isActive() {
+			if(alive == true){
+				return true;
+			}
+			return false;
+		}
+
+
+		@Override
+		public void act() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void setInActive() {
+			alive = false;
+	        if(location != null) {
+	            field.clear(location);
+	            location = null;
+	            field = null;
+	        }
+			
+		}
+
+
+		@Override
+		public Location getLocation() {
+			 return location;
+		}
+
+
+		@Override
+		public void setLocation(Location newLocation) {
+			 if(location != null) {
+		            field.clear(location);
+		        }
+		        location = newLocation;
+		        field.place(this, newLocation);
+		}
+
+
+		@Override
+		public void setField() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public Field getField() {
+			return field;
+		}
 }

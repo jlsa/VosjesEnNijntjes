@@ -9,6 +9,7 @@ public abstract class Animal implements Actor {
     protected int age = 1;
     protected int foodLevel = 100;
     protected int maxFoodLevel = 100;
+    protected boolean alive = true;
     
     public void incrementAge() {}
     

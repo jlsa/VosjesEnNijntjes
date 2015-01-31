@@ -1,12 +1,12 @@
 package nl.ecoquest.vk.actor.animal;
 
-import java.util.List;
-
 import nl.ecoquest.vk.actor.Actor;
-
+import nl.ecoquest.vk.actor.Sickness;
 import nl.ecoquest.vk.*;
 
-public class Rabbit extends Animal implements Actor{
+public class Rabbit extends Animal implements Actor, Sickness{
+	
+	 public int sick;
 	
 	 public Rabbit(Field field, Location location)
 	    {
@@ -19,6 +19,7 @@ public class Rabbit extends Animal implements Actor{
 	        age = 0;
 	        foodLevel = 100;
 	        maxFoodLevel = 100;
+	        alive = true;
 	    }
 	    
 	 
@@ -91,4 +92,91 @@ public class Rabbit extends Animal implements Actor{
 	    {
 	    	
 	    }	
+	    
+	    public boolean isSick()
+	    {
+	    	if(sick != 0){
+	    		return true;
+	    	}
+	    	return false;
+	    }
+
+
+		@Override
+		public void setSick() {
+			sick = 1;
+			
+		}
+
+
+		@Override
+		public void incrementSickness() {
+			sick++;
+			
+		}
+
+
+		@Override
+		public void spreadSickness() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public boolean isActive() {
+			if(alive == true){
+				return true;
+			}
+			return false;
+		}
+
+
+		@Override
+		public void act() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void setInActive() {
+			alive = false;
+	        if(location != null) {
+	            field.clear(location);
+	            location = null;
+	            field = null;
+	        }
+			
+		}
+
+
+		@Override
+		public Location getLocation() {
+			 return location;
+		}
+
+
+		@Override
+		public void setLocation(Location newLocation) {
+			 if(location != null) {
+		            field.clear(location);
+		        }
+		        location = newLocation;
+		        field.place(this, newLocation);
+		}
+
+
+		@Override
+		public void setField() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public Field getField() {
+			return field;
+		}
+	    
 }
