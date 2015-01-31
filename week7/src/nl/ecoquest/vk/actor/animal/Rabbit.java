@@ -19,6 +19,7 @@ public class Rabbit extends Animal implements Actor, Sickness{
 	        age = 0;
 	        foodLevel = 100;
 	        maxFoodLevel = 100;
+	        alive = true;
 	    }
 	    
 	 
@@ -124,7 +125,9 @@ public class Rabbit extends Animal implements Actor, Sickness{
 
 		@Override
 		public boolean isActive() {
-			// TODO Auto-generated method stub
+			if(alive == true){
+				return true;
+			}
 			return false;
 		}
 
@@ -138,7 +141,12 @@ public class Rabbit extends Animal implements Actor, Sickness{
 
 		@Override
 		public void setInActive() {
-			// TODO Auto-generated method stub
+			alive = false;
+	        if(location != null) {
+	            field.clear(location);
+	            location = null;
+	            field = null;
+	        }
 			
 		}
 
