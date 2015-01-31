@@ -112,8 +112,8 @@ public class Fox extends Animal implements Actor {
 	    	return foodValue;
 	    }
 	    
-	    public int setFoodValue(int foodValue){
-	    	foodValue = this.foodValue;
+	    public void setFoodValue(int foodValue){
+	    	this.foodValue = foodValue;
 	    }
 	    
 	    public void tryToEscape()
