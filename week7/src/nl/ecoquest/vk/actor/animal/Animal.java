@@ -1,5 +1,9 @@
 package nl.ecoquest.vk.actor.animal;
 
+import java.util.*;
+import nl.ecoquest.vk.actor.*;
+import nl.ecoquest.vk.simulation.*;
+
 public abstract class Animal implements Actor {
 	protected int breedingAge = 5;
     protected int maxAge = 40;
@@ -11,21 +15,92 @@ public abstract class Animal implements Actor {
     protected int maxFoodLevel = 100;
     protected boolean alive = true;
     
-    public void incrementAge() {}
+    protected Random rand = Randomizer.getRandom();
+    private Field field;
+    private Location location;
     
-    public void incrementHunger() {}
-    
-    public Location findFood() {
-    	return null;
+    public Animal(Field field, Location location) {
+    	this.field = field;
+    	this.location = location;
+    }
+
+    public void incrementAge()
+    {
+        age++;
+        if(age > maxAge) {
+        	setInActive();
+        }
+    }
+ 
+    public void incrementHunger()
+    {
+        foodLevel--;
+        if(foodLevel <= 0) {
+            setInActive();
+        }
     }
     
-    public void giveBirth(){}
+    public boolean canBreed()
+	{
+	    return age >= breedingAge;
+	}
+	 
+	public int getFoodValue() {
+		return foodValue;
+	}
+	 
+	public void setFoodValue(int foodValue){
+		this.foodValue = foodValue;
+	}
+ 
+    public abstract Location findFood();
+    
+    public abstract void giveBirth(List<Actor> newActors);
    
-    public int breed() {}
+    public abstract int breed();
     
-    public boolean canBreed() {
-    	return false;
-    }
+    public abstract void tryToEscape();
     
-    public void tryToEscape() {}
+    @Override
+	public boolean isActive() {
+		if(alive == true){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void setInActive() {
+		alive = false;
+        if(location != null) {
+            field.clear(location);
+            location = null;
+            field = null;
+        }
+		
+	}
+
+	@Override
+	public Location getLocation() {
+		 return location;
+	}
+
+	@Override
+	public void setLocation(Location newLocation) {
+		 if(location != null) {
+	            field.clear(location);
+	        }
+	        location = newLocation;
+	        field.place(this, newLocation);
+	}
+
+	@Override
+	public Field getField() {
+		return field;
+	}
+	
+	@Override
+	public void setField(Field field) {
+		this.field = field;
+	}
 }

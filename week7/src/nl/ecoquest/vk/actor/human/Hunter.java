@@ -1,19 +1,13 @@
 package nl.ecoquest.vk.actor.human;
 
-import Actor;
-import Bear;
-import Field;
-import Fox;
-import Location;
-import Rabbit;
+import nl.ecoquest.vk.actor.*;
+import nl.ecoquest.vk.actor.animal.*;
+import nl.ecoquest.vk.simulation.*;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class Hunter extends Human {
-	private boolean active;
-	private Location location;
-	private Field field;
 	/**
 	 * Hunter constructor
 	 * @param field the field the hunter is on
@@ -21,9 +15,7 @@ public class Hunter extends Human {
 	 */
 	public Hunter(Field field, Location location)
 	{
-		active = true;
-		this.field = field;
-		this.location = location;
+		super(field, location);
 	}
 	/**
 	 * @see Actor#act(java.util.List)
@@ -42,12 +34,8 @@ public class Hunter extends Human {
                 setLocation(newLocation);
             }
             else {
-                // Overcrowding.
-            	if(location != null) {
-                    field.clear(location);
-                    location = null;
-                    field = null;
-                }
+                // overcrowding
+            	// hunters cant die!
             }
 		}
 	}
@@ -62,65 +50,26 @@ public class Hunter extends Human {
             Object animal = field.getObjectAt(where);
             if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isAlive()) { 
-                    rabbit.setDead();
+                if(rabbit.isActive()) { 
+                    rabbit.setInActive();
                     return where;
                 }
             }
             if(animal instanceof Bear) {
                 Bear bear = (Bear) animal;
-                if(bear.isAlive()) { 
-                    bear.setDead();
+                if(bear.isActive()) { 
+                    bear.setInActive();
                     return where;
                 }
             }
             if(animal instanceof Fox) {
                 Fox fox = (Fox) animal;
-                if(fox.isAlive()) { 
-                    fox.setDead();
+                if(fox.isActive()) { 
+                    fox.setInActive();
                     return where;
                 }
             }
         }
         return null;
 	}
-	
-	/** 
-	 * @see Actor#isActive()
-	 */
-	@Override
-	public boolean isActive() {
-		return active;
-	}
-	
-	/**
-     * Return the hunters location.
-     * @return The hunters location.
-     */
-    protected Location getLocation()
-    {
-        return location;
-    }
-
-    /**
-     * Place the animal at the new location in the given field.
-     * @param newLocation The animal's new location.
-     */
-    protected void setLocation(Location newLocation)
-    {
-        if(location != null) {
-            field.clear(location);
-        }
-        location = newLocation;
-        field.place(this, newLocation);
-    }
-    
-    /**
-     * Return the animal's field.
-     * @return The animal's field.
-     */
-    protected Field getField()
-    {
-        return field;
-    }
 }

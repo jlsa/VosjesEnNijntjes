@@ -1,15 +1,10 @@
 package nl.ecoquest.vk.actor.animal;
 
-import Bear;
-import Field;
-import Fox;
-import Location;
-import Rabbit;
-
 import java.util.Iterator;
 import java.util.List;
+import nl.ecoquest.vk.actor.*;
+import nl.ecoquest.vk.simulation.*;
 
-import nl.ecoquest.vk.actor.Actor;
 
 public class Bear extends Animal implements Actor {
 	 public Bear(Field field, Location location)
@@ -31,7 +26,7 @@ public class Bear extends Animal implements Actor {
 	    {
 	        incrementAge();
 	        incrementHunger();
-	        if(super.isActive()) {
+	        if(isActive()) {
 	            giveBirth(newActors);            
 	            // Move towards a source of food if found.
 	            Location newLocation = findFood();
@@ -121,72 +116,10 @@ public class Bear extends Animal implements Actor {
 	        return age >= breedingAge;
 	    }
 	    
-	    public int getFoodValue(){
-	    	return foodValue;
-	    }
-	    
-	    public int setFoodValue(int foodValue){
-	    	foodValue = this.foodValue;
-	    }
-	    
+	   
 	    public void tryToEscape()
 	    {
 	    	
 	    }	    
 	    
-	    @Override
-		public boolean isActive() {
-			if(alive == true){
-				return true;
-			}
-			return false;
-		}
-
-
-		@Override
-		public void act() {
-			// TODO Auto-generated method stub
-			
-		}
-
-
-		@Override
-		public void setInActive() {
-			alive = false;
-	        if(location != null) {
-	            field.clear(location);
-	            location = null;
-	            field = null;
-	        }
-			
-		}
-
-
-		@Override
-		public Location getLocation() {
-			 return location;
-		}
-
-
-		@Override
-		public void setLocation(Location newLocation) {
-			 if(location != null) {
-		            field.clear(location);
-		        }
-		        location = newLocation;
-		        field.place(this, newLocation);
-		}
-
-
-		@Override
-		public void setField() {
-			// TODO Auto-generated method stub
-			
-		}
-
-
-		@Override
-		public Field getField() {
-			return field;
-		}
 }
