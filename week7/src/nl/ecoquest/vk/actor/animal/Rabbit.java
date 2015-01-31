@@ -1,12 +1,15 @@
 package nl.ecoquest.vk.actor.animal;
 
+import java.util.Iterator;
 import java.util.List;
 
 import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.actor.Sickness;
+import nl.ecoquest.vk.simulation.*;
 
-import nl.ecoquest.vk.*;
-
-public class Rabbit extends Animal implements Actor{
+public class Rabbit extends Animal implements Sickness {
+	
+	 public int sick;
 	
 	 public Rabbit(Field field, Location location)
 	    {
@@ -19,6 +22,7 @@ public class Rabbit extends Animal implements Actor{
 	        age = 0;
 	        foodLevel = 100;
 	        maxFoodLevel = 100;
+	        alive = true;
 	    }
 	    
 	 
@@ -47,7 +51,7 @@ public class Rabbit extends Animal implements Actor{
 	        }
 	    }
 	    
-	    private void giveBirth(List<Actor> newRabbits)
+	    public void giveBirth(List<Actor> newRabbits)
 	    {
 	        // New rabbits are born into adjacent locations.
 	        // Get a list of adjacent free locations.
@@ -56,8 +60,8 @@ public class Rabbit extends Animal implements Actor{
 	        int births = breed();
 	        for(int b = 0; b < births && free.size() > 0; b++) {
 	            Location loc = free.remove(0);
-	            Rabbit young = new Rabbit(false, field, loc);
-	            newRabbits.add((Actor) young);
+	            Rabbit young = new Rabbit(field, loc);
+	            newRabbits.add(young);
 	        }
 	    }
 	    
@@ -69,26 +73,69 @@ public class Rabbit extends Animal implements Actor{
 	        }
 	        return births;
 	    }
-
-	    /**
-	     * A rabbit can breed if it has reached the breeding age.
-	     * @return true if the rabbit can breed, false otherwise.
-	     */
-	    public boolean canBreed()
-	    {
-	        return age >= breedingAge;
-	    }
-	    
-	    public int getFoodValue(){
-	    	return foodValue;
-	    }
-	    
-	    public int setFoodValue(int foodValue){
-	    	foodValue = this.foodValue;
-	    }
 	    
 	    public void tryToEscape()
 	    {
 	    	
 	    }	
+	    
+	    public boolean isSick()
+	    {
+	    	if(sick != 0){
+	    		return true;
+	    	}
+	    	return false;
+	    }
+
+
+		@Override
+		public void setSick() {
+			sick = 1;
+			
+		}
+
+
+		@Override
+		public void incrementSickness() {
+			sick++;
+			
+		}
+
+
+		@Override
+		public void spreadSickness() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public Location findFood() {
+			/*Field field = getField();
+	        List<Location> adjacent = field.adjacentLocations(getLocation());
+	        Iterator<Location> it = adjacent.iterator();
+	        while(it.hasNext()) {
+	            Location where = it.next();
+	            Object animal = field.getObjectAt(where);
+	            if(animal instanceof Rabbit) {
+	                Rabbit rabbit = (Rabbit) animal;
+	                if(rabbit.isActive()) { 
+	                    rabbit.setInActive();
+	                    foodLevel = rabbit.getFoodValue();
+	                    //return where;
+	                }
+	            }
+	            if(animal instanceof Fox) {
+	                Fox fox = (Fox) animal;
+	                if(fox.isActive()) { 
+	                    fox.setInActive();
+	                    foodLevel = fox.getFoodValue();
+	                    //return where;
+	                }
+	            }
+	        }*/
+	        return null;
+		}
+
+	    
 }

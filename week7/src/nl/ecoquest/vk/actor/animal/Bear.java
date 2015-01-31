@@ -1,15 +1,10 @@
 package nl.ecoquest.vk.actor.animal;
 
-import Bear;
-import Field;
-import Fox;
-import Location;
-import Rabbit;
-
 import java.util.Iterator;
 import java.util.List;
+import nl.ecoquest.vk.actor.*;
+import nl.ecoquest.vk.simulation.*;
 
-import nl.ecoquest.vk.actor.Actor;
 
 public class Bear extends Animal implements Actor {
 	 public Bear(Field field, Location location)
@@ -23,6 +18,7 @@ public class Bear extends Animal implements Actor {
 	        age = 0;
 	        maxFoodLevel = 100;
 	        foodLevel = 100;
+	        alive = true;
 	        
 	    }
 	 
@@ -30,7 +26,7 @@ public class Bear extends Animal implements Actor {
 	    {
 	        incrementAge();
 	        incrementHunger();
-	        if(super.isActive()) {
+	        if(isActive()) {
 	            giveBirth(newActors);            
 	            // Move towards a source of food if found.
 	            Location newLocation = findFood();
@@ -120,16 +116,10 @@ public class Bear extends Animal implements Actor {
 	        return age >= breedingAge;
 	    }
 	    
-	    public int getFoodValue(){
-	    	return foodValue;
-	    }
-	    
-	    public int setFoodValue(int foodValue){
-	    	foodValue = this.foodValue;
-	    }
-	    
+	   
 	    public void tryToEscape()
 	    {
 	    	
 	    }	    
+	    
 }

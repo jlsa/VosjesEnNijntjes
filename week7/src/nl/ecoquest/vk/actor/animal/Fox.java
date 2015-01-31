@@ -1,6 +1,7 @@
 package nl.ecoquest.vk.actor.animal;
 
 import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.simulation.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -18,13 +19,14 @@ public class Fox extends Animal implements Actor {
 	        age = 0;
 	        maxFoodLevel = 100;
 	        foodLevel = 100;
+	        alive = true;
 	    }
 	 
 	 public void act(List<Actor> newFoxes)
 	    {
 	        incrementAge();
 	        incrementHunger();
-	        if(super.isActive()) {
+	        if(isActive()) {
 	            giveBirth(newFoxes);            
 	            // Move towards a source of food if found.
 	            Location newLocation = findFood();
@@ -43,21 +45,7 @@ public class Fox extends Animal implements Actor {
 	        }
 	    }
 	 
-	 public void incrementAge()
-	    {
-	        age++;
-	        if(age > maxAge) {
-	        	setInActive();
-	        }
-	    }
 	 
-	 public void incrementHunger()
-	    {
-	        foodLevel--;
-	        if(foodLevel <= 0) {
-	            setInActive();
-	        }
-	    }
 	 
 	 public Location findFood()
 	    {
@@ -94,29 +82,19 @@ public class Fox extends Animal implements Actor {
 	    }
 	 
 	 public int breed()
-	    {
-	        int births = 0;
+	 {
+		 int births = 0;
 	        if(canBreed() && rand.nextDouble() <= breedingProbability) {
 	            births = rand.nextInt(maxLitterSize) + 1;
 	        }
 	        return births;
 	    }
 	 
-	 public boolean canBreed()
-	    {
-	        return age >= breedingAge;
-	    }
-	    
-	    public int getFoodValue(){
-	    	return foodValue;
-	    }
-	    
-	    public int setFoodValue(int foodValue){
-	    	foodValue = this.foodValue;
-	    }
+	 
 	    
 	    public void tryToEscape()
 	    {
 	    	
 	    }
+		
 }

@@ -9,6 +9,7 @@ import nl.ecoquest.vk.simulation.*;
 import nl.ecoquest.vk.view.FieldView;
 import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.actor.animal.*;
+import nl.ecoquest.vk.actor.human.*;
 
 
 /**
@@ -22,6 +23,8 @@ public class SimulatorModel extends AbstractModel implements Runnable
 {
 	private double FOX_CREATION_PROBABILITY = 0.05;
 	private double RABBIT_CREATION_PROBABILITY = 0.08;
+	private double BEAR_CREATION_PROBABILITY = 0.03;
+	private double HUNTER_CREATION_PROBABILITY = 0.001;
 	
 	private static final Color EMPTY_COLOR = Color.WHITE;
 	private static final Color UNKNOWN_COLOR = Color.GRAY;
@@ -61,6 +64,8 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		// set the color of each actor that is on the field
 		colors.put(Fox.class, Color.ORANGE); // foxes are red/orange in nature
 		colors.put(Rabbit.class, Color.DARK_GRAY); // gray/brown rabbits
+		colors.put(Bear.class, Color.BLACK); // Blackbears!
+		colors.put(Hunter.class, Color.RED); // Hunters wearing red coats!
 	}
 	
 	public void simulate(int steps) 
@@ -147,6 +152,17 @@ public class SimulatorModel extends AbstractModel implements Runnable
 					Rabbit rabbit = new Rabbit(field, location);
 					actors.add(rabbit);
 				}
+				if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
+					Location location = new Location(row, col);
+					Bear bear = new Bear(field, location);
+					actors.add(bear);
+				}
+				if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
+					Location location = new Location(row, col);
+					Hunter hunter = new Hunter(field, location);
+					actors.add(hunter);
+				}
+				
 			}
 		}
 		
