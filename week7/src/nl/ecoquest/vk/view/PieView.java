@@ -1,9 +1,4 @@
-/**
- * 
- */
 package nl.ecoquest.vk.view;
-
-import java.awt.Window;
 
 import javax.swing.JPanel;
 
@@ -12,11 +7,8 @@ import nl.ecoquest.vk.model.SimulatorModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
 
 /**
  * @author Angela
@@ -36,11 +28,11 @@ public class PieView extends AbstractView {
 	
 	private PieDataset createDataset(SimulatorModel model){
 		String population = model.getPopulationDetails();
-		String[] splitPopulation = population.split(":");
+		String[] splitPopulation = population.split(" ");
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		
-		for(int i = 0; i < splitPopulation.length; i += 2){
-			dataset.setValue(splitPopulation[i], Double.parseDouble(splitPopulation[i+1]));
+		for(int i = 0; i < splitPopulation.length; i += 3){
+			dataset.setValue(splitPopulation[i], Double.parseDouble(splitPopulation[i+2]));
 		}		
 		return dataset;
 	}

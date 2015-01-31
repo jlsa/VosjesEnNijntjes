@@ -18,15 +18,15 @@ import nl.ecoquest.vk.controller.*;
 public class Main implements Runnable {
 	private JFrame screen;
 	private SimulatorModel model; 
-	private AbstractView fieldView;
-	private AbstractView statView;
-	private SimulatorController controller;
+//	private AbstractView fieldView;
+//	private AbstractView statView;
+//	private SimulatorController controller;
 	
 	// list with updateable objects
 	private ArrayList<Updateable> updateableObjects;
 	private OptionsView options;
 	private LegendView legend;
-	private PieView pieChart;
+//	private PieView pieChart;
 
 	
 	public Main() {
@@ -70,7 +70,7 @@ public class Main implements Runnable {
 		screen = new DefaultView(model);
 		options = new OptionsView(model);
 		legend = new LegendView();
-		pieChart = new PieView(model);
+		//pieChart = new PieView(model);
 		screen.setVisible(true);
 		options.setVisible(false);
 		legend.setVisible(false);

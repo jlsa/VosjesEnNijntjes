@@ -29,7 +29,7 @@ public class StatisticsView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		pieView = new pieView(model);
+		pieView = new PieView(model);
 		//JPanel PLACEHOLDER_FOR_PIEVIEW = new JPanel();
 		contentPane.add(pieView);
 		
@@ -37,11 +37,11 @@ public class StatisticsView extends JFrame {
 		//JPanel PLACEHOLDER_FOR_HISTOVIEW = new JPanel();
 		contentPane.add(histoView);
 		
-		textView = new textView(model);
+		textView = new TextView(model);
 		//JPanel PLACEHOLDER_FOR_TEXTVIEW = new JPanel();
 		contentPane.add(textView);
 		
-		graphView = new graphView(model);
+		graphView = new GraphView(model);
 		//JPanel PLACEHOLDER_FOR_GRAPH_VIEW = new JPanel();
 		contentPane.add(graphView);
 	}

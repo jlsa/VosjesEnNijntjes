@@ -38,17 +38,19 @@ public class OptionsView extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
+		/*
 		Icon iconRabbit = new ImageIcon(getClass().getResource("images/iconRabbit.png"));
 		Icon iconFox = new ImageIcon(getClass().getResource("images/iconFox.png"));
 		Icon iconBear = new ImageIcon(getClass().getResource("images/iconBear.png"));
 		Icon iconHunter = new ImageIcon(getClass().getResource("images/iconHunter.png"));
+		*/
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
 		JPanel rabbitPanel = new JPanel();
 		rabbitPanel.setBackground(Color.WHITE);
-		tabbedPane.addTab("Rabbits", iconRabbit, rabbitPanel, "Edit the rabbits");
+		tabbedPane.addTab("Rabbits", null, rabbitPanel, "Edit the rabbits");
 		rabbitPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblRabbitBreedingAge = new JLabel("Breeding Age");
@@ -104,7 +106,7 @@ public class OptionsView extends JFrame {
 		
 		JPanel foxPanel = new JPanel();
 		foxPanel.setBackground(Color.WHITE);
-		tabbedPane.addTab("Foxes", iconFox, foxPanel, "Edit the foxes");
+		tabbedPane.addTab("Foxes", null, foxPanel, "Edit the foxes");
 		foxPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblFoxBreedingAge = new JLabel("Breeding Age");
@@ -149,7 +151,7 @@ public class OptionsView extends JFrame {
 		
 		JPanel bearPanel = new JPanel();
 		bearPanel.setBackground(Color.WHITE);
-		tabbedPane.addTab("Bears", iconBear, bearPanel, "RAWR!");
+		tabbedPane.addTab("Bears", null, bearPanel, "RAWR!");
 		bearPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblBearBreedingAge = new JLabel("Breeding Age");
@@ -190,7 +192,7 @@ public class OptionsView extends JFrame {
 		
 		JPanel hunterPanel = new JPanel();
 		hunterPanel.setBackground(Color.WHITE);
-		tabbedPane.addTab("Hunters", iconHunter, hunterPanel, "\"Is that a rifle in your pants or are you just happy to see me?\"");
+		tabbedPane.addTab("Hunters", null, hunterPanel, "\"Is that a rifle in your pants or are you just happy to see me?\"");
 		hunterPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblPlaceholderText = new JLabel("PLACEHOLDER TEXT");
