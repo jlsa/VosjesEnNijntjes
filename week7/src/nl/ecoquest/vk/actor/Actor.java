@@ -8,26 +8,11 @@ public interface Actor {
 	
 	public void setInActive();
 	
-	public Location getLocation()
-	{
-		
-		return location;
-	    
-	};
+	public Location getLocation();
    	
-	public void setLocation(Location newLocation)
-	{
-        if(Location != null) {
-            field.clear(Location);
-        }
-        Location = newLocation;
-        field.place(this, newLocation);
-    }
+	public void setLocation(Location newLocation);
 	
 	public void setField(Field);
 	
-	public Field getField()
-	{
-        return field;
-    }
+	public Field getField();
 }

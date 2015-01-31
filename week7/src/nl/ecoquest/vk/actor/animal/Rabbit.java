@@ -110,7 +110,7 @@ public class Rabbit extends Animal implements Actor, Sickness{
 
 		@Override
 		public void incrementSickness() {
-			// TODO Auto-generated method stub
+			sick++;
 			
 		}
 
@@ -145,15 +145,17 @@ public class Rabbit extends Animal implements Actor, Sickness{
 
 		@Override
 		public Location getLocation() {
-			// TODO Auto-generated method stub
-			return null;
+			 return location;
 		}
 
 
 		@Override
 		public void setLocation(Location newLocation) {
-			// TODO Auto-generated method stub
-			
+			 if(location != null) {
+		            field.clear(location);
+		        }
+		        location = newLocation;
+		        field.place(this, newLocation);
 		}
 
 
@@ -166,8 +168,7 @@ public class Rabbit extends Animal implements Actor, Sickness{
 
 		@Override
 		public Field getField() {
-			// TODO Auto-generated method stub
-			return null;
+			return field;
 		}
-	    }
+	    
 }
