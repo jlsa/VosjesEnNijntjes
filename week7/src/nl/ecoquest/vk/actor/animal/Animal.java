@@ -27,5 +27,4 @@ public abstract class Animal implements Actor {
     }
     
     public void tryToEscape() {}
-    
 }

@@ -1,12 +1,12 @@
 package nl.ecoquest.vk.actor.animal;
 
-import java.util.List;
-
 import nl.ecoquest.vk.actor.Actor;
-
+import nl.ecoquest.vk.actor.Sickness;
 import nl.ecoquest.vk.*;
 
-public class Rabbit extends Animal implements Actor{
+public class Rabbit extends Animal implements Actor, Sickness{
+	
+	 public int sick;
 	
 	 public Rabbit(Field field, Location location)
 	    {
@@ -91,5 +91,83 @@ public class Rabbit extends Animal implements Actor{
 	    {
 	    	
 	    }	
+	    
+	    public boolean isSick()
+	    {
+	    	if(sick != 0){
+	    		return true;
+	    	}
+	    	return false;
+	    }
 
+
+		@Override
+		public void setSick() {
+			sick = 1;
+			
+		}
+
+
+		@Override
+		public void incrementSickness() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void spreadSickness() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public boolean isActive() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+
+		@Override
+		public void act() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void setInActive() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public Location getLocation() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		@Override
+		public void setLocation(Location newLocation) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public void setField() {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		@Override
+		public Field getField() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	    }
 }

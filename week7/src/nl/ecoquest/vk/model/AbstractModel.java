@@ -1,11 +1,11 @@
-package nl.ecoquest.vk.logic;
+package nl.ecoquest.vk.model;
 
 import nl.ecoquest.vk.view.*;
 
 import java.util.*;
 
 public abstract class AbstractModel {
-	private List<AbstractView> views;
+	protected List<AbstractView> views;
 	
 	public AbstractModel() {
 		views = new ArrayList<AbstractView>();
@@ -15,7 +15,7 @@ public abstract class AbstractModel {
 		views.add(view);
 	}
 	
-	public void notifyViews() {
+	protected void notifyViews() {
 		for(AbstractView view: views) {
 			view.updateView();
 		}

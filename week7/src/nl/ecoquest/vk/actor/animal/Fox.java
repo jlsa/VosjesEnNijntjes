@@ -118,7 +118,5 @@ public class Fox extends Animal implements Actor {
 	    public void tryToEscape()
 	    {
 	    	
-	    }	    
-	        
-
+	    }
 }
