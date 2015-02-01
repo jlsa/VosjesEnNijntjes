@@ -229,7 +229,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 
 	@Override
 	public void run() {
-		for(int i=0;i<numOfSteps && run && isViable(field);i++) {
+		for(int i=0;i<numOfSteps && run; i++) {
 			simulateOneStep();
 			update();
 			try {
