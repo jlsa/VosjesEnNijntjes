@@ -6,15 +6,15 @@ import nl.ecoquest.vk.model.*;
 
 public class FieldView extends AbstractView {
 	
-	private int w = 300;
-	private int h = 300;
+	private int w = 500;
+	private int h = 500;
 	private static final long serialVersionUID = 1L;
 	
 	public Graphics g;
 	public int xScale, yScale;
 	
 	private int gridWidth, gridHeight;
-	private final int GRID_VIEW_SCALING_FACTOR = 1;
+	private final int GRID_VIEW_SCALING_FACTOR = 5;
 	
 	private Dimension size;
 	private Image fieldImage;

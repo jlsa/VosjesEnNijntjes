@@ -2,6 +2,7 @@ package nl.ecoquest.vk.actor.human;
 
 import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.actor.animal.*;
+import nl.ecoquest.vk.actor.environment.*;
 import nl.ecoquest.vk.simulation.*;
 
 import java.util.Iterator;
@@ -39,7 +40,10 @@ public class Hunter extends Human {
             }
 		}
 	}
-
+	/**
+	 * The hunter has one purpose in life. To hunt!
+	 * @return New location of the hunter. Can be null
+	 */
 	public Location hunt()
 	{
 		Field field = getField();
@@ -47,27 +51,40 @@ public class Hunter extends Human {
         Iterator<Location> it = adjacent.iterator();
         while(it.hasNext()) {
             Location where = it.next();
-            Object animal = field.getObjectAt(where);
-            if(animal instanceof Rabbit) {
-                Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isActive()) { 
-                    rabbit.setInActive();
-                    return where;
+            Object actor = field.getObjectAt(where);
+            if(actor instanceof Rabbit) {
+                Rabbit rabbit = (Rabbit) actor;
+                if(!rabbit.tryToEscape()) {
+	                if(rabbit.isActive()) { 
+	                    rabbit.setInActive();
+	                    return where;
+	                }
                 }
             }
-            if(animal instanceof Bear) {
-                Bear bear = (Bear) animal;
-                if(bear.isActive()) { 
-                    bear.setInActive();
-                    return where;
+            if(actor instanceof Bear) {
+                Bear bear = (Bear) actor;
+                if(!bear.tryToEscape()) {
+	                if(bear.isActive()) { 
+	                    bear.setInActive();
+	                    return where;
+	                }
                 }
             }
-            if(animal instanceof Fox) {
-                Fox fox = (Fox) animal;
-                if(fox.isActive()) { 
-                    fox.setInActive();
-                    return where;
+            if(actor instanceof Fox) {
+                Fox fox = (Fox) actor;
+                if(!fox.tryToEscape()) {
+	                if(fox.isActive()) { 
+	                    fox.setInActive();
+	                    return where;
+	                }
                 }
+            }
+            if(actor instanceof Grass) {
+            	Grass grass = (Grass) actor;
+            	if(grass.isActive()) {
+            		grass.setInActive();
+            		return where;
+            	}
             }
         }
         return null;
