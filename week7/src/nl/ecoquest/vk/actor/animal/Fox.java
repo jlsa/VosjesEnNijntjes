@@ -25,10 +25,10 @@ public class Fox extends Animal implements Actor {
 	        maxAge = 150;
 	        breedingProbability = 0.11;
 	        maxLitterSize = 4;
-	        foodValue = 3;
-	        age = 0;
-	        maxFoodLevel = 100;
-	        foodLevel = 100;
+	        foodValue = 15;
+	        age = 1;
+	        maxFoodLevel = 20;
+	        foodLevel = 20;
 	        alive = true;
 	    }
 	 
@@ -70,7 +70,7 @@ public class Fox extends Animal implements Actor {
 	                Rabbit rabbit = (Rabbit) animal;
 	                if(rabbit.isActive()) { 
 	                    rabbit.setInActive();
-	                    foodLevel = rabbit.getFoodValue();
+	                    feed(rabbit.getFoodValue());
 	                    return where;
 	                }
 	            }

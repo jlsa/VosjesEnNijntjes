@@ -130,4 +130,15 @@ public class FieldStats
         }
         countsValid = true;
     }
+    
+    /**
+     * Returns the amount of actors at the current moment in the field
+     * @param actor What kind of actor type
+     * @return the amount of actors of the given type
+     */
+    public float getCount(Class<?> actor) {
+    	Counter count = counters.get(actor);
+        return count.getCount();
+	}
+    
 }

@@ -16,24 +16,24 @@ import nl.ecoquest.vk.simulation.*;
 public abstract class Animal implements Actor 
 {
 	// The breeding age of the animal
-	protected int breedingAge = 5;
+	protected int breedingAge;
 	// The max age of the animal
-    protected int maxAge = 40;
+    protected int maxAge;
     // The breeding probability
-    protected double breedingProbability = 0.85;
+    protected double breedingProbability;
     // The max litter size of the animal
-    protected int maxLitterSize = 4;
+    protected int maxLitterSize;
     // The food value if being eaten.
-    protected int foodValue = 1;
+    protected int foodValue;
     // The age of the animal
-    protected int age = 1;
+    protected int age;
     
     // The food level of the animal
-    protected int foodLevel = 100;
+    protected int foodLevel;
     // The max food level
-    protected int maxFoodLevel = 100;
+    protected int maxFoodLevel;
     // The alive/active state of the animal
-    protected boolean alive = true;
+    protected boolean alive;
     
     // Random
     protected Random rand = Randomizer.getRandom();
@@ -96,8 +96,12 @@ public abstract class Animal implements Actor
 	 * Set the food value to a new food value
 	 * @param foodValue
 	 */
-	public void setFoodValue(int foodValue){
-		this.foodValue = foodValue;
+	public void feed(int foodValue){
+		int newFoodLevel = foodLevel + this.foodLevel;
+		if(newFoodLevel > maxFoodLevel) {
+			newFoodLevel = maxFoodLevel;
+		}
+		this.foodLevel = newFoodLevel;
 	}
 	/**
 	 * All animals need to find food. 
@@ -122,7 +126,7 @@ public abstract class Animal implements Actor
      * @return true if escaped, false if failed to escape
      */
     public final boolean tryToEscape() {
-    	// if there are free adjacent locations then the
+    	/*// if there are free adjacent locations then the
     	// math for this method is basic 10% run away chance 
     	// + 1% for every one free adjacent location
     	Location freeLocation = getField().freeAdjacentLocation(getLocation());
@@ -137,7 +141,7 @@ public abstract class Animal implements Actor
 	    	} else {
 	    		return false;
 	    	}
-    	}
+    	}*/
     	return false;
     }
     
@@ -157,7 +161,6 @@ public abstract class Animal implements Actor
             location = null;
             field = null;
         }
-		
 	}
 
 	@Override

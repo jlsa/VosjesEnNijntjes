@@ -40,7 +40,7 @@ public class SimulatorController extends AbstractController implements ActionLis
 		stepOne.setBounds(0, 50, 100, 50);
 		stepHundred.setBounds(0, 100, 100, 50);
 		stopSteps.setBounds(0, 150, 100, 50);
-		populationDetails.setBounds(0, 200, 300, 50);
+		populationDetails.setBounds(0, 200, 600, 50);
 		
 		setVisible(true);
 	}

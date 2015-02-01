@@ -21,30 +21,32 @@ public class Rabbit extends Animal implements Sickness {
 		super(field, location);
 		breedingAge = 5;
 		maxAge = 40;
-		breedingProbability = 0.85;
-		maxLitterSize = 4;
-		foodValue = 1;
-		age = 0;
-		foodLevel = 100;
-		maxFoodLevel = 100;
+		breedingProbability = 0.7;
+		maxLitterSize = 1;
+		foodValue = 3;
+		age = 1;
+		foodLevel = 20;
+		maxFoodLevel = 20;
 		alive = true;
 	}
 		
 	@Override
 	public void act(List<Actor> newRabbits)
 	{
+		//incrementHunger();
 		incrementAge();
 		if(isActive()) {
-			giveBirth(newRabbits);            
-			// Try to move into a free location.
-			Location newLocation = getField().freeAdjacentLocation(getLocation());
-			if(newLocation != null) {
-				setLocation(newLocation);
-			} else {
-				// Overcrowding.
-				setInActive();
-			}
-		}
+            giveBirth(newRabbits);            
+            // Try to move into a free location.
+            Location newLocation = getField().freeAdjacentLocation(getLocation());
+            if(newLocation != null) {
+                setLocation(newLocation);
+            }
+            else {
+                // Overcrowding.
+                setInActive();
+            }
+        }
 	}
 	
 	@Override
@@ -94,7 +96,6 @@ public class Rabbit extends Animal implements Sickness {
 		@Override
 		public void setSick() {
 			sick = 1;
-			
 		}
 
 
