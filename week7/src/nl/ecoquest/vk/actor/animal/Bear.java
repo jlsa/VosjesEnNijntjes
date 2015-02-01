@@ -128,12 +128,5 @@ public class Bear extends Animal implements Actor {
 	public boolean canBreed()
 	{
 		return age >= breedingAge;
-	}
-	
-	@Override  
-	public boolean tryToEscape()
-	{	
-		return false;
-	}	    
-		
+	}		
 }

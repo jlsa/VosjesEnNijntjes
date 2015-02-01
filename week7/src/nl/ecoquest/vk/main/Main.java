@@ -48,9 +48,9 @@ public class Main implements Runnable {
 		updateableObjects.add(controller);
 		
 		// give positions
-		fieldView.setBounds(0, 0, 300, 300);
-		statView.setBounds(300, 0, 300, 300);
-		controller.setBounds(0, 300, 300, 300);
+		fieldView.setBounds(0, 0, 500, 500);
+		statView.setBounds(500, 0, 300, 300);
+		controller.setBounds(500, 300, 300, 300);
 
 		//
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

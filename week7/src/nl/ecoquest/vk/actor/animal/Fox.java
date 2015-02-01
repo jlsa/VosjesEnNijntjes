@@ -100,11 +100,4 @@ public class Fox extends Animal implements Actor {
 	        }
 	        return births;
 	    }
-	 
-	    
-	@Override  
-	public boolean tryToEscape()
-	{	
-		return false;
-	}	
 }

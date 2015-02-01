@@ -1,6 +1,7 @@
 package nl.ecoquest.vk.actor.animal;
 
 import java.util.*;
+
 import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.simulation.*;
 
@@ -117,10 +118,28 @@ public abstract class Animal implements Actor
     public abstract int breed();
     
     /**
-     * If attacked the animal can try to escape!
+     * If attacked the animal can try to escape! It is still a chance! Small one that it succeeds
      * @return true if escaped, false if failed to escape
      */
-    public abstract boolean tryToEscape();
+    public final boolean tryToEscape() {
+    	// if there are free adjacent locations then the
+    	// math for this method is basic 10% run away chance 
+    	// + 1% for every one free adjacent location
+    	Location freeLocation = getField().freeAdjacentLocation(getLocation());
+    	List<Location> free = getField().getFreeAdjacentLocations(getLocation());
+    	if(free.size() > 0) {
+    		int escapeChance = 10 + free.size();
+	    	int tryChance = Randomizer.getRandom().nextInt(100) + 1;
+	    	if(escapeChance >= tryChance) {
+	    		// now move to another position!
+	    		setLocation(freeLocation);
+	    		return true;
+	    	} else {
+	    		return false;
+	    	}
+    	}
+    	return false;
+    }
     
     @Override
 	public boolean isActive() {

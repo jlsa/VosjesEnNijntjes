@@ -1,6 +1,5 @@
 package nl.ecoquest.vk.actor.animal;
 
-import java.util.Iterator;
 import java.util.List;
 
 import nl.ecoquest.vk.actor.Actor;
@@ -9,6 +8,7 @@ import nl.ecoquest.vk.simulation.*;
 
 /**
  * The rabbit is the lowest in the animal foodchain. 
+ * 
  * @author Jeroen, Angela en Joel
  * @version 2015-02-01
  */
@@ -80,12 +80,7 @@ public class Rabbit extends Animal implements Sickness {
 			}
 			return births;
 		}
-		
-		@Override
-		public boolean tryToEscape()
-		{
-			return false;
-		}	
+	
 		@Override
 		public boolean isSick()
 		{
