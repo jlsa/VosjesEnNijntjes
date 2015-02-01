@@ -6,8 +6,18 @@ import nl.ecoquest.vk.simulation.*;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * The keen, funny, beautiful foxes!
+ * @author Jeroen, Angela en Joel
+ * @version 2015-02-01
+ */
 public class Fox extends Animal implements Actor {
 	
+	/**
+	 * The fox constructor
+	 * @param field
+	 * @param location
+	 */
 	 public Fox(Field field, Location location)
 	    {
 	        super(field, location);
@@ -22,6 +32,7 @@ public class Fox extends Animal implements Actor {
 	        alive = true;
 	    }
 	 
+	 @Override
 	 public void act(List<Actor> newFoxes)
 	    {
 	        incrementAge();
@@ -46,7 +57,7 @@ public class Fox extends Animal implements Actor {
 	    }
 	 
 	 
-	 
+	 @Override
 	 public Location findFood()
 	    {
 	        Field field = getField();
@@ -66,7 +77,7 @@ public class Fox extends Animal implements Actor {
 	        }
 	        return null;
 	    }
-	 
+	 @Override
 	 public void giveBirth(List<Actor> newFoxes)
 	    {
 	        // New foxes are born into adjacent locations.
@@ -80,7 +91,7 @@ public class Fox extends Animal implements Actor {
 	            newFoxes.add(young);
 	        }
 	    }
-	 
+	 @Override
 	 public int breed()
 	 {
 		 int births = 0;
@@ -91,9 +102,9 @@ public class Fox extends Animal implements Actor {
 	    }
 	 
 	    
-	    public void tryToEscape()
-	    {
-	    	
-	    }
-		
+	@Override  
+	public boolean tryToEscape()
+	{	
+		return false;
+	}	
 }
