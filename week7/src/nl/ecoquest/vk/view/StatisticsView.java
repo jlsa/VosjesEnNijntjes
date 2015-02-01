@@ -22,27 +22,27 @@ public class StatisticsView extends JFrame {
 	 * @param SimulatorModel
 	 */
 	public StatisticsView(SimulatorModel model) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 750);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 400, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(2, 2, 0, 0));
 		
 		pieView = new PieView(model);
-		//JPanel PLACEHOLDER_FOR_PIEVIEW = new JPanel();
+		pieView.setVisible(true);
 		contentPane.add(pieView);
 		
 		histoView = new HistoView(model);
-		//JPanel PLACEHOLDER_FOR_HISTOVIEW = new JPanel();
+		histoView.setVisible(true);
 		contentPane.add(histoView);
 		
 		textView = new TextView(model);
-		//JPanel PLACEHOLDER_FOR_TEXTVIEW = new JPanel();
+		histoView.setVisible(true);
 		contentPane.add(textView);
 		
 		graphView = new GraphView(model);
-		//JPanel PLACEHOLDER_FOR_GRAPH_VIEW = new JPanel();
+		graphView.setVisible(true);
 		contentPane.add(graphView);
 	}
 

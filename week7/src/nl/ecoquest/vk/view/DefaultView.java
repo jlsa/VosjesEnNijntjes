@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -17,22 +18,15 @@ import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 
+import nl.ecoquest.vk.controller.MenubarController;
 import nl.ecoquest.vk.model.SimulatorModel;
+import nl.ecoquest.vk.simulation.Updateable;
 
-import javax.swing.AbstractAction;
-
-import java.awt.event.ActionEvent;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.swing.Action;
-
-public class DefaultView extends JFrame {
+public class DefaultView extends JFrame implements Updateable{
 
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private AbstractView fieldView;
 	private JButton btnRun;
 	private JButton btnStep;
 	private JButton btnSteps;
@@ -41,14 +35,18 @@ public class DefaultView extends JFrame {
 	private JButton btnOptions;
 	private JPanel buttonPanel;
 	private JPanel westContent;
+	private JLabel stepCount;
+	private JLabel population;
+	private SimulatorModel model;
 	
 	/**
 	 * Create the frame.
 	 * @param SimulatorModel
 	 */
-	public DefaultView(SimulatorModel model) {
+	public DefaultView(SimulatorModel model, FieldView fieldView) {
+		this.model = model;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1024, 768);
+		setSize(800, 600);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		
@@ -62,14 +60,17 @@ public class DefaultView extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		fieldView = new FieldView(model);
 		contentPane.add(fieldView, BorderLayout.CENTER);
 		fieldView.setLayout(new BorderLayout(0, 0));
 		
 		JPanel stepPanel = new JPanel();
+		stepCount = new JLabel("Steps: " + model.getStepsTaken());
+		stepPanel.add(stepCount);
 		fieldView.add(stepPanel, BorderLayout.NORTH);
 		
 		JPanel populationPanel = new JPanel();
+		population = new JLabel("Population: " + model.getPopulationDetails());
+		populationPanel.add(population);
 		fieldView.add(populationPanel, BorderLayout.SOUTH);
 		
 		JPanel westPane = new JPanel();
@@ -95,6 +96,7 @@ public class DefaultView extends JFrame {
 		
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0));
+		mntmQuit.addActionListener(new MenubarController());
 		mnFile.add(mntmQuit);
 		
 		JMenu mnLegend = new JMenu("Legend");
@@ -102,6 +104,7 @@ public class DefaultView extends JFrame {
 		
 		JMenuItem mntmLegend = new JMenuItem("Legend");
 		mntmLegend.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0));
+		mntmLegend.addActionListener(new MenubarController());
 		mnLegend.add(mntmLegend);
 		
 		return menuBar;
@@ -134,14 +137,20 @@ public class DefaultView extends JFrame {
 		buttonPanel.add(btnOptions);
 		}
 	
-	public List<JButton> getButtons(){
-		List<JButton> buttons = new LinkedList<JButton>();
-		buttons.add(btnRun);
-		buttons.add(btnStep);
-		buttons.add(btnSteps);
-		buttons.add(btnStop);
-		buttons.add(btnStatistics);
-		buttons.add(btnOptions);
-		return buttons;
+	public void addActionListeners(ActionListener run, ActionListener oneStep, ActionListener step100, ActionListener stop, 
+									ActionListener stats, ActionListener options){
+		btnRun.addActionListener(run);
+		btnStep.addActionListener(oneStep);
+		btnSteps.addActionListener(step100);
+		btnStop.addActionListener(stop);
+		btnStatistics.addActionListener(stats);
+		btnOptions.addActionListener(options);
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		stepCount.setText("Steps: " + model.getStepsTaken());
+		population.setText("Population: " + model.getPopulationDetails());
 	}
 }

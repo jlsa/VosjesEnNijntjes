@@ -17,7 +17,7 @@ public class LegendView extends JFrame {
 	 * Create the frame.
 	 */
 	public LegendView() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 150, 125);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -61,6 +61,7 @@ public class LegendView extends JFrame {
 		
 		JLabel lblHunterColour = new JLabel("colour4");
 		colourPanel.add(lblHunterColour);
-	}
 
+	}
+	
 }

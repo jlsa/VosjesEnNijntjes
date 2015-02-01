@@ -31,9 +31,13 @@ public class PieView extends AbstractView {
 		String[] splitPopulation = population.split(" ");
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		
-		for(int i = 0; i < splitPopulation.length; i += 3){
+		dataset.setValue("Rabbits", new Double(10.5));
+		dataset.setValue("Foxes", new Double(3.6));
+		dataset.setValue("Bears", new Double(1.34));
+		dataset.setValue("Hunters", new Double(0.67));
+		/*for(int i = 0; i < splitPopulation.length; i += 3){
 			dataset.setValue(splitPopulation[i], Double.parseDouble(splitPopulation[i+2]));
-		}		
+		}*/		
 		return dataset;
 	}
 	

@@ -2,8 +2,6 @@ package nl.ecoquest.vk.main;
 
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
 import nl.ecoquest.vk.model.*;
 import nl.ecoquest.vk.simulation.Updateable;
 import nl.ecoquest.vk.view.*;
@@ -16,17 +14,14 @@ import nl.ecoquest.vk.controller.*;
  *
  */
 public class Main implements Runnable {
-	private JFrame screen;
+	private DefaultView screen;
 	private SimulatorModel model; 
-//	private AbstractView fieldView;
-//	private AbstractView statView;
-//	private SimulatorController controller;
+	private ToolbarController toolbarController;
+
 	
 	// list with updateable objects
 	private ArrayList<Updateable> updateableObjects;
-	private OptionsView options;
-	private LegendView legend;
-//	private PieView pieChart;
+	private FieldView fieldView;
 
 	
 	public Main() {
@@ -66,14 +61,19 @@ public class Main implements Runnable {
 		// yes, this is an endless loop on purpose!
 		new Thread(this).start();
 */
+		updateableObjects = new ArrayList<Updateable>();
+		
 		model = new SimulatorModel();
-		screen = new DefaultView(model);
-		options = new OptionsView(model);
-		legend = new LegendView();
-		//pieChart = new PieView(model);
+		fieldView = new FieldView(model);
+		screen = new DefaultView(model, fieldView);
+		toolbarController = new ToolbarController(model, screen);
+		
+		updateableObjects.add(screen);
+		
 		screen.setVisible(true);
-		options.setVisible(false);
-		legend.setVisible(false);
+		model.reset();
+		
+		new Thread(this).start();
 	}
 	
 	/**
