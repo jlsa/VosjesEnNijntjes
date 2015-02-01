@@ -1,10 +1,13 @@
 package nl.ecoquest.vk.actor.animal;
 
+import java.util.Iterator;
+import java.util.List;
+
 import nl.ecoquest.vk.actor.Actor;
 import nl.ecoquest.vk.actor.Sickness;
-import nl.ecoquest.vk.*;
+import nl.ecoquest.vk.simulation.*;
 
-public class Rabbit extends Animal implements Actor, Sickness{
+public class Rabbit extends Animal implements Sickness {
 	
 	 public int sick;
 	
@@ -48,7 +51,7 @@ public class Rabbit extends Animal implements Actor, Sickness{
 	        }
 	    }
 	    
-	    private void giveBirth(List<Actor> newRabbits)
+	    public void giveBirth(List<Actor> newRabbits)
 	    {
 	        // New rabbits are born into adjacent locations.
 	        // Get a list of adjacent free locations.
@@ -57,8 +60,8 @@ public class Rabbit extends Animal implements Actor, Sickness{
 	        int births = breed();
 	        for(int b = 0; b < births && free.size() > 0; b++) {
 	            Location loc = free.remove(0);
-	            Rabbit young = new Rabbit(false, field, loc);
-	            newRabbits.add((Actor) young);
+	            Rabbit young = new Rabbit(field, loc);
+	            newRabbits.add(young);
 	        }
 	    }
 	    
@@ -69,23 +72,6 @@ public class Rabbit extends Animal implements Actor, Sickness{
 	            births = rand.nextInt(maxLitterSize) + 1;
 	        }
 	        return births;
-	    }
-
-	    /**
-	     * A rabbit can breed if it has reached the breeding age.
-	     * @return true if the rabbit can breed, false otherwise.
-	     */
-	    public boolean canBreed()
-	    {
-	        return age >= breedingAge;
-	    }
-	    
-	    public int getFoodValue(){
-	    	return foodValue;
-	    }
-	    
-	    public void setFoodValue(int foodValue){
-	    	this.foodValue = foodValue;
 	    }
 	    
 	    public void tryToEscape()
@@ -124,59 +110,32 @@ public class Rabbit extends Animal implements Actor, Sickness{
 
 
 		@Override
-		public boolean isActive() {
-			if(alive == true){
-				return true;
-			}
-			return false;
+		public Location findFood() {
+			/*Field field = getField();
+	        List<Location> adjacent = field.adjacentLocations(getLocation());
+	        Iterator<Location> it = adjacent.iterator();
+	        while(it.hasNext()) {
+	            Location where = it.next();
+	            Object animal = field.getObjectAt(where);
+	            if(animal instanceof Rabbit) {
+	                Rabbit rabbit = (Rabbit) animal;
+	                if(rabbit.isActive()) { 
+	                    rabbit.setInActive();
+	                    foodLevel = rabbit.getFoodValue();
+	                    //return where;
+	                }
+	            }
+	            if(animal instanceof Fox) {
+	                Fox fox = (Fox) animal;
+	                if(fox.isActive()) { 
+	                    fox.setInActive();
+	                    foodLevel = fox.getFoodValue();
+	                    //return where;
+	                }
+	            }
+	        }*/
+	        return null;
 		}
 
-
-		@Override
-		public void act() {
-			// TODO Auto-generated method stub
-			
-		}
-
-
-		@Override
-		public void setInActive() {
-			alive = false;
-	        if(location != null) {
-	            field.clear(location);
-	            location = null;
-	            field = null;
-	        }
-			
-		}
-
-
-		@Override
-		public Location getLocation() {
-			 return location;
-		}
-
-
-		@Override
-		public void setLocation(Location newLocation) {
-			 if(location != null) {
-		            field.clear(location);
-		        }
-		        location = newLocation;
-		        field.place(this, newLocation);
-		}
-
-
-		@Override
-		public void setField() {
-			// TODO Auto-generated method stub
-			
-		}
-
-
-		@Override
-		public Field getField() {
-			return field;
-		}
 	    
 }

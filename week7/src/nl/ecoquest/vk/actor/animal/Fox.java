@@ -1,6 +1,7 @@
 package nl.ecoquest.vk.actor.animal;
 
 import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.simulation.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Fox extends Animal implements Actor {
 	    {
 	        incrementAge();
 	        incrementHunger();
-	        if(super.isActive()) {
+	        if(isActive()) {
 	            giveBirth(newFoxes);            
 	            // Move towards a source of food if found.
 	            Location newLocation = findFood();
@@ -44,21 +45,7 @@ public class Fox extends Animal implements Actor {
 	        }
 	    }
 	 
-	 public void incrementAge()
-	    {
-	        age++;
-	        if(age > maxAge) {
-	        	setInActive();
-	        }
-	    }
 	 
-	 public void incrementHunger()
-	    {
-	        foodLevel--;
-	        if(foodLevel <= 0) {
-	            setInActive();
-	        }
-	    }
 	 
 	 public Location findFood()
 	    {
@@ -95,85 +82,18 @@ public class Fox extends Animal implements Actor {
 	    }
 	 
 	 public int breed()
-	    {
-	        int births = 0;
+	 {
+		 int births = 0;
 	        if(canBreed() && rand.nextDouble() <= breedingProbability) {
 	            births = rand.nextInt(maxLitterSize) + 1;
 	        }
 	        return births;
 	    }
 	 
-	 public boolean canBreed()
-	    {
-	        return age >= breedingAge;
-	    }
-	    
-	    public int getFoodValue(){
-	    	return foodValue;
-	    }
-	    
-	    public void setFoodValue(int foodValue){
-	    	this.foodValue = foodValue;
-	    }
 	    
 	    public void tryToEscape()
 	    {
 	    	
 	    }
-	    
-	    @Override
-		public boolean isActive() {
-			if(alive == true){
-				return true;
-			}
-			return false;
-		}
-
-
-		@Override
-		public void act() {
-			// TODO Auto-generated method stub
-			
-		}
-
-
-		@Override
-		public void setInActive() {
-			alive = false;
-	        if(location != null) {
-	            field.clear(location);
-	            location = null;
-	            field = null;
-	        }
-			
-		}
-
-
-		@Override
-		public Location getLocation() {
-			 return location;
-		}
-
-
-		@Override
-		public void setLocation(Location newLocation) {
-			 if(location != null) {
-		            field.clear(location);
-		        }
-		        location = newLocation;
-		        field.place(this, newLocation);
-		}
-
-
-		@Override
-		public void setField() {
-			// TODO Auto-generated method stub
-			
-		}
-
-
-		@Override
-		public Field getField() {
-			return field;
-		}
+		
 }
