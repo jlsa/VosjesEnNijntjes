@@ -38,7 +38,6 @@ public class Rabbit extends Animal implements Sickness {
 			sicknessLevel = 0;
 			infectionRate = 0.0f;
 		}
-
 	}
 		
 	@Override

@@ -11,6 +11,12 @@ import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.actor.animal.*;
 import nl.ecoquest.vk.actor.human.*;
 
+import nl.ecoquest.vk.model.AbstractModel;
+import nl.ecoquest.vk.simulation.*;
+import nl.ecoquest.vk.view.FieldView;
+import nl.ecoquest.vk.actor.*;
+import nl.ecoquest.vk.actor.animal.*;
+import nl.ecoquest.vk.actor.human.*;
 
 
 /**
@@ -94,6 +100,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		System.out.println("steps: " + step);
 		System.out.println("Actors: " + actors.size());
 
+		System.out.println("steps: " + step);
 		
 		// provide space for newborn animals
 		List<Actor> newActors = new ArrayList<Actor>();
