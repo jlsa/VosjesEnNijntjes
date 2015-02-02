@@ -23,7 +23,7 @@ public class Bear extends Animal implements Actor {
 		breedingAge = 20;
 		maxAge = 200;
 		breedingProbability = 0.01;
-		maxLitterSize = 2;
+		maxLitterSize = 1;
 		foodValue = 30;
 		age = 1;
 		maxFoodLevel = 100;
@@ -85,7 +85,7 @@ public class Bear extends Animal implements Actor {
 			Rabbit rabbit = (Rabbit) animal;
 				if(rabbit.isActive()) { 
 					rabbit.setInActive();
-					feed(rabbit.getFoodValue());//foodLevel = rabbit.getFoodValue();
+					foodLevel = 10;//feed(rabbit.getFoodValue());//foodLevel = rabbit.getFoodValue();
 					return where;
 				}
 			}
@@ -93,7 +93,7 @@ public class Bear extends Animal implements Actor {
 				Fox fox = (Fox) animal;
 				if(fox.isActive()) { 
 					fox.setInActive();
-					feed(fox.getFoodValue());//foodLevel = fox.getFoodValue();
+					foodLevel = 10;//feed(fox.getFoodValue());//foodLevel = fox.getFoodValue();
 					return where;
 				}
 			}

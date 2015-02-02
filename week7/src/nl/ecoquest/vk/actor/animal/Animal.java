@@ -39,9 +39,9 @@ public abstract class Animal implements Actor
     protected Random rand = Randomizer.getRandom();
     
     // Field on which the animal resides
-    private Field field;
+    protected Field field;
     // The location the animal has on the field.
-    private Location location;
+    protected Location location;
     
     /**
      * Animal constructor. (Abstract)
@@ -51,6 +51,7 @@ public abstract class Animal implements Actor
     public Animal(Field field, Location location) {
     	this.field = field;
     	this.location = location;
+    	alive = true;
     }
     
     /**
@@ -101,7 +102,7 @@ public abstract class Animal implements Actor
 		if(newFoodLevel > maxFoodLevel) {
 			newFoodLevel = maxFoodLevel;
 		}
-		this.foodLevel = newFoodLevel;
+		this.foodLevel = foodValue;//newFoodLevel;
 	}
 	/**
 	 * All animals need to find food. 
@@ -147,10 +148,7 @@ public abstract class Animal implements Actor
     
     @Override
 	public boolean isActive() {
-		if(alive == true){
-			return true;
-		}
-		return false;
+		return alive;
 	}
 
 	@Override
@@ -170,11 +168,11 @@ public abstract class Animal implements Actor
 
 	@Override
 	public void setLocation(Location newLocation) {
-		 if(location != null) {
-	            field.clear(location);
-	        }
-	        location = newLocation;
-	        field.place(this, newLocation);
+		if(location != null) {
+			field.clear(location);
+	    }
+	    location = newLocation;
+	    field.place(this, newLocation);
 	}
 
 	@Override

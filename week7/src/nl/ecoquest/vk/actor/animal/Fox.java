@@ -21,15 +21,14 @@ public class Fox extends Animal implements Actor {
 	 public Fox(Field field, Location location)
 	    {
 	        super(field, location);
-	        breedingAge = 10;
+	        breedingAge = 15;
 	        maxAge = 150;
-	        breedingProbability = 0.11;
-	        maxLitterSize = 4;
-	        foodValue = 15;
-	        age = 1;
-	        maxFoodLevel = 20;
-	        foodLevel = 20;
-	        alive = true;
+	        breedingProbability = 0.08;//0.11;
+	        maxLitterSize = 2;
+	        foodValue = 9;
+	        age = rand.nextInt(maxAge);
+	        maxFoodLevel = 9;
+	        foodLevel = rand.nextInt(foodValue);
 	    }
 	 
 	 @Override
@@ -70,8 +69,8 @@ public class Fox extends Animal implements Actor {
 	                Rabbit rabbit = (Rabbit) animal;
 	                if(rabbit.isActive()) { 
 	                    rabbit.setInActive();
-	                    feed(rabbit.getFoodValue());
-	                    return where;
+	                    foodLevel = foodValue;//feed(rabbit.getFoodValue());
+	                    return null;//where;
 	                }
 	            }
 	        }
@@ -91,13 +90,13 @@ public class Fox extends Animal implements Actor {
 	            newFoxes.add(young);
 	        }
 	    }
-	 @Override
-	 public int breed()
-	 {
-		 int births = 0;
-	        if(canBreed() && rand.nextDouble() <= breedingProbability) {
-	            births = rand.nextInt(maxLitterSize) + 1;
-	        }
-	        return births;
+	@Override
+	public int breed()
+	{
+		int births = 0;
+	    if(canBreed() && rand.nextDouble() <= breedingProbability) {
+	    	births = rand.nextInt(maxLitterSize) + 1;
 	    }
+	    return births;
+	}
 }

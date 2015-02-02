@@ -48,7 +48,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	private boolean runInfinite;
 	
 	// the time in microseconds the thread sleeps each cycle (Cannot be lower then 10)
-	private int sleepTime = 100; // 1000 is 1 second
+	private int sleepTime = 10; // 1000 is 1 second
 	
 	private LinkedHashMap<Class<?>, Color> colors;
 		
@@ -57,15 +57,16 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		actors = new ArrayList<Actor>();
 		colors = new LinkedHashMap<Class<?>, Color>();
 		fieldStats = new FieldStats();
-		field = new Field(75, 75);
+		field = new Field(100, 100);
 		run = false;
 		runInfinite = false;
 		
 		// set the color of each actor that is on the field
 		colors.put(Fox.class, Color.RED); // foxes are red/orange in nature
 		colors.put(Rabbit.class, Color.BLUE); // gray/brown rabbits
-		//colors.put(Bear.class, Color.BLACK); // Blackbears!
-		//colors.put(Hunter.class, Color.RED); // Hunters wearing red coats!
+		colors.put(Bear.class, Color.BLACK); // Blackbears!
+		colors.put(Hunter.class, Color.RED); // Hunters wearing red coats!
+		reset();
 	}
 	
 	public void simulate(int steps) 
@@ -89,22 +90,23 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		// do 1 step
 		step++;
 		System.out.println("steps: " + step);
+		System.out.println("Actors: " + actors.size());
 		
 		// provide space for newborn animals
 		List<Actor> newActors = new ArrayList<Actor>();
 		
 		try {
-			// let all actors act
-			for(Iterator<Actor> it = actors.iterator(); it.hasNext();)  {
-				Actor actor = it.next();
-				actor.act(newActors);
-				if(!actor.isActive()) {
-					it.remove();
+			
+			for(int i = 0; i < actors.size(); i++){
+				Actor actor = actors.get(i);
+				if(actor.isActive()) {
+					actor.act(newActors);
+				} else {
+					actors.remove(i);
 				}
 			}
-			
 			actors.addAll(newActors);
-			//notifyViews();
+			update();
 		} catch(Exception e) {
 			System.err.println(e);
 		}
@@ -153,7 +155,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 					Rabbit rabbit = new Rabbit(field, location);
 					actors.add(rabbit);
 				}
-				/*if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
+				if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
 					Location location = new Location(row, col);
 					Bear bear = new Bear(field, location);
 					actors.add(bear);
@@ -162,7 +164,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 					Location location = new Location(row, col);
 					Hunter hunter = new Hunter(field, location);
 					actors.add(hunter);
-				}*/
+				}
 				
 			}
 		}
@@ -203,9 +205,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 			}
 		}
 		
-		//notifyViews();
-		System.out.println("updating");
-		
+		notifyViews();		
 	}
 	
 	private void render(int col, int row, Color color) {
@@ -231,7 +231,6 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	public void run() {
 		for(int i=0;i<numOfSteps && run; i++) {
 			simulateOneStep();
-			update();
 			try {
 				if(sleepTime <= 10) {
 					sleepTime = 10;
