@@ -28,7 +28,19 @@ public interface Sickness {
 	public void incrementSickness();
 	
 	/**
+	 * Gets the current sickness level
+	 * @return the current sickness level
+	 */
+	public int getSicknessLevel();
+	
+	/**
 	 * Spread the sickness
 	 */
 	public void spreadSickness();
+	
+	/**
+	 * Get the infection rate of the sickness
+	 * @return infection rate
+	 */
+	public double getInfectionRate();
 }
