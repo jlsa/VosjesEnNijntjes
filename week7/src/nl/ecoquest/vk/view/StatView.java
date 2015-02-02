@@ -1,12 +1,17 @@
 package nl.ecoquest.vk.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
+<<<<<<< HEAD
 import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.actor.animal.*;
 import nl.ecoquest.vk.actor.environment.*;
 import nl.ecoquest.vk.actor.human.*;
 import nl.ecoquest.vk.model.*;
+=======
+import nl.ecoquest.vk.model.SimulatorModel;
+>>>>>>> GUIAngela
 
 @SuppressWarnings("serial")
 public class StatView extends AbstractView {
@@ -135,7 +140,7 @@ public class StatView extends AbstractView {
 		
 		g.setColor(Color.lightGray);
 		g.fillArc(x, y, width, height, beginNon, endNon);
-		*/
 		
+		*/
 	}
 }

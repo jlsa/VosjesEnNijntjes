@@ -1,9 +1,18 @@
 package nl.ecoquest.vk.controller;
 
+<<<<<<< HEAD
+=======
+import java.awt.Color;
+>>>>>>> GUIAngela
 import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
+=======
+import java.util.LinkedHashMap;
+import java.util.Map;
+>>>>>>> GUIAngela
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;

@@ -1,9 +1,6 @@
 package nl.ecoquest.vk.simulation;
 
 
-import nl.ecoquest.vk.simulation.Counter;
-import nl.ecoquest.vk.simulation.Field;
-
 import java.util.HashMap;
 
 /**
@@ -45,7 +42,7 @@ public class FieldStats
         for(Class<?> key : counters.keySet()) {
             Counter info = counters.get(key);
             buffer.append(info.getName());
-            buffer.append(": ");
+            buffer.append(" : ");
             buffer.append(info.getCount());
             buffer.append(' ');
         }

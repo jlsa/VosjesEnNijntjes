@@ -25,8 +25,11 @@ public class PopulationGenerator {
 		
 	}
 	
+<<<<<<< HEAD
 	public static void setNewValues(){
 		
 	}
 	
+=======
+>>>>>>> GUIAngela
 }
