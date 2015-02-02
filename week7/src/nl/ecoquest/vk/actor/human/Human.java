@@ -2,7 +2,7 @@ package nl.ecoquest.vk.actor.human;
 
 import java.util.List;
 
-import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.simulation.Field;
 import nl.ecoquest.vk.simulation.Location;
 

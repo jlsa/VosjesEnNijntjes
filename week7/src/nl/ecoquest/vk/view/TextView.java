@@ -1,31 +1,41 @@
+/**
+ * 
+ */
 package nl.ecoquest.vk.view;
-
-import javax.swing.JTextArea;
 
 import nl.ecoquest.vk.model.SimulatorModel;
 import nl.ecoquest.vk.simulation.Updateable;
 
 /**
- * Textview is a simple view of the current simulation.
- * It's job is to simply print the population.
- * @author Angela 
- *  
+ * @author Angela
+ *
  */
 public class TextView extends AbstractView implements Updateable{
-//TODO fix TextView
+
 	private static final long serialVersionUID = 1L;
 	private SimulatorModel model;
-	private JTextArea textArea;
 
 	public TextView(SimulatorModel model) {
 		super(model);
-		this.setVisible(true);
+		this.model = model;
 	}
 	
+	private void splitText(SimulatorModel model){
+		String data = model.getPopulationDetails();
+		String[] lines = data.split(" ");
+		
+		System.out.println(model.getStepsTaken());
+		for(int i = 0; i <= lines.length; i+=3){
+			System.out.print(lines[i]);
+			System.out.print(": ");
+			System.out.print(lines[i] + "\n");			
+		}
+	}
 
 	@Override
 	public void update() {
-		//TODO add update method
+		// TODO Auto-generated method stub
+		splitText(model);
 	}
 
 }

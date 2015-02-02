@@ -1,12 +1,9 @@
 package nl.ecoquest.vk.actor.animal;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-import nl.ecoquest.vk.actor.Actor;
-import nl.ecoquest.vk.simulation.Field;
-import nl.ecoquest.vk.simulation.Location;
-import nl.ecoquest.vk.simulation.Randomizer;
+import nl.ecoquest.vk.actor.*;
+import nl.ecoquest.vk.simulation.*;
 
 /**
  * A class representing shared characteristics of animals.
@@ -45,7 +42,6 @@ public abstract class Animal implements Actor
     protected Field field;
     // The location the animal has on the field.
     protected Location location;
-    
     
     /**
      * Animal constructor. (Abstract)
@@ -187,75 +183,5 @@ public abstract class Animal implements Actor
 	@Override
 	public void setField(Field field) {
 		this.field = field;
-	}
-
-	/**
-	 * @return the breedingAge
-	 */
-	public int getBreedingAge() {
-		return breedingAge;
-	}
-
-	/**
-	 * @param breedingAge the breedingAge to set
-	 */
-	public void setBreedingAge(int breedingAge) {
-		this.breedingAge = breedingAge;
-	}
-
-	/**
-	 * @return the maxAge
-	 */
-	public int getMaxAge() {
-		return maxAge;
-	}
-
-	/**
-	 * @param maxAge the maxAge to set
-	 */
-	public void setMaxAge(int maxAge) {
-		this.maxAge = maxAge;
-	}
-
-	/**
-	 * @return the breedingProbability
-	 */
-	public double getBreedingProbability() {
-		return breedingProbability;
-	}
-
-	/**
-	 * @param breedingProbability the breedingProbability to set
-	 */
-	public void setBreedingProbability(double breedingProbability) {
-		this.breedingProbability = breedingProbability;
-	}
-
-	/**
-	 * @return the maxLitterSize
-	 */
-	public int getMaxLitterSize() {
-		return maxLitterSize;
-	}
-
-	/**
-	 * @param maxLitterSize the maxLitterSize to set
-	 */
-	public void setMaxLitterSize(int maxLitterSize) {
-		this.maxLitterSize = maxLitterSize;
-	}
-
-	/**
-	 * @return the foodLevel
-	 */
-	public int getFoodLevel() {
-		return foodLevel;
-	}
-
-	/**
-	 * @param foodLevel the foodLevel to set
-	 */
-	public void setFoodLevel(int foodLevel) {
-		this.foodLevel = foodLevel;
 	}
 }

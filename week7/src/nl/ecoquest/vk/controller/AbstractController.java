@@ -1,8 +1,8 @@
 package nl.ecoquest.vk.controller;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import nl.ecoquest.vk.model.SimulatorModel;
+import nl.ecoquest.vk.model.*;
 
 @SuppressWarnings("serial")
 public abstract class AbstractController extends JPanel {

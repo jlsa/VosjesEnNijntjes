@@ -3,23 +3,24 @@ package nl.ecoquest.vk.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import nl.ecoquest.vk.model.SimulatorModel;
-import nl.ecoquest.vk.view.DefaultView;
-import nl.ecoquest.vk.view.OptionsView;
-import nl.ecoquest.vk.view.StatisticsView;
+import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.simulation.*;
+import nl.ecoquest.vk.view.*;
 
 public class ToolbarController extends AbstractController {
 
 	private static final long serialVersionUID = 1L;
 	private DefaultView view;
+	private SimulatorModel model;
 	private OptionsView options;
 	private StatisticsView stats;
 	
-	public ToolbarController(SimulatorModel model, DefaultView view, StatisticsView stats) {
+	public ToolbarController(SimulatorModel model, DefaultView view) {
 		super(model);
+		this.model = model;
 		this.view = view;
-		this.stats = stats;
 		options = new OptionsView(model);
+		stats = new StatisticsView(model);
 		addButtonListeners();
 		
 	}

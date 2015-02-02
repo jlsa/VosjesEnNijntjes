@@ -1,13 +1,12 @@
 package nl.ecoquest.vk.controller;
 
+import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
-import nl.ecoquest.vk.model.SimulatorModel;
-import nl.ecoquest.vk.simulation.Updateable;
+import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.simulation.*;
 
 @SuppressWarnings("serial")
 public class SimulatorController extends AbstractController implements ActionListener, Updateable {

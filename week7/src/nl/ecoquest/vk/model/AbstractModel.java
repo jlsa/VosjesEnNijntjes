@@ -1,9 +1,8 @@
 package nl.ecoquest.vk.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import nl.ecoquest.vk.view.*;
 
-import nl.ecoquest.vk.view.AbstractView;
+import java.util.*;
 
 public abstract class AbstractModel {
 	protected List<AbstractView> views;

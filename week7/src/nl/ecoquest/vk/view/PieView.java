@@ -1,28 +1,54 @@
 package nl.ecoquest.vk.view;
 
+import javax.swing.JPanel;
+
 import nl.ecoquest.vk.model.SimulatorModel;
-import nl.ecoquest.vk.simulation.Updateable;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 
 /**
- * PieView is a representation of the data model outputs
- * in a simple pie chart
  * @author Angela
  *
  */
-public class PieView extends AbstractView implements Updateable{
+public class PieView extends AbstractView {
 	
 	private static final long serialVersionUID = 1L;
-//TODO fix PieView
+
 	public PieView(SimulatorModel model){
 		super(model);
 		
-
-		this.setVisible(true);
+		JFreeChart pieChart = createChart(createDataset(model));
+		JPanel piePanel = new ChartPanel(pieChart);
+		piePanel.setVisible(true);
 	}
 	
-
-	@Override
-	public void update() {
-		super.updateView();		
+	private PieDataset createDataset(SimulatorModel model){
+		String population = model.getPopulationDetails();
+		String[] splitPopulation = population.split(" ");
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		
+		dataset.setValue("Rabbits", new Double(10.5));
+		dataset.setValue("Foxes", new Double(3.6));
+		dataset.setValue("Bears", new Double(1.34));
+		dataset.setValue("Hunters", new Double(0.67));
+		/*for(int i = 0; i < splitPopulation.length; i += 3){
+			dataset.setValue(splitPopulation[i], Double.parseDouble(splitPopulation[i+2]));
+		}*/		
+		return dataset;
+	}
+	
+	private JFreeChart createChart(PieDataset dataset){
+		JFreeChart chart = ChartFactory.createPieChart(
+				"Pie Chart",
+				dataset,
+				true,
+				true,
+				false
+		);
+		return chart;
 	}
 }

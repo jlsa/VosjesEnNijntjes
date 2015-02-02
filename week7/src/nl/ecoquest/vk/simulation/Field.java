@@ -1,5 +1,8 @@
 package nl.ecoquest.vk.simulation;
 
+import nl.ecoquest.vk.simulation.Location;
+import nl.ecoquest.vk.simulation.Randomizer;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;

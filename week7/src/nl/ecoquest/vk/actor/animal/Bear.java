@@ -2,10 +2,8 @@ package nl.ecoquest.vk.actor.animal;
 
 import java.util.Iterator;
 import java.util.List;
-
-import nl.ecoquest.vk.actor.Actor;
-import nl.ecoquest.vk.simulation.Field;
-import nl.ecoquest.vk.simulation.Location;
+import nl.ecoquest.vk.actor.*;
+import nl.ecoquest.vk.simulation.*;
 
 /**
  * The bear is a verocious animal. It kills all rabbits, foxes and tries to runaway from the poaching hunters!
