@@ -26,17 +26,16 @@ public class Bear extends Animal implements Actor {
 		maxAge = 200;
 		breedingProbability = 0.01;
 		maxLitterSize = 1;
-		foodValue = 30;
+		foodValue = 18;
 		age = 1;
-		maxFoodLevel = 100;
-		foodLevel = 20;
+		maxFoodLevel = 18;
+		foodLevel = 18;
 	}
 	
 	@Override
 	public void act(List<Actor> newActors)
 	{
 		incrementAge();
-		incrementHunger();
 		if(isActive()) {
 			giveBirth(newActors);            
 			// Move towards a source of food if found.
@@ -54,6 +53,8 @@ public class Bear extends Animal implements Actor {
 				setInActive();
 			}
 		}
+
+		incrementHunger();
 	}
 	
 	@Override
@@ -88,7 +89,7 @@ public class Bear extends Animal implements Actor {
 				if(rabbit.isActive()) { 
 					if(!rabbit.tryToEscape()) {
 						rabbit.setInActive();
-						foodLevel = 10;
+						foodLevel += rabbit.getFoodValue();
 					}
 					return where;
 				}
@@ -98,7 +99,7 @@ public class Bear extends Animal implements Actor {
 				if(fox.isActive()) { 
 					if(!fox.tryToEscape()) {
 						fox.setInActive();
-						foodLevel = 10;
+						foodLevel += fox.getFoodValue();
 					}
 					return where;
 				}

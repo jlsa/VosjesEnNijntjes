@@ -26,7 +26,7 @@ public class Fox extends Animal implements Actor {
 	        maxAge = 150;
 	        breedingProbability = 0.11;//0.11;
 	        maxLitterSize = 3;
-	        foodValue = 13;
+	        foodValue = 6;
 	        age = rand.nextInt(maxAge);
 	        maxFoodLevel = 9;
 	        foodLevel = rand.nextInt(foodValue);
@@ -35,7 +35,7 @@ public class Fox extends Animal implements Actor {
 	 @Override
 	 public void act(List<Actor> newFoxes)
 	    {
-	        incrementAge();
+
 	        incrementHunger();
 	        if(isActive()) {
 	            giveBirth(newFoxes);            
@@ -54,6 +54,8 @@ public class Fox extends Animal implements Actor {
 	                setInActive();
 	            }
 	        }
+
+	        incrementAge();
 	    }
 	 
 	 
@@ -71,7 +73,7 @@ public class Fox extends Animal implements Actor {
 	                if(rabbit.isActive()) {
 	                	if(!rabbit.tryToEscape()) {
 		                    rabbit.setInActive();
-		                    foodLevel += foodValue;
+		                    foodLevel += rabbit.getFoodValue();
 	                	}
 	                    return where;
 	                }

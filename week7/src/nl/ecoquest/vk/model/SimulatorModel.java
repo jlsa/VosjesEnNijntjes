@@ -65,9 +65,9 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		
 		// set the color of each actor that is on the field
 		colors.put(Fox.class, Color.RED); // foxes are red/orange in nature
-		colors.put(Rabbit.class, Color.BLUE); // gray/brown rabbits
-		colors.put(Bear.class, Color.BLACK); // Blackbears!
-		colors.put(Hunter.class, Color.YELLOW); // Hunters wearing red coats!
+		colors.put(Rabbit.class, Color.BLUE); // blue rabbits
+		colors.put(Bear.class, Color.BLACK); // Black bears!
+		colors.put(Hunter.class, Color.YELLOW); // Hunters wearing yellow coats!
 		colors.put(Grass.class, Color.GREEN); // green grass!
 	}
 	
