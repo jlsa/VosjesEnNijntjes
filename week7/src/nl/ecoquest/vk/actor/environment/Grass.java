@@ -3,7 +3,6 @@ package nl.ecoquest.vk.actor.environment;
 import java.util.*;
 
 import nl.ecoquest.vk.actor.Actor;
-import nl.ecoquest.vk.actor.animal.Fox;
 import nl.ecoquest.vk.simulation.Field;
 import nl.ecoquest.vk.simulation.Location;
 import nl.ecoquest.vk.simulation.Randomizer;

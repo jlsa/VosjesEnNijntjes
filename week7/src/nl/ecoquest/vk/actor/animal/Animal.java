@@ -98,11 +98,11 @@ public abstract class Animal implements Actor
 	 * @param foodValue
 	 */
 	public void feed(int foodValue){
-		int newFoodLevel = foodLevel + this.foodLevel;
+		int newFoodLevel = foodValue + this.foodLevel;
 		if(newFoodLevel > maxFoodLevel) {
 			newFoodLevel = maxFoodLevel;
 		}
-		this.foodLevel = foodValue;//newFoodLevel;
+		this.foodLevel = newFoodLevel;
 	}
 	/**
 	 * All animals need to find food. 

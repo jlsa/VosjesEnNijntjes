@@ -4,7 +4,7 @@ package nl.ecoquest.vk.model;
 import java.util.*;
 import java.awt.Color;
 
-import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.model.AbstractModel;
 import nl.ecoquest.vk.simulation.*;
 import nl.ecoquest.vk.view.*;
 import nl.ecoquest.vk.actor.*;
@@ -47,7 +47,6 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	
 	
 	private boolean run;
-	private boolean runInfinite;
 	
 	// the time in microseconds the thread sleeps each cycle (Cannot be lower then 10)
 	private int sleepTime = 10; // 1000 is 1 second
@@ -61,7 +60,6 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		fieldStats = new FieldStats();
 		field = new Field(100, 100);
 		run = false;
-		runInfinite = false;
 		
 		// set the color of each actor that is on the field
 		colors.put(Fox.class, Color.RED); // foxes are red/orange in nature
@@ -79,13 +77,6 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		run = true;
 		new Thread(this).start();
 		
-	}
-	
-	public void simulateInfinite() {
-		runInfinite = true;
-		if(run) { return; }
-		run = true;
-		new Thread(this).start();
 	}
 	
 	private void simulateOneStep() {

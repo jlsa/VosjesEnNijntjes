@@ -24,7 +24,7 @@ public class Fox extends Animal implements Actor {
 	        super(field, location);
 	        breedingAge = 15;
 	        maxAge = 150;
-	        breedingProbability = 0.11;//0.11;
+	        breedingProbability = 0.12;//0.11;
 	        maxLitterSize = 3;
 	        foodValue = 6;
 	        age = rand.nextInt(maxAge);
@@ -35,8 +35,8 @@ public class Fox extends Animal implements Actor {
 	 @Override
 	 public void act(List<Actor> newFoxes)
 	    {
-
 	        incrementHunger();
+	        incrementAge();
 	        if(isActive()) {
 	            giveBirth(newFoxes);            
 	            // Move towards a source of food if found.
@@ -55,7 +55,6 @@ public class Fox extends Animal implements Actor {
 	            }
 	        }
 
-	        incrementAge();
 	    }
 	 
 	 

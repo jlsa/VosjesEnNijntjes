@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.actor.environment.*;
-import nl.ecoquest.vk.actor.human.*;
 import nl.ecoquest.vk.simulation.*;
 
 /**
@@ -24,8 +23,8 @@ public class Bear extends Animal implements Actor {
 		alive = true;	
 		breedingAge = 20;
 		maxAge = 200;
-		breedingProbability = 0.01;
-		maxLitterSize = 1;
+		breedingProbability = 0.07;
+		maxLitterSize = 2;
 		foodValue = 18;
 		age = 1;
 		maxFoodLevel = 18;

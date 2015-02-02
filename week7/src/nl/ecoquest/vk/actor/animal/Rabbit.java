@@ -27,8 +27,8 @@ public class Rabbit extends Animal implements Sickness {
 		breedingAge = 5;
 		maxAge = 40;
 		breedingProbability = 0.12;
-		maxLitterSize = 4; 
-		foodValue = 3;
+		maxLitterSize = 3; 
+		foodValue = 4;
 		age = rand.nextInt(maxAge);
 		foodLevel = 4;
 		maxFoodLevel = 20;
@@ -37,9 +37,8 @@ public class Rabbit extends Animal implements Sickness {
 		
 		// random chance if the rabbit is sick or not
 		int sickChance = rand.nextInt(100) + 1;
-		if(sickChance < 50) {
-			//setSick();
-			sick = false;
+		if(sickChance < 10) {
+			sick= false;//setSick();
 		} else {
 			sick = false;
 		}
@@ -49,7 +48,7 @@ public class Rabbit extends Animal implements Sickness {
 	public void act(List<Actor> newRabbits)
 	{
 		incrementAge();
-		
+		incrementHunger();
 		if(isActive()) {
 			incrementSickness();
 		}
@@ -74,7 +73,6 @@ public class Rabbit extends Animal implements Sickness {
                 setInActive();
             }
         }
-		incrementHunger();
 		
 	}
 	
@@ -173,7 +171,7 @@ public class Rabbit extends Animal implements Sickness {
 				if(actor instanceof Grass) {
 					Grass grass = (Grass) actor;
 					if(grass.isActive()) {
-						foodLevel += 2;
+						feed(4);//foodLevel += 4;
 						grass.setInActive();
 						return where;
 					}
