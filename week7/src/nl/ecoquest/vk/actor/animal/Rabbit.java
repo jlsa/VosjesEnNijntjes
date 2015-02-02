@@ -23,7 +23,6 @@ public class Rabbit extends Animal implements Sickness {
 	public Rabbit(Field field, Location location)
 	{
 		super(field, location);
-<<<<<<< HEAD
 		breedingAge = 5;
 		maxAge = 40;
 		breedingProbability = 0.12;
@@ -40,8 +39,6 @@ public class Rabbit extends Animal implements Sickness {
 			sicknessLevel = 0;
 			infectionRate = 0.0f;
 		}
-=======
->>>>>>> GUIAngela
 	}
 		
 	@Override
