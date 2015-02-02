@@ -1,8 +1,8 @@
 package nl.ecoquest.vk.view;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
-import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.model.SimulatorModel;
 
 public abstract class AbstractView extends JPanel 
 {

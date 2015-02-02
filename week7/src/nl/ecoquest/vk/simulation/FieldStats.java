@@ -1,9 +1,6 @@
 package nl.ecoquest.vk.simulation;
 
 
-import nl.ecoquest.vk.simulation.Counter;
-import nl.ecoquest.vk.simulation.Field;
-
 import java.util.HashMap;
 
 /**

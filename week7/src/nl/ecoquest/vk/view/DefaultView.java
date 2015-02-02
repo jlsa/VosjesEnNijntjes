@@ -2,11 +2,17 @@ package nl.ecoquest.vk.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.AbstractButton;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +28,11 @@ import nl.ecoquest.vk.controller.MenubarController;
 import nl.ecoquest.vk.model.SimulatorModel;
 import nl.ecoquest.vk.simulation.Updateable;
 
+/**
+ * 
+ * @author Angela
+ *
+ */
 public class DefaultView extends JFrame implements Updateable{
 
 
@@ -44,6 +55,7 @@ public class DefaultView extends JFrame implements Updateable{
 	 * @param SimulatorModel
 	 */
 	public DefaultView(SimulatorModel model, FieldView fieldView) {
+		this.setTitle("Foxes and Rabbits");
 		this.model = model;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
@@ -80,11 +92,8 @@ public class DefaultView extends JFrame implements Updateable{
 		westPane.add(westContent);
 		westContent.setLayout(new BorderLayout(0, 0));
 		
-		JPanel PLACEHOLDER_FOR_LOGO = new JPanel();
-		westContent.add(PLACEHOLDER_FOR_LOGO, BorderLayout.CENTER);
-		PLACEHOLDER_FOR_LOGO.setBackground(new Color(255, 255, 204));
-		
 		addButtons();
+		addLogo();
 		
 	}
 		
@@ -96,7 +105,7 @@ public class DefaultView extends JFrame implements Updateable{
 		
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0));
-		mntmQuit.addActionListener(new MenubarController());
+		mntmQuit.addActionListener(new MenubarController(model));
 		mnFile.add(mntmQuit);
 		
 		JMenu mnLegend = new JMenu("Legend");
@@ -104,7 +113,7 @@ public class DefaultView extends JFrame implements Updateable{
 		
 		JMenuItem mntmLegend = new JMenuItem("Legend");
 		mntmLegend.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, 0));
-		mntmLegend.addActionListener(new MenubarController());
+		mntmLegend.addActionListener(new MenubarController(model));
 		mnLegend.add(mntmLegend);
 		
 		return menuBar;
@@ -149,8 +158,22 @@ public class DefaultView extends JFrame implements Updateable{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		stepCount.setText("Steps: " + model.getStepsTaken());
 		population.setText("Population: " + model.getPopulationDetails());
+	}
+	
+	private void addLogo(){
+		JPanel logoPanel = new JPanel();
+		westContent.add(logoPanel, BorderLayout.CENTER);
+		
+		try {
+			Icon logo;
+			logo = new ImageIcon(getClass().getResource("images/64ecoLogo.png"));
+			JLabel logoLabel = new JLabel(logo);
+			logoPanel.add(logoLabel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logoPanel.setSize(getPreferredSize());
 	}
 }

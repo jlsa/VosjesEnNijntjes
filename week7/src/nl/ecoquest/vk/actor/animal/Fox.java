@@ -1,10 +1,11 @@
 package nl.ecoquest.vk.actor.animal;
 
-import nl.ecoquest.vk.actor.Actor;
-import nl.ecoquest.vk.simulation.*;
-
 import java.util.Iterator;
 import java.util.List;
+
+import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.Location;
 
 /**
  * The keen, funny, beautiful foxes!

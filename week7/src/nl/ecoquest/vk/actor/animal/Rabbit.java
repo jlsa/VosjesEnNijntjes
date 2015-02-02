@@ -4,7 +4,8 @@ import java.util.List;
 
 import nl.ecoquest.vk.actor.Actor;
 import nl.ecoquest.vk.actor.Sickness;
-import nl.ecoquest.vk.simulation.*;
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.Location;
 
 /**
  * The rabbit is the lowest in the animal foodchain. 
@@ -19,15 +20,6 @@ public class Rabbit extends Animal implements Sickness {
 	public Rabbit(Field field, Location location)
 	{
 		super(field, location);
-		breedingAge = 5;
-		maxAge = 40;
-		breedingProbability = 0.85;
-		maxLitterSize = 4;
-		foodValue = 1;
-		age = 0;
-		foodLevel = 100;
-		maxFoodLevel = 100;
-		alive = true;
 	}
 		
 	@Override

@@ -1,8 +1,9 @@
 package nl.ecoquest.vk.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
-import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.model.SimulatorModel;
 
 @SuppressWarnings("serial")
 public class StatView extends AbstractView {
@@ -92,7 +93,7 @@ public class StatView extends AbstractView {
 		
 		g.setColor(Color.lightGray);
 		g.fillArc(x, y, width, height, beginNon, endNon);
-		*/
 		
+		*/
 	}
 }

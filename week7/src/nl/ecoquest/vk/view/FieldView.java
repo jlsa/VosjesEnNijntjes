@@ -1,8 +1,10 @@
 package nl.ecoquest.vk.view;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 
-import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.model.SimulatorModel;
 
 public class FieldView extends AbstractView {
 	

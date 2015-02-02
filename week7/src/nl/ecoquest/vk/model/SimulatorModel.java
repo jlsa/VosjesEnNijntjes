@@ -1,15 +1,23 @@
 package nl.ecoquest.vk.model;
 
 
-import java.util.*;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Random;
 
-import nl.ecoquest.vk.model.AbstractModel;
-import nl.ecoquest.vk.simulation.*;
+import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.actor.animal.Bear;
+import nl.ecoquest.vk.actor.animal.Fox;
+import nl.ecoquest.vk.actor.animal.Rabbit;
+import nl.ecoquest.vk.actor.human.Hunter;
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.FieldStats;
+import nl.ecoquest.vk.simulation.Location;
+import nl.ecoquest.vk.simulation.Randomizer;
 import nl.ecoquest.vk.view.FieldView;
-import nl.ecoquest.vk.actor.*;
-import nl.ecoquest.vk.actor.animal.*;
-import nl.ecoquest.vk.actor.human.*;
 
 
 /**
@@ -87,7 +95,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	private void simulateOneStep() {
 		// do 1 step
 		step++;
-		System.out.println("steps: " + step);
+		//System.out.println("steps: " + step);
 		
 		// provide space for newborn animals
 		List<Actor> newActors = new ArrayList<Actor>();
@@ -273,6 +281,13 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	 */
 	public String getPopulationDetails() {
 		return fieldStats.getPopulationDetails(field);
+	}
+
+	/**
+	 * @return the colors
+	 */
+	public LinkedHashMap<Class<?>, Color> getColors() {
+		return colors;
 	}
 	
 	
