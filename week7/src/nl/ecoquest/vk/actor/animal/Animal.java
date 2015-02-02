@@ -50,7 +50,7 @@ public abstract class Animal implements Actor
      */
     public Animal(Field field, Location location) {
     	this.field = field;
-    	this.location = location;
+    	setLocation(location);
     	alive = true;
     }
     
@@ -130,7 +130,7 @@ public abstract class Animal implements Actor
     	// if there are free adjacent locations then the
     	// math for this method is basic 10% run away chance 
     	// + 1% for every one free adjacent location
-    	/*Location freeLocation = getField().freeAdjacentLocation(getLocation());
+    	Location freeLocation = getField().freeAdjacentLocation(getLocation());
     	List<Location> free = getField().getFreeAdjacentLocations(getLocation());
     	if(free.size() > 0) {
     		int escapeChance = 10 + free.size();
@@ -142,7 +142,7 @@ public abstract class Animal implements Actor
 	    	} else {
 	    		return false;
 	    	}
-    	}*/
+    	}
     	return false;
     }
     

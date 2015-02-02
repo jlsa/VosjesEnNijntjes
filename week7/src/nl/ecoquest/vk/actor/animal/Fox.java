@@ -1,6 +1,7 @@
 package nl.ecoquest.vk.actor.animal;
 
 import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.actor.environment.Grass;
 import nl.ecoquest.vk.simulation.*;
 
 import java.util.Iterator;
@@ -23,8 +24,8 @@ public class Fox extends Animal implements Actor {
 	        super(field, location);
 	        breedingAge = 15;
 	        maxAge = 150;
-	        breedingProbability = 0.08;//0.11;
-	        maxLitterSize = 2;
+	        breedingProbability = 0.11;//0.11;
+	        maxLitterSize = 3;
 	        foodValue = 13;
 	        age = rand.nextInt(maxAge);
 	        maxFoodLevel = 9;
@@ -64,15 +65,24 @@ public class Fox extends Animal implements Actor {
 	        Iterator<Location> it = adjacent.iterator();
 	        while(it.hasNext()) {
 	            Location where = it.next();
-	            Object animal = field.getObjectAt(where);
-	            if(animal instanceof Rabbit) {
-	                Rabbit rabbit = (Rabbit) animal;
+	            Object actor = field.getObjectAt(where);
+	            if(actor instanceof Rabbit) {
+	                Rabbit rabbit = (Rabbit) actor;
 	                if(rabbit.isActive()) {
-	                    rabbit.setInActive();
-	                    foodLevel = foodValue;
+	                	if(!rabbit.tryToEscape()) {
+		                    rabbit.setInActive();
+		                    foodLevel += foodValue;
+	                	}
 	                    return where;
 	                }
 	            }
+	            if(actor instanceof Grass) {
+					Grass grass = (Grass) actor;
+					if(grass.isActive()) {
+						grass.setInActive();
+						return where;
+					}
+				}
 	        }
 	        return null;
 	    }
