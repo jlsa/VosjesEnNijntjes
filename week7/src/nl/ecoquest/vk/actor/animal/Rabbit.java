@@ -4,7 +4,8 @@ import java.util.List;
 
 import nl.ecoquest.vk.actor.Actor;
 import nl.ecoquest.vk.actor.Sickness;
-import nl.ecoquest.vk.simulation.*;
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.Location;
 
 /**
  * The rabbit is the lowest in the animal foodchain. 
@@ -14,49 +15,28 @@ import nl.ecoquest.vk.simulation.*;
  */
 public class Rabbit extends Animal implements Sickness {
 	// sick state
-	private boolean sick;
-	private int sicknessLevel;
-	private int maxSicknessLevel = 100;
-	private float infectionRate;
+	public int sick;
 	
 	public Rabbit(Field field, Location location)
 	{
 		super(field, location);
-		breedingAge = 5;
-		maxAge = 40;
-		breedingProbability = 0.12;
-		maxLitterSize = 1; // 4 is to much
-		foodValue = 20;
-		age = rand.nextInt(maxAge);
-		foodLevel = 20;
-		maxFoodLevel = 20;
-		
-		// random chance if the rabbit is sick or not
-		int sickChance = rand.nextInt(100) + 1;
-		if(sickChance < 10) {
-			sick = true;
-			sicknessLevel = 0;
-			infectionRate = 0.0f;
-		}
 	}
 		
 	@Override
 	public void act(List<Actor> newRabbits)
 	{
-		incrementHunger();
 		incrementAge();
 		if(isActive()) {
-            giveBirth(newRabbits);            
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-            	setInActive();
-            }
-        }
+			giveBirth(newRabbits);            
+			// Try to move into a free location.
+			Location newLocation = getField().freeAdjacentLocation(getLocation());
+			if(newLocation != null) {
+				setLocation(newLocation);
+			} else {
+				// Overcrowding.
+				setInActive();
+			}
+		}
 	}
 	
 	@Override
@@ -76,7 +56,6 @@ public class Rabbit extends Animal implements Sickness {
 		Field field = getField();
 		List<Location> free = field.getFreeAdjacentLocations(getLocation());
 		int births = breed();
-		//System.out.println("Rabbit! Births: " + births + " free: " + free.size());
 		for(int b = 0; b < births && free.size() > 0; b++) {
 			Location loc = free.remove(0);
 			Rabbit young = new Rabbit(field, loc);
@@ -97,28 +76,30 @@ public class Rabbit extends Animal implements Sickness {
 		@Override
 		public boolean isSick()
 		{
-			return sick;
+			if(sick != 0){
+				return true;
+			}
+			return false;
 		}
 
 
 		@Override
 		public void setSick() {
-			sick = true;
+			sick = 1;
+			
 		}
 
 
 		@Override
 		public void incrementSickness() {
-			sicknessLevel++;
-			infectionRate += 0.01f;
-			if(sicknessLevel >= maxSicknessLevel) {
-				setInActive();
-			}
+			sick++;
+			
 		}
 
 
 		@Override
 		public void spreadSickness() {
+			// TODO Auto-generated method stub
 			
 		}
 
@@ -149,16 +130,6 @@ public class Rabbit extends Animal implements Sickness {
 				}
 			}*/
 			return null;
-		}
-
-		@Override
-		public int getSicknessLevel() {
-			return sicknessLevel;
-		}
-
-		@Override
-		public double getInfectionRate() {
-			return infectionRate;
 		}
 
 		

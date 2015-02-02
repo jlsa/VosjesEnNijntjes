@@ -1,10 +1,18 @@
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.*;
-
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * A graphical view of the simulation grid.

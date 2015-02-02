@@ -2,8 +2,10 @@ package nl.ecoquest.vk.actor.animal;
 
 import java.util.Iterator;
 import java.util.List;
-import nl.ecoquest.vk.actor.*;
-import nl.ecoquest.vk.simulation.*;
+
+import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.Location;
 
 /**
  * The bear is a verocious animal. It kills all rabbits, foxes and tries to runaway from the poaching hunters!
@@ -23,9 +25,9 @@ public class Bear extends Animal implements Actor {
 		breedingAge = 20;
 		maxAge = 200;
 		breedingProbability = 0.01;
-		maxLitterSize = 1;
-		foodValue = 30;
-		age = 1;
+		maxLitterSize = 2;
+		foodValue = 15;
+		age = 0;
 		maxFoodLevel = 100;
 		foodLevel = 100;
 	}
@@ -85,7 +87,7 @@ public class Bear extends Animal implements Actor {
 			Rabbit rabbit = (Rabbit) animal;
 				if(rabbit.isActive()) { 
 					rabbit.setInActive();
-					foodLevel = 10;//feed(rabbit.getFoodValue());//foodLevel = rabbit.getFoodValue();
+					foodLevel = rabbit.getFoodValue();
 					return where;
 				}
 			}
@@ -93,7 +95,7 @@ public class Bear extends Animal implements Actor {
 				Fox fox = (Fox) animal;
 				if(fox.isActive()) { 
 					fox.setInActive();
-					foodLevel = 10;//feed(fox.getFoodValue());//foodLevel = fox.getFoodValue();
+					foodLevel = fox.getFoodValue();
 					return where;
 				}
 			}

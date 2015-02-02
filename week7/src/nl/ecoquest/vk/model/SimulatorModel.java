@@ -1,22 +1,23 @@
 package nl.ecoquest.vk.model;
 
 
-import java.util.*;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Random;
 
-import nl.ecoquest.vk.model.*;
-import nl.ecoquest.vk.simulation.*;
-import nl.ecoquest.vk.view.*;
-import nl.ecoquest.vk.actor.*;
-import nl.ecoquest.vk.actor.animal.*;
-import nl.ecoquest.vk.actor.human.*;
-
-import nl.ecoquest.vk.model.AbstractModel;
-import nl.ecoquest.vk.simulation.*;
+import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.actor.animal.Bear;
+import nl.ecoquest.vk.actor.animal.Fox;
+import nl.ecoquest.vk.actor.animal.Rabbit;
+import nl.ecoquest.vk.actor.human.Hunter;
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.FieldStats;
+import nl.ecoquest.vk.simulation.Location;
+import nl.ecoquest.vk.simulation.Randomizer;
 import nl.ecoquest.vk.view.FieldView;
-import nl.ecoquest.vk.actor.*;
-import nl.ecoquest.vk.actor.animal.*;
-import nl.ecoquest.vk.actor.human.*;
 
 
 /**
@@ -55,7 +56,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	private boolean runInfinite;
 	
 	// the time in microseconds the thread sleeps each cycle (Cannot be lower then 10)
-	private int sleepTime = 10; // 1000 is 1 second
+	private int sleepTime = 100; // 1000 is 1 second
 	
 	private LinkedHashMap<Class<?>, Color> colors;
 		
@@ -64,16 +65,15 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		actors = new ArrayList<Actor>();
 		colors = new LinkedHashMap<Class<?>, Color>();
 		fieldStats = new FieldStats();
-		field = new Field(100, 100);
+		field = new Field(150, 150);
 		run = false;
 		runInfinite = false;
 		
 		// set the color of each actor that is on the field
-		colors.put(Fox.class, Color.RED); // foxes are red/orange in nature
-		colors.put(Rabbit.class, Color.BLUE); // gray/brown rabbits
-		//colors.put(Bear.class, Color.BLACK); // Blackbears!
-		//colors.put(Hunter.class, Color.RED); // Hunters wearing red coats!
-		reset();
+		colors.put(Fox.class, Color.ORANGE); // foxes are red/orange in nature
+		colors.put(Rabbit.class, Color.DARK_GRAY); // gray/brown rabbits
+		colors.put(Bear.class, Color.BLACK); // Blackbears!
+		colors.put(Hunter.class, Color.RED); // Hunters wearing red coats!
 	}
 	
 	public void simulate(int steps) 
@@ -83,7 +83,6 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		numOfSteps = steps;
 		run = true;
 		new Thread(this).start();
-		
 	}
 	
 	public void simulateInfinite() {
@@ -96,27 +95,23 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	private void simulateOneStep() {
 		// do 1 step
 		step++;
-
-		System.out.println("steps: " + step);
-		System.out.println("Actors: " + actors.size());
-
-		System.out.println("steps: " + step);
+		//System.out.println("steps: " + step);
 		
 		// provide space for newborn animals
 		List<Actor> newActors = new ArrayList<Actor>();
 		
 		try {
-			
-			for(int i = 0; i < actors.size(); i++){
-				Actor actor = actors.get(i);
-				if(actor.isActive()) {
-					actor.act(newActors);
-				} else {
-					actors.remove(i);
+			// let all actors act
+			for(Iterator<Actor> it = actors.iterator(); it.hasNext();)  {
+				Actor actor = it.next();
+				actor.act(newActors);
+				if(!actor.isActive()) {
+					it.remove();
 				}
 			}
+			
 			actors.addAll(newActors);
-			update();
+			notifyViews();
 		} catch(Exception e) {
 			System.err.println(e);
 		}
@@ -165,7 +160,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 					Rabbit rabbit = new Rabbit(field, location);
 					actors.add(rabbit);
 				}
-				/*if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
+				if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
 					Location location = new Location(row, col);
 					Bear bear = new Bear(field, location);
 					actors.add(bear);
@@ -174,7 +169,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 					Location location = new Location(row, col);
 					Hunter hunter = new Hunter(field, location);
 					actors.add(hunter);
-				}*/
+				}
 				
 			}
 		}
@@ -215,7 +210,9 @@ public class SimulatorModel extends AbstractModel implements Runnable
 			}
 		}
 		
-		notifyViews();		
+		notifyViews();
+		System.out.println("updating");
+		
 	}
 	
 	private void render(int col, int row, Color color) {
@@ -228,7 +225,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		}
 	}
 	
-	public Color getColor(Class<?> actorClass) {
+	private Color getColor(Class<?> actorClass) {
 		Color c = colors.get(actorClass);
 		if(c == null) {
 			return UNKNOWN_COLOR;
@@ -239,18 +236,33 @@ public class SimulatorModel extends AbstractModel implements Runnable
 
 	@Override
 	public void run() {
-		for(int i=0;i<numOfSteps && run; i++) {
-			simulateOneStep();
-			try {
-				if(sleepTime <= 10) {
-					sleepTime = 10;
+		if(!runInfinite) {
+			for(int i=0;i<numOfSteps && run;i++) {
+				simulateOneStep();
+				update();
+				try {
+					if(sleepTime <= 10) {
+						sleepTime = 10;
+					}
+					Thread.sleep(sleepTime);
+				} catch(InterruptedException e) {
+					e.printStackTrace();
 				}
-				Thread.sleep(sleepTime);
-			} catch(InterruptedException e) {
-				e.printStackTrace();
+			}
+		} else {
+			while(run && runInfinite) {
+				simulateOneStep();
+				update();
+				try {
+					if(sleepTime <= 10) {
+						sleepTime = 10;
+					}
+					Thread.sleep(sleepTime);
+				} catch(InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		
 		run = false;
 	}
 	
@@ -270,23 +282,13 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	public String getPopulationDetails() {
 		return fieldStats.getPopulationDetails(field);
 	}
-	
+
 	/**
-     * Returns the amount of actors at the current moment in the field
-     * @param actor What kind of actor type
-     * @return the amount of actors of the given type
-     */
-	public float getCount(Class<?> actor){
-		return fieldStats.getCount(actor);
+	 * @return the colors
+	 */
+	public LinkedHashMap<Class<?>, Color> getColors() {
+		return colors;
 	}
 	
-	/**
-     * Determine whether the simulation should continue to run.
-     * @return true If there is more than one species alive.
-     */
-    public boolean isViable(Field field)
-    {
-    	return fieldStats.isViable(field);
-    }
 	
 }

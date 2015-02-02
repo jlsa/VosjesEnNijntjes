@@ -1,12 +1,15 @@
 package nl.ecoquest.vk.actor.human;
 
-import nl.ecoquest.vk.actor.*;
-import nl.ecoquest.vk.actor.animal.*;
-import nl.ecoquest.vk.actor.environment.*;
-import nl.ecoquest.vk.simulation.*;
-
 import java.util.Iterator;
 import java.util.List;
+
+import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.actor.animal.Bear;
+import nl.ecoquest.vk.actor.animal.Fox;
+import nl.ecoquest.vk.actor.animal.Rabbit;
+import nl.ecoquest.vk.actor.environment.Grass;
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.Location;
 
 public class Hunter extends Human {
 	/**

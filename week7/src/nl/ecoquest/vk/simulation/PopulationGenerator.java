@@ -25,7 +25,4 @@ public class PopulationGenerator {
 		
 	}
 	
-	public static void setNewValues(){
-		
-	}
 }

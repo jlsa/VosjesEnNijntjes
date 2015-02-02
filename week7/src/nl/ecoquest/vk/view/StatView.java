@@ -1,20 +1,12 @@
 package nl.ecoquest.vk.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
-import nl.ecoquest.vk.actor.*;
-import nl.ecoquest.vk.actor.animal.*;
-import nl.ecoquest.vk.actor.environment.*;
-import nl.ecoquest.vk.actor.human.*;
-import nl.ecoquest.vk.model.*;
-
-import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.model.SimulatorModel;
 
 @SuppressWarnings("serial")
 public class StatView extends AbstractView {
-	
-	private int cirkelSize = 150;
-	
 	public StatView(SimulatorModel model) {
 		super(model);
 		setSize(300, 300);
@@ -26,45 +18,9 @@ public class StatView extends AbstractView {
 	}
 	
 	public void paintComponent(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.white);
 		int pieSize = 300;
 		g.fillRect(0, 0, pieSize, pieSize);
-		//float rC = (float) model.getCount(Rabbit.class);
-		/*float fC = (float)this.model.getCount(Fox.class);
-		float bC = (float)this.model.getCount(Bear.class);
-		float hC = (float)this.model.getCount(Hunter.class);
-		float gC = (float)this.model.getCount(Grass.class);
-		*/
-		/*float total = rC + fC + bC + hC + gC;
-
-		float temp = 0.0f;
-
-		temp = (3.6f * ((rC/total)*100));
-		int rA = Math.round(temp);
-
-		temp = (3.6f * ((fC/total)*100));
-		int fA = Math.round(temp);
-
-		temp = (3.6f * ((bC/total)*100));
-		int bA = Math.round(temp);
-
-		temp = (3.6f * ((hC/total)*100));
-		int hA = Math.round(temp);
-
-		temp = (3.6f * ((gC/total)*100));
-		int gA = Math.round(temp);
-
-		g.setColor(this.model.getColor(Rabbit.class));
-		g.fillArc((this.getWidth()-this.cirkelSize)/2, (this.getHeight()-this.cirkelSize)/2, this.cirkelSize, this.cirkelSize, 0, rA);
-		g.setColor(this.model.getColor(Fox.class));
-		g.fillArc((this.getWidth()-this.cirkelSize)/2, (this.getHeight()-this.cirkelSize)/2, this.cirkelSize, this.cirkelSize, rA, fA);
-		g.setColor(this.model.getColor(Bear.class));
-		g.fillArc((this.getWidth()-this.cirkelSize)/2, (this.getHeight()-this.cirkelSize)/2, this.cirkelSize, this.cirkelSize, (fA + rA) , bA);
-		g.setColor(this.model.getColor(Hunter.class));
-		g.fillArc((this.getWidth()-this.cirkelSize)/2, (this.getHeight()-this.cirkelSize)/2, this.cirkelSize, this.cirkelSize, (fA + rA + bA) , hA);
-		g.setColor(this.model.getColor(Grass.class));
-		g.fillArc((this.getWidth()-this.cirkelSize)/2, (this.getHeight()-this.cirkelSize)/2, this.cirkelSize, this.cirkelSize, (fA + rA + bA + hA) , gA);
-		*/
 		/*
 		int[][] state = model.getField();
 		
@@ -137,7 +93,7 @@ public class StatView extends AbstractView {
 		
 		g.setColor(Color.lightGray);
 		g.fillArc(x, y, width, height, beginNon, endNon);
-		*/
 		
+		*/
 	}
 }

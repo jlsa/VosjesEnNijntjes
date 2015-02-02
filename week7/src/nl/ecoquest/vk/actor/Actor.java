@@ -1,7 +1,9 @@
 package nl.ecoquest.vk.actor;
 
-import java.util.*;
-import nl.ecoquest.vk.simulation.*;
+import java.util.List;
+
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.Location;
 
 /**
  * The actor interface makes sure every actor at least

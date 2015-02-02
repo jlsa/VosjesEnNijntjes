@@ -1,9 +1,12 @@
 package nl.ecoquest.vk.actor.animal;
 
-import java.util.*;
+import java.util.List;
+import java.util.Random;
 
-import nl.ecoquest.vk.actor.*;
-import nl.ecoquest.vk.simulation.*;
+import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.Location;
+import nl.ecoquest.vk.simulation.Randomizer;
 
 /**
  * A class representing shared characteristics of animals.
@@ -16,32 +19,33 @@ import nl.ecoquest.vk.simulation.*;
 public abstract class Animal implements Actor 
 {
 	// The breeding age of the animal
-	protected int breedingAge;
+	protected int breedingAge = 5;
 	// The max age of the animal
-    protected int maxAge;
+    protected int maxAge = 40;
     // The breeding probability
-    protected double breedingProbability;
+    protected double breedingProbability = 0.85;
     // The max litter size of the animal
-    protected int maxLitterSize;
+    protected int maxLitterSize = 4;
     // The food value if being eaten.
-    protected int foodValue;
+    protected int foodValue = 1;
     // The age of the animal
-    protected int age;
+    protected int age = 1;
     
     // The food level of the animal
-    protected int foodLevel;
+    protected int foodLevel = 100;
     // The max food level
-    protected int maxFoodLevel;
+    protected int maxFoodLevel = 100;
     // The alive/active state of the animal
-    protected boolean alive;
+    protected boolean alive = true;
     
     // Random
     protected Random rand = Randomizer.getRandom();
     
     // Field on which the animal resides
-    protected Field field;
+    private Field field;
     // The location the animal has on the field.
-    protected Location location;
+    private Location location;
+    
     
     /**
      * Animal constructor. (Abstract)
@@ -51,7 +55,6 @@ public abstract class Animal implements Actor
     public Animal(Field field, Location location) {
     	this.field = field;
     	this.location = location;
-    	alive = true;
     }
     
     /**
@@ -97,12 +100,8 @@ public abstract class Animal implements Actor
 	 * Set the food value to a new food value
 	 * @param foodValue
 	 */
-	public void feed(int foodValue){
-		int newFoodLevel = foodLevel + this.foodLevel;
-		if(newFoodLevel > maxFoodLevel) {
-			newFoodLevel = maxFoodLevel;
-		}
-		this.foodLevel = foodValue;//newFoodLevel;
+	public void setFoodValue(int foodValue){
+		this.foodValue = foodValue;
 	}
 	/**
 	 * All animals need to find food. 
@@ -130,7 +129,7 @@ public abstract class Animal implements Actor
     	// if there are free adjacent locations then the
     	// math for this method is basic 10% run away chance 
     	// + 1% for every one free adjacent location
-    	/*Location freeLocation = getField().freeAdjacentLocation(getLocation());
+    	Location freeLocation = getField().freeAdjacentLocation(getLocation());
     	List<Location> free = getField().getFreeAdjacentLocations(getLocation());
     	if(free.size() > 0) {
     		int escapeChance = 10 + free.size();
@@ -142,13 +141,16 @@ public abstract class Animal implements Actor
 	    	} else {
 	    		return false;
 	    	}
-    	}*/
+    	}
     	return false;
     }
     
     @Override
 	public boolean isActive() {
-		return alive;
+		if(alive == true){
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -159,6 +161,7 @@ public abstract class Animal implements Actor
             location = null;
             field = null;
         }
+		
 	}
 
 	@Override
@@ -168,11 +171,11 @@ public abstract class Animal implements Actor
 
 	@Override
 	public void setLocation(Location newLocation) {
-		if(location != null) {
-			field.clear(location);
-	    }
-	    location = newLocation;
-	    field.place(this, newLocation);
+		 if(location != null) {
+	            field.clear(location);
+	        }
+	        location = newLocation;
+	        field.place(this, newLocation);
 	}
 
 	@Override
@@ -183,5 +186,75 @@ public abstract class Animal implements Actor
 	@Override
 	public void setField(Field field) {
 		this.field = field;
+	}
+
+	/**
+	 * @return the breedingAge
+	 */
+	public int getBreedingAge() {
+		return breedingAge;
+	}
+
+	/**
+	 * @param breedingAge the breedingAge to set
+	 */
+	public void setBreedingAge(int breedingAge) {
+		this.breedingAge = breedingAge;
+	}
+
+	/**
+	 * @return the maxAge
+	 */
+	public int getMaxAge() {
+		return maxAge;
+	}
+
+	/**
+	 * @param maxAge the maxAge to set
+	 */
+	public void setMaxAge(int maxAge) {
+		this.maxAge = maxAge;
+	}
+
+	/**
+	 * @return the breedingProbability
+	 */
+	public double getBreedingProbability() {
+		return breedingProbability;
+	}
+
+	/**
+	 * @param breedingProbability the breedingProbability to set
+	 */
+	public void setBreedingProbability(double breedingProbability) {
+		this.breedingProbability = breedingProbability;
+	}
+
+	/**
+	 * @return the maxLitterSize
+	 */
+	public int getMaxLitterSize() {
+		return maxLitterSize;
+	}
+
+	/**
+	 * @param maxLitterSize the maxLitterSize to set
+	 */
+	public void setMaxLitterSize(int maxLitterSize) {
+		this.maxLitterSize = maxLitterSize;
+	}
+
+	/**
+	 * @return the foodLevel
+	 */
+	public int getFoodLevel() {
+		return foodLevel;
+	}
+
+	/**
+	 * @param foodLevel the foodLevel to set
+	 */
+	public void setFoodLevel(int foodLevel) {
+		this.foodLevel = foodLevel;
 	}
 }

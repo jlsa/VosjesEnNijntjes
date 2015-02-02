@@ -1,10 +1,11 @@
 package nl.ecoquest.vk.actor.animal;
 
-import nl.ecoquest.vk.actor.Actor;
-import nl.ecoquest.vk.simulation.*;
-
 import java.util.Iterator;
 import java.util.List;
+
+import nl.ecoquest.vk.actor.Actor;
+import nl.ecoquest.vk.simulation.Field;
+import nl.ecoquest.vk.simulation.Location;
 
 /**
  * The keen, funny, beautiful foxes!
@@ -21,14 +22,15 @@ public class Fox extends Animal implements Actor {
 	 public Fox(Field field, Location location)
 	    {
 	        super(field, location);
-	        breedingAge = 15;
+	        breedingAge = 10;
 	        maxAge = 150;
-	        breedingProbability = 0.08;//0.11;
-	        maxLitterSize = 2;
-	        foodValue = 13;
-	        age = rand.nextInt(maxAge);
-	        maxFoodLevel = 9;
-	        foodLevel = rand.nextInt(foodValue);
+	        breedingProbability = 0.11;
+	        maxLitterSize = 4;
+	        foodValue = 3;
+	        age = 0;
+	        maxFoodLevel = 100;
+	        foodLevel = 100;
+	        alive = true;
 	    }
 	 
 	 @Override
@@ -67,9 +69,9 @@ public class Fox extends Animal implements Actor {
 	            Object animal = field.getObjectAt(where);
 	            if(animal instanceof Rabbit) {
 	                Rabbit rabbit = (Rabbit) animal;
-	                if(rabbit.isActive()) {
+	                if(rabbit.isActive()) { 
 	                    rabbit.setInActive();
-	                    foodLevel = foodValue;
+	                    foodLevel = rabbit.getFoodValue();
 	                    return where;
 	                }
 	            }
@@ -90,13 +92,13 @@ public class Fox extends Animal implements Actor {
 	            newFoxes.add(young);
 	        }
 	    }
-	@Override
-	public int breed()
-	{
-		int births = 0;
-	    if(canBreed() && rand.nextDouble() <= breedingProbability) {
-	    	births = rand.nextInt(maxLitterSize) + 1;
+	 @Override
+	 public int breed()
+	 {
+		 int births = 0;
+	        if(canBreed() && rand.nextDouble() <= breedingProbability) {
+	            births = rand.nextInt(maxLitterSize) + 1;
+	        }
+	        return births;
 	    }
-	    return births;
-	}
 }
