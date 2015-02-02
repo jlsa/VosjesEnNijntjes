@@ -64,8 +64,8 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		// set the color of each actor that is on the field
 		colors.put(Fox.class, Color.RED); // foxes are red/orange in nature
 		colors.put(Rabbit.class, Color.BLUE); // gray/brown rabbits
-		colors.put(Bear.class, Color.BLACK); // Blackbears!
-		colors.put(Hunter.class, Color.RED); // Hunters wearing red coats!
+		//colors.put(Bear.class, Color.BLACK); // Blackbears!
+		//colors.put(Hunter.class, Color.RED); // Hunters wearing red coats!
 		reset();
 	}
 	
@@ -155,7 +155,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 					Rabbit rabbit = new Rabbit(field, location);
 					actors.add(rabbit);
 				}
-				if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
+				/*if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
 					Location location = new Location(row, col);
 					Bear bear = new Bear(field, location);
 					actors.add(bear);
@@ -164,7 +164,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 					Location location = new Location(row, col);
 					Hunter hunter = new Hunter(field, location);
 					actors.add(hunter);
-				}
+				}*/
 				
 			}
 		}

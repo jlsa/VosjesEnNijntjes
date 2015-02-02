@@ -43,7 +43,7 @@ public class Rabbit extends Animal implements Sickness {
 	@Override
 	public void act(List<Actor> newRabbits)
 	{
-		//incrementHunger();
+		incrementHunger();
 		incrementAge();
 		if(isActive()) {
             giveBirth(newRabbits);            
