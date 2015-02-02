@@ -2,6 +2,7 @@ package nl.ecoquest.vk.actor.animal;
 
 import java.util.Iterator;
 import java.util.List;
+
 import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.actor.environment.*;
 import nl.ecoquest.vk.simulation.*;

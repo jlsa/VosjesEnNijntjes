@@ -1,12 +1,13 @@
 package nl.ecoquest.vk.controller;
 
-import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import nl.ecoquest.vk.model.*;
-import nl.ecoquest.vk.simulation.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+import nl.ecoquest.vk.model.SimulatorModel;
+import nl.ecoquest.vk.simulation.Updateable;
 
 @SuppressWarnings("serial")
 public class SimulatorController extends AbstractController implements ActionListener, Updateable {
@@ -40,7 +41,7 @@ public class SimulatorController extends AbstractController implements ActionLis
 		stepOne.setBounds(0, 50, 100, 50);
 		stepHundred.setBounds(0, 100, 100, 50);
 		stopSteps.setBounds(0, 150, 100, 50);
-		populationDetails.setBounds(0, 200, 600, 50);
+		populationDetails.setBounds(0, 200, 300, 50);
 		
 		setVisible(true);
 	}

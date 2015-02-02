@@ -1,10 +1,10 @@
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
@@ -119,16 +119,14 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
-        System.out.println("Step: " + step);
-        System.out.println("Actors: " + actors.size());
-        
+
         // Provide space for newborn animals.
         List<Actor> newActors = new ArrayList<Actor>();        
         // Let all rabbits act.
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
             actor.act(newActors);
-            if(!actor.isActive()) {
+            if(! actor.isActive()) {
                 it.remove();
             }
         }
@@ -163,17 +161,17 @@ public class Simulator
             for(int col = 0; col < field.getWidth(); col++) {
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Fox fox = new Fox(false, field, location);
+                    Fox fox = new Fox(true, field, location);
                     actors.add(fox);
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(false, field, location);
+                    Rabbit rabbit = new Rabbit(true, field, location);
                     actors.add(rabbit);
                 }
                 else if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Bear bear = new Bear(false, field, location);
+                    Bear bear = new Bear(true, field, location);
                     actors.add(bear);
                 }
                 else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {

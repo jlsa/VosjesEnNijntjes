@@ -73,7 +73,6 @@ public class Rabbit extends Animal implements Sickness {
                 setInActive();
             }
         }
-		
 	}
 	
 	@Override
@@ -156,8 +155,7 @@ public class Rabbit extends Animal implements Sickness {
 						}
 					}
 				}
-			}
-			
+			}			
 		}
 
 		@Override
@@ -171,7 +169,7 @@ public class Rabbit extends Animal implements Sickness {
 				if(actor instanceof Grass) {
 					Grass grass = (Grass) actor;
 					if(grass.isActive()) {
-						feed(4);//foodLevel += 4;
+						feed(4);
 						grass.setInActive();
 						return where;
 					}
@@ -179,7 +177,7 @@ public class Rabbit extends Animal implements Sickness {
 			}
 			return null;
 		}
-
+		
 		@Override
 		public int getSicknessLevel() {
 			return sicknessLevel;
@@ -189,6 +187,5 @@ public class Rabbit extends Animal implements Sickness {
 		public double getInfectionRate() {
 			return infectionRate;
 		}
-
 		
 }

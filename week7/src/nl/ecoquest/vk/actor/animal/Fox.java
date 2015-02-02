@@ -1,5 +1,6 @@
 package nl.ecoquest.vk.actor.animal;
 
+
 import nl.ecoquest.vk.actor.Actor;
 import nl.ecoquest.vk.actor.environment.Grass;
 import nl.ecoquest.vk.simulation.*;
@@ -22,7 +23,7 @@ public class Fox extends Animal implements Actor {
 	 public Fox(Field field, Location location)
 	    {
 	        super(field, location);
-	        breedingAge = 15;
+	        breedingAge = 10;
 	        maxAge = 150;
 	        breedingProbability = 0.12;//0.11;
 	        maxLitterSize = 3;
@@ -101,13 +102,13 @@ public class Fox extends Animal implements Actor {
 	            newFoxes.add(young);
 	        }
 	    }
-	@Override
-	public int breed()
-	{
-		int births = 0;
-	    if(canBreed() && rand.nextDouble() <= breedingProbability) {
-	    	births = rand.nextInt(maxLitterSize) + 1;
+	 @Override
+	 public int breed()
+	 {
+		 int births = 0;
+	        if(canBreed() && rand.nextDouble() <= breedingProbability) {
+	            births = rand.nextInt(maxLitterSize) + 1;
+	        }
+	        return births;
 	    }
-	    return births;
-	}
 }

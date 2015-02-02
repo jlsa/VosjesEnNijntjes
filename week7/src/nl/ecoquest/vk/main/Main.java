@@ -2,12 +2,12 @@ package nl.ecoquest.vk.main;
 
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
-import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.controller.ToolbarController;
+import nl.ecoquest.vk.model.SimulatorModel;
 import nl.ecoquest.vk.simulation.Updateable;
-import nl.ecoquest.vk.view.*;
-import nl.ecoquest.vk.controller.*;
+import nl.ecoquest.vk.view.DefaultView;
+import nl.ecoquest.vk.view.FieldView;
+import nl.ecoquest.vk.view.StatisticsView;
 
 /**
  * The main class, this is the glue of the MVC pattern 
@@ -16,17 +16,19 @@ import nl.ecoquest.vk.controller.*;
  *
  */
 public class Main implements Runnable {
-	private JFrame screen;
+	private DefaultView screen;
 	private SimulatorModel model; 
-	private AbstractView fieldView;
-	private AbstractView statView;
-	private SimulatorController controller;
+	private ToolbarController toolbarController;
+	private FieldView fieldView;
+	private StatisticsView statsView;
+
 	
 	// list with updateable objects
 	private ArrayList<Updateable> updateableObjects;
+
 	
 	public Main() {
-		// instantiate
+/*		// instantiate
 		updateableObjects = new ArrayList<Updateable>();
 		model = new SimulatorModel();
 		controller = new SimulatorController(model);
@@ -60,6 +62,22 @@ public class Main implements Runnable {
 		model.reset();
 		
 		// yes, this is an endless loop on purpose!
+		new Thread(this).start();
+*/
+		updateableObjects = new ArrayList<Updateable>();
+		
+		model = new SimulatorModel();
+		fieldView = new FieldView(model);
+		screen = new DefaultView(model, fieldView);
+		statsView = new StatisticsView(model);
+		toolbarController = new ToolbarController(model, screen, statsView);
+		
+		updateableObjects.add(screen);
+		updateableObjects.add(statsView);
+		
+		screen.setVisible(true);
+		model.reset();
+		
 		new Thread(this).start();
 	}
 	

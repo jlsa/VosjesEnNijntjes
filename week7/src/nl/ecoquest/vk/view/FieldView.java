@@ -1,8 +1,10 @@
 package nl.ecoquest.vk.view;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 
-import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.model.SimulatorModel;
 
 public class FieldView extends AbstractView {
 	
@@ -14,7 +16,7 @@ public class FieldView extends AbstractView {
 	public int xScale, yScale;
 	
 	private int gridWidth, gridHeight;
-	private final int GRID_VIEW_SCALING_FACTOR = 6;
+	private final int GRID_VIEW_SCALING_FACTOR = 5;
 	
 	private Dimension size;
 	private Image fieldImage;
@@ -29,8 +31,8 @@ public class FieldView extends AbstractView {
 		setSize(w, h);
 
 		size = new Dimension(0, 0);
-		gridWidth = 100;
-		gridHeight = 100;
+		gridWidth = 125;
+		gridHeight = 125;
 	}
 	
 	/**

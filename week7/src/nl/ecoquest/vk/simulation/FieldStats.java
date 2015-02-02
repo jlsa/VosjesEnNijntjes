@@ -1,9 +1,6 @@
 package nl.ecoquest.vk.simulation;
 
 
-import nl.ecoquest.vk.simulation.Counter;
-import nl.ecoquest.vk.simulation.Field;
-
 import java.util.HashMap;
 
 /**
@@ -45,7 +42,7 @@ public class FieldStats
         for(Class<?> key : counters.keySet()) {
             Counter info = counters.get(key);
             buffer.append(info.getName());
-            buffer.append(": ");
+            buffer.append(" : ");
             buffer.append(info.getCount());
             buffer.append(' ');
         }
@@ -130,15 +127,4 @@ public class FieldStats
         }
         countsValid = true;
     }
-    
-    /**
-     * Returns the amount of actors at the current moment in the field
-     * @param actor What kind of actor type
-     * @return the amount of actors of the given type
-     */
-    public float getCount(Class<?> actor) {
-    	Counter count = counters.get(actor);
-        return count.getCount();
-	}
-    
 }
