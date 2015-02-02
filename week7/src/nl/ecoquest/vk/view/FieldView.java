@@ -31,8 +31,8 @@ public class FieldView extends AbstractView {
 		setSize(w, h);
 
 		size = new Dimension(0, 0);
-		gridWidth = 125;
-		gridHeight = 125;
+		gridWidth = 120;
+		gridHeight = 90;
 	}
 	
 	/**

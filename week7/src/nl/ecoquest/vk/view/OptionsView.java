@@ -299,7 +299,7 @@ public class OptionsView extends JFrame {
 		
 //		JButton btnReset = new JButton("Reset");
 //		btnReset.setName("Reset");
-//		btnReset.addActionListener(new OptionslqController());
+//		btnReset.addActionListener(new OptionslqController(model));
 //		btnPane.add(btnReset);
 //		btnReset.setHorizontalAlignment(SwingConstants.RIGHT);
 	}

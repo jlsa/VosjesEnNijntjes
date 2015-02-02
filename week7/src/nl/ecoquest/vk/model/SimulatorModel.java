@@ -1,6 +1,5 @@
 package nl.ecoquest.vk.model;
 
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,26 +7,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 
-<<<<<<< HEAD
-import nl.ecoquest.vk.model.AbstractModel;
-import nl.ecoquest.vk.simulation.*;
-import nl.ecoquest.vk.view.*;
-import nl.ecoquest.vk.actor.*;
-import nl.ecoquest.vk.actor.animal.*;
-import nl.ecoquest.vk.actor.human.*;
-import nl.ecoquest.vk.actor.environment.*;
-=======
 import nl.ecoquest.vk.actor.Actor;
 import nl.ecoquest.vk.actor.animal.Bear;
 import nl.ecoquest.vk.actor.animal.Fox;
 import nl.ecoquest.vk.actor.animal.Rabbit;
+import nl.ecoquest.vk.actor.environment.Grass;
 import nl.ecoquest.vk.actor.human.Hunter;
 import nl.ecoquest.vk.simulation.Field;
 import nl.ecoquest.vk.simulation.FieldStats;
 import nl.ecoquest.vk.simulation.Location;
 import nl.ecoquest.vk.simulation.Randomizer;
 import nl.ecoquest.vk.view.FieldView;
->>>>>>> GUIAngela
 
 
 /**
@@ -67,7 +57,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	private boolean runInfinite;
 	
 	// the time in microseconds the thread sleeps each cycle (Cannot be lower then 10)
-	private int sleepTime = 100; // 1000 is 1 second
+	private int sleepTime = 10; // 1000 is 1 second
 	
 	private LinkedHashMap<Class<?>, Color> colors;
 		
@@ -94,6 +84,13 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		if(run) { return; }
 		numOfSteps = steps;
 		run = true;
+		new Thread(this).start();
+	}
+	
+	public void simulateInfinite() {
+		if(run) {return;}
+		run = true;
+		runInfinite = true;
 		new Thread(this).start();
 	}
 	

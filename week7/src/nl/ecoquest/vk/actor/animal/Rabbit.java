@@ -38,7 +38,7 @@ public class Rabbit extends Animal implements Sickness {
 		// random chance if the rabbit is sick or not
 		int sickChance = rand.nextInt(100) + 1;
 		if(sickChance < 10) {
-			sick= false;//setSick();
+			setSick();
 		} else {
 			sick = false;
 		}

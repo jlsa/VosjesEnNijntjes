@@ -72,18 +72,21 @@ public class DefaultView extends JFrame implements Updateable{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		contentPane.add(fieldView, BorderLayout.CENTER);
-		fieldView.setLayout(new BorderLayout(0, 0));
+		JPanel fieldPanel = new JPanel();
+		contentPane.add(fieldPanel, BorderLayout.CENTER);
+		fieldPanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel stepPanel = new JPanel();
 		stepCount = new JLabel("Steps: " + model.getStepsTaken());
 		stepPanel.add(stepCount);
-		fieldView.add(stepPanel, BorderLayout.NORTH);
+		fieldPanel.add(stepPanel, BorderLayout.NORTH);
+		
+		fieldPanel.add(fieldView, BorderLayout.CENTER);
 		
 		JPanel populationPanel = new JPanel();
 		population = new JLabel("Population: " + model.getPopulationDetails());
 		populationPanel.add(population);
-		fieldView.add(populationPanel, BorderLayout.SOUTH);
+		fieldPanel.add(populationPanel, BorderLayout.SOUTH);
 		
 		JPanel westPane = new JPanel();
 		contentPane.add(westPane, BorderLayout.WEST);

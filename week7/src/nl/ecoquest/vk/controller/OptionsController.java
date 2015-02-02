@@ -34,7 +34,7 @@ public class OptionsController extends AbstractController implements ChangeListe
 	 * Model is a parameter because we need to edit it.
 	 * @param model
 	 */
-	public OptionsController(SimulatorModel model){
+	public OptionsController(SimulatorModel model) {
 		super(model);
 	}
 	
