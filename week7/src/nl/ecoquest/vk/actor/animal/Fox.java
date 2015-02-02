@@ -25,7 +25,7 @@ public class Fox extends Animal implements Actor {
 	        maxAge = 150;
 	        breedingProbability = 0.08;//0.11;
 	        maxLitterSize = 2;
-	        foodValue = 24;
+	        foodValue = 13;
 	        age = rand.nextInt(maxAge);
 	        maxFoodLevel = 9;
 	        foodLevel = rand.nextInt(foodValue);
