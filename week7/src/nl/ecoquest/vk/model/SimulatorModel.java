@@ -4,12 +4,13 @@ package nl.ecoquest.vk.model;
 import java.util.*;
 import java.awt.Color;
 
-import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.model.AbstractModel;
 import nl.ecoquest.vk.simulation.*;
 import nl.ecoquest.vk.view.*;
 import nl.ecoquest.vk.actor.*;
 import nl.ecoquest.vk.actor.animal.*;
 import nl.ecoquest.vk.actor.human.*;
+import nl.ecoquest.vk.actor.environment.*;
 
 
 /**
@@ -21,10 +22,11 @@ import nl.ecoquest.vk.actor.human.*;
  */
 public class SimulatorModel extends AbstractModel implements Runnable
 {
-	private double FOX_CREATION_PROBABILITY = 0.05;
+	private double FOX_CREATION_PROBABILITY = 0.02;
 	private double RABBIT_CREATION_PROBABILITY = 0.08;
 	private double BEAR_CREATION_PROBABILITY = 0.03;
 	private double HUNTER_CREATION_PROBABILITY = 0.001;
+	private double GRASS_CREATION_PROBABILITY = 0.005;
 	
 	private static final Color EMPTY_COLOR = Color.WHITE;
 	private static final Color UNKNOWN_COLOR = Color.GRAY;
@@ -45,7 +47,6 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	
 	
 	private boolean run;
-	private boolean runInfinite;
 	
 	// the time in microseconds the thread sleeps each cycle (Cannot be lower then 10)
 	private int sleepTime = 10; // 1000 is 1 second
@@ -59,14 +60,13 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		fieldStats = new FieldStats();
 		field = new Field(100, 100);
 		run = false;
-		runInfinite = false;
 		
 		// set the color of each actor that is on the field
 		colors.put(Fox.class, Color.RED); // foxes are red/orange in nature
-		colors.put(Rabbit.class, Color.BLUE); // gray/brown rabbits
-		//colors.put(Bear.class, Color.BLACK); // Blackbears!
-		//colors.put(Hunter.class, Color.RED); // Hunters wearing red coats!
-		reset();
+		colors.put(Rabbit.class, Color.BLUE); // blue rabbits
+		colors.put(Bear.class, Color.BLACK); // Black bears!
+		colors.put(Hunter.class, Color.YELLOW); // Hunters wearing yellow coats!
+		colors.put(Grass.class, Color.GREEN); // green grass!
 	}
 	
 	public void simulate(int steps) 
@@ -77,13 +77,6 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		run = true;
 		new Thread(this).start();
 		
-	}
-	
-	public void simulateInfinite() {
-		runInfinite = true;
-		if(run) { return; }
-		run = true;
-		new Thread(this).start();
 	}
 	
 	private void simulateOneStep() {
@@ -106,6 +99,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 				}
 			}
 			actors.addAll(newActors);
+			
 			update();
 		} catch(Exception e) {
 			System.err.println(e);
@@ -155,20 +149,24 @@ public class SimulatorModel extends AbstractModel implements Runnable
 					Rabbit rabbit = new Rabbit(field, location);
 					actors.add(rabbit);
 				}
-				/*if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
+				if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
 					Location location = new Location(row, col);
 					Bear bear = new Bear(field, location);
 					actors.add(bear);
 				}
+				if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
+					Location location = new Location(row, col);
+					Grass grass = new Grass(field, location);
+					actors.add(grass);
+				}
+				
 				if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY) {
 					Location location = new Location(row, col);
 					Hunter hunter = new Hunter(field, location);
 					actors.add(hunter);
-				}*/
-				
+				}
 			}
 		}
-		
 		update();
 	}
 	
@@ -212,7 +210,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		if(views.size() > 0) {
 			if(views.get(0) instanceof FieldView) {
 				FieldView view = (FieldView)views.get(0);
-				view.g.setColor(color); //(col, row, color);
+				view.g.setColor(color);
 				view.g.fillRect(col * view.xScale, row * view.yScale, view.xScale-1, view.yScale-1);
 			}
 		}

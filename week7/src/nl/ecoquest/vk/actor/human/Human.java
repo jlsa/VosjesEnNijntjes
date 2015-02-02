@@ -26,7 +26,7 @@ public abstract class Human implements Actor {
 	 */
 	public Human(Field field, Location location) {
 		this.field = field;
-		this.location = location;
+		setLocation(location);
 		active = true;
 	}
 	

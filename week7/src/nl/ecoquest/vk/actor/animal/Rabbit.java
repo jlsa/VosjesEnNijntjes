@@ -1,9 +1,11 @@
 package nl.ecoquest.vk.actor.animal;
 
+import java.util.Iterator;
 import java.util.List;
 
 import nl.ecoquest.vk.actor.Actor;
 import nl.ecoquest.vk.actor.Sickness;
+import nl.ecoquest.vk.actor.environment.Grass;
 import nl.ecoquest.vk.simulation.*;
 
 /**
@@ -15,8 +17,8 @@ import nl.ecoquest.vk.simulation.*;
 public class Rabbit extends Animal implements Sickness {
 	// sick state
 	private boolean sick;
-	private int sicknessLevel;
-	private int maxSicknessLevel = 100;
+	private int sicknessLevel = 0;
+	private int maxSicknessLevel = 15;
 	private float infectionRate;
 	
 	public Rabbit(Field field, Location location)
@@ -25,38 +27,53 @@ public class Rabbit extends Animal implements Sickness {
 		breedingAge = 5;
 		maxAge = 40;
 		breedingProbability = 0.12;
-		maxLitterSize = 1; // 4 is to much
-		foodValue = 20;
+		maxLitterSize = 3; 
+		foodValue = 4;
 		age = rand.nextInt(maxAge);
-		foodLevel = 20;
+		foodLevel = 4;
 		maxFoodLevel = 20;
+		sicknessLevel = 0;
+		infectionRate = 0.0f;
 		
 		// random chance if the rabbit is sick or not
 		int sickChance = rand.nextInt(100) + 1;
 		if(sickChance < 10) {
-			sick = true;
-			sicknessLevel = 0;
-			infectionRate = 0.0f;
+			sick= false;//setSick();
+		} else {
+			sick = false;
 		}
 	}
 		
 	@Override
 	public void act(List<Actor> newRabbits)
 	{
-		incrementHunger();
 		incrementAge();
+		incrementHunger();
 		if(isActive()) {
-            giveBirth(newRabbits);            
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
+			incrementSickness();
+		}
+		
+		if(isActive()) {
+            if(getSicknessLevel() < (maxSicknessLevel/2)) {
+            	giveBirth(newRabbits);   
+            }
+            
+            // Move towards a source of food if found.
+            Location newLocation = findFood();
+            if(newLocation == null) { 
+                // No food found - try to move to a free location.
+                newLocation = getField().freeAdjacentLocation(getLocation());
+            }
+            // See if it was possible to move.
             if(newLocation != null) {
                 setLocation(newLocation);
             }
             else {
                 // Overcrowding.
-            	setInActive();
+                setInActive();
             }
         }
+		
 	}
 	
 	@Override
@@ -76,7 +93,6 @@ public class Rabbit extends Animal implements Sickness {
 		Field field = getField();
 		List<Location> free = field.getFreeAdjacentLocations(getLocation());
 		int births = breed();
-		//System.out.println("Rabbit! Births: " + births + " free: " + free.size());
 		for(int b = 0; b < births && free.size() > 0; b++) {
 			Location loc = free.remove(0);
 			Rabbit young = new Rabbit(field, loc);
@@ -104,14 +120,22 @@ public class Rabbit extends Animal implements Sickness {
 		@Override
 		public void setSick() {
 			sick = true;
+			sicknessLevel = 0;
+			infectionRate = 0.001f;
 		}
 
 
 		@Override
 		public void incrementSickness() {
-			sicknessLevel++;
-			infectionRate += 0.01f;
-			if(sicknessLevel >= maxSicknessLevel) {
+			if(isSick()) {
+				sicknessLevel+=2;
+				infectionRate += 0.01f;
+				//spreadSickness();
+				if(sicknessLevel >= maxSicknessLevel) {
+					setInActive();
+				}
+			}
+			if(getSicknessLevel() >= maxSicknessLevel ) {
 				setInActive();
 			}
 		}
@@ -119,35 +143,40 @@ public class Rabbit extends Animal implements Sickness {
 
 		@Override
 		public void spreadSickness() {
+			//System.out.println("Spread sickness");
+			Field field = getField();
+			List<Location> adjacent = field.adjacentLocations(getLocation());
+			if(adjacent != null) {
+				for(int i = 0; i < adjacent.size(); i++) {
+					Object actor = field.getObjectAt(adjacent.get(i));
+					if(actor instanceof Rabbit) {
+						Rabbit rabbit = (Rabbit) actor;
+						if(!rabbit.isSick()) {
+							rabbit.setSick();
+						}
+					}
+				}
+			}
 			
 		}
 
-
 		@Override
 		public Location findFood() {
-			/*Field field = getField();
+			Field field = getField();
 			List<Location> adjacent = field.adjacentLocations(getLocation());
 			Iterator<Location> it = adjacent.iterator();
 			while(it.hasNext()) {
 				Location where = it.next();
-				Object animal = field.getObjectAt(where);
-				if(animal instanceof Rabbit) {
-					Rabbit rabbit = (Rabbit) animal;
-					if(rabbit.isActive()) { 
-						rabbit.setInActive();
-						foodLevel = rabbit.getFoodValue();
-						//return where;
+				Object actor = field.getObjectAt(where);
+				if(actor instanceof Grass) {
+					Grass grass = (Grass) actor;
+					if(grass.isActive()) {
+						feed(4);//foodLevel += 4;
+						grass.setInActive();
+						return where;
 					}
 				}
-				if(animal instanceof Fox) {
-					Fox fox = (Fox) animal;
-					if(fox.isActive()) { 
-						fox.setInActive();
-						foodLevel = fox.getFoodValue();
-						//return where;
-					}
-				}
-			}*/
+			}
 			return null;
 		}
 
