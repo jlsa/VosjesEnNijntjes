@@ -45,6 +45,7 @@ public class LegendView extends AbstractView {
 
 	/**
 	 * Create the frame.
+	 * @param model The simulator model
 	 */
 	public LegendView(SimulatorModel model) {
 		super(model);

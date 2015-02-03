@@ -6,7 +6,6 @@ package nl.ecoquest.vk.actor;
  * the sickness.
  * 
  * @author Jeroen, Joel en Angela
- * @since 
  * @version 2015-02-01
  */
 public interface Sickness {

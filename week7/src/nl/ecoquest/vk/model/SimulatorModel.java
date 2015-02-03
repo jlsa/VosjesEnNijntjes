@@ -30,7 +30,7 @@ import nl.ecoquest.vk.view.FieldView;
  */
 public class SimulatorModel extends AbstractModel implements Runnable
 {
-	private double FOX_CREATION_PROBABILITY = 0.02;
+	private double FOX_CREATION_PROBABILITY = 0.09;
 	private double RABBIT_CREATION_PROBABILITY = 0.08;
 	private double BEAR_CREATION_PROBABILITY = 0.03;
 	private double HUNTER_CREATION_PROBABILITY = 0.001;

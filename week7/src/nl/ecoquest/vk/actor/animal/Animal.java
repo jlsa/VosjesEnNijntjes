@@ -12,10 +12,8 @@ import nl.ecoquest.vk.simulation.Randomizer;
  * A class representing shared characteristics of animals.
  *
  * @author Jeroen, Joel en Angela
- * @since 
  * @version 2015-02-01
  */
-
 public abstract class Animal implements Actor 
 {
 	// The breeding age of the animal
@@ -49,8 +47,8 @@ public abstract class Animal implements Actor
     
     /**
      * Animal constructor. (Abstract)
-     * @param field
-     * @param location
+     * @param field The Field on which the animal resides
+     * @param location The location on which the animal resides in the field
      */
     public Animal(Field field, Location location) {
     	this.field = field;
@@ -99,7 +97,7 @@ public abstract class Animal implements Actor
 	 
 	/**
 	 * Set the food value to a new food value
-	 * @param foodValue
+	 * @param foodValue the foodValue given
 	 */
 	public void feed(int foodValue){
 		int newFoodLevel = foodValue + this.foodLevel;
@@ -117,7 +115,7 @@ public abstract class Animal implements Actor
     public abstract Location findFood();
     /**
      * Give birth to new animals!
-     * @param newActors
+     * @param newActors the list to be filled with new actors
      */
     public abstract void giveBirth(List<Actor> newActors);
     /**
@@ -251,9 +249,9 @@ public abstract class Animal implements Actor
 
 	/**
 	 * Every animal is energy for another animal to live on. 
-	 * @param The value if being eaten!
+	 * @param foodValue The value if being eaten!
 	 */
-	public void setFoodValue(int foodLevel) {
+	public void setFoodValue(int foodValue) {
 		this.foodValue = foodValue;
 	}
 }

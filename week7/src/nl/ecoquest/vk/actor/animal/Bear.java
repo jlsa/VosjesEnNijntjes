@@ -15,8 +15,8 @@ import nl.ecoquest.vk.simulation.*;
 public class Bear extends Animal implements Actor {
 	/**
 	 * Constructor of the bear. Sets the default values 
-	 * @param field
-	 * @param location
+	 * @param field The Field on which the bear resides
+	 * @param location The location on the field
 	 */
 	public Bear(Field field, Location location)
 	{

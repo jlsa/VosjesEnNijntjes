@@ -33,14 +33,14 @@ public class PopulationGenerator
 		rabbitSettings.put("breedingAge", Integer.valueOf(5));
 		rabbitSettings.put("maxAge", Integer.valueOf(40));
 		rabbitSettings.put("breedingProbability", Double.valueOf(0.12));
-		rabbitSettings.put("maxLitterSize", Integer.valueOf(3));
+		rabbitSettings.put("maxLitterSize", Integer.valueOf(4));
 		rabbitSettings.put("foodValue", Integer.valueOf(4));
 		
 		foxSettings = new LinkedHashMap<String, Number>();
 		foxSettings.put("breedingAge", Integer.valueOf(10));
 		foxSettings.put("maxAge", Integer.valueOf(150));
 		foxSettings.put("breedingProbability", Double.valueOf(0.12));
-		foxSettings.put("maxLitterSize", Integer.valueOf(3));
+		foxSettings.put("maxLitterSize", Integer.valueOf(2));
 		foxSettings.put("foodValue", Integer.valueOf(6));
 		
 		bearSettings = new LinkedHashMap<String, Number>();
@@ -64,10 +64,10 @@ public class PopulationGenerator
 	
 	/**
 	 * This method generates a new instance from the given  
-	 * @param actorClass
-	 * @param field
-	 * @param location
-	 * @return
+	 * @param actorClass The actor class
+	 * @param field The field on which the animal should reside
+	 * @param location The position on the field
+	 * @return A new Animal
 	 */
 	public static Animal generateAnimal(Class<?> actorClass, Field field, Location location){
 		Animal actor = null;
@@ -91,8 +91,8 @@ public class PopulationGenerator
 	
 	/**
 	 * Sets the breeding age of the animal
-	 * @param actorClass
-	 * @param breedingAge
+	 * @param actorClass The actor class
+	 * @param breedingAge The breeding age
 	 */
 	public void setBreedingAge(Class<?> actorClass, int breedingAge) {
 		if(actorClass == Rabbit.class) {
@@ -109,7 +109,7 @@ public class PopulationGenerator
 	
 	/**
 	 * Gets the user defined values for breeding age
-	 * @param actorClass
+	 * @param actorClass The actor class
 	 * @return the breeding age for the given actor
 	 */
 	public int getBreedingAge(Class<?> actorClass) {
@@ -126,6 +126,11 @@ public class PopulationGenerator
 		return returnValue;
 	}
 	
+	/**
+	 * Set the max age to all actors of type
+	 * @param actorClass The actor class
+	 * @param maxAge The max age
+	 */
 	public void setMaxAge(Class<?> actorClass, int maxAge) {
 		if(actorClass == Rabbit.class) {
 			rabbitSettings.put("maxAge", Integer.valueOf(maxAge));
@@ -141,7 +146,7 @@ public class PopulationGenerator
 	
 	/**
 	 * Gets the user defined values for breeding age
-	 * @param actorClass
+	 * @param actorClass The actor class
 	 * @return the breeding age for the given actor
 	 */
 	public int getMaxAge(Class<?> actorClass) {
@@ -158,6 +163,11 @@ public class PopulationGenerator
 		return returnValue;
 	}
 	
+	/**
+	 * Set breeding probability
+	 * @param actorClass The actor class
+	 * @param breedingProbability The probability percentage
+	 */
 	public void setBreedingProbability(Class<?> actorClass, double breedingProbability) {
 		if(actorClass == Rabbit.class) {
 			rabbitSettings.put("breedingProbability", Double.valueOf(breedingProbability));
@@ -173,7 +183,7 @@ public class PopulationGenerator
 	
 	/**
 	 * Gets the user defined values for breeding age
-	 * @param actorClass
+	 * @param actorClass The breeding class
 	 * @return the breeding chance the given class has
 	 */
 	public double getBreedingProbability(Class<?> actorClass) {
@@ -190,6 +200,11 @@ public class PopulationGenerator
 		return returnValue;
 	}
 	
+	/**
+	 * Set the max litter size
+	 * @param actorClass the actor class
+	 * @param maxLitterSize the max amount of offspring
+	 */
 	public void setMaxLitterSize(Class<?> actorClass, int maxLitterSize) {
 		if(actorClass == Rabbit.class) {
 			rabbitSettings.put("maxLitterSize", Integer.valueOf(maxLitterSize));
@@ -204,7 +219,7 @@ public class PopulationGenerator
 	}
 	/**
 	 * Gets the user defined values for breeding age
-	 * @param actorClass
+	 * @param actorClass The actor class
 	 * @return the max offspring the animal can have
 	 */
 	public int getMaxLitterSize(Class<?> actorClass) {
@@ -221,6 +236,11 @@ public class PopulationGenerator
 		return returnValue;
 	}
 	
+	/**
+	 * Set the foodvalue of an actor
+	 * @param actorClass The actor class
+	 * @param foodValue The food value
+	 */
 	public void setFoodValue(Class<?> actorClass, int foodValue) {
 		if(actorClass == Rabbit.class) {
 			rabbitSettings.put("foodValue", Integer.valueOf(foodValue));
@@ -236,7 +256,7 @@ public class PopulationGenerator
 	
 	/**
 	 * Gets the food value if the given actor class is being eaten.
-	 * @param actorClass
+	 * @param actorClass The actor class
 	 * @return the food value
 	 */
 	public int getFoodValue(Class<?> actorClass) {
@@ -256,7 +276,7 @@ public class PopulationGenerator
 	/**
 	 * Let the population generator know about the model
 	 * so other methods can use it for updating their data to the actors
-	 * @param model
+	 * @param model The simulator model
 	 */
 	public void setModel(SimulatorModel model) {
 		this.model = model;

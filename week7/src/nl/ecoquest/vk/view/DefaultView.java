@@ -53,7 +53,8 @@ public class DefaultView extends JFrame implements Updateable{
 	
 	/**
 	 * Create the frame.
-	 * @param SimulatorModel
+	 * @param model The SimulatorModel 
+	 * @param fieldView The FieldView
 	 */
 	public DefaultView(SimulatorModel model, FieldView fieldView) {
 		this.setTitle("Foxes and Rabbits");

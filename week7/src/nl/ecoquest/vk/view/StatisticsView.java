@@ -28,7 +28,7 @@ public class StatisticsView extends JFrame implements Updateable{
 
 	/**
 	 * Create the frame.
-	 * @param SimulatorModel
+	 * @param model The simulator model
 	 */
 	public StatisticsView(SimulatorModel model) {
 		this.model = model;

@@ -40,6 +40,7 @@ public class OptionsView extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param model The simulator model
 	 */
 	public OptionsView(SimulatorModel model) {
 		this.model = model;

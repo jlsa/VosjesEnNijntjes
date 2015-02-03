@@ -36,7 +36,7 @@ public class OptionsController extends AbstractController implements ChangeListe
 	/**
 	 * Create the controller.
 	 * Model is a parameter because we need to edit it.
-	 * @param model
+	 * @param model The simulator model
 	 */
 	public OptionsController(SimulatorModel model) {
 		super(model);
@@ -64,8 +64,6 @@ public class OptionsController extends AbstractController implements ChangeListe
 			}
 		}
 	}
-	
-	//TODO update fields in animal
 	
 	private void rabbitEvents() {
 		if("rabbitBreedingAge".equals(name)){

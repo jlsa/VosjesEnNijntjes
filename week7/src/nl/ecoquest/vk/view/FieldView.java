@@ -24,7 +24,7 @@ public class FieldView extends AbstractView {
 	
 	/**
 	 * Fieldview, shows the field
-	 * @param model
+	 * @param model The simulator model
 	 */
 	public FieldView(SimulatorModel model) {
 		super(model);

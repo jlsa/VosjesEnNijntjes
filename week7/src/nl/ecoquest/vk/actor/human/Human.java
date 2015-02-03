@@ -21,8 +21,8 @@ public abstract class Human implements Actor {
 	
 	/**
 	 * Constructor
-	 * @param field
-	 * @param location
+	 * @param field The field the human resides on
+	 * @param location The location on the field
 	 */
 	public Human(Field field, Location location) {
 		this.field = field;

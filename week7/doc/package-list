@@ -1,0 +1,10 @@
+nl.ecoquest.vk.actor
+nl.ecoquest.vk.actor.animal
+nl.ecoquest.vk.actor.environment
+nl.ecoquest.vk.actor.human
+nl.ecoquest.vk.controller
+nl.ecoquest.vk.main
+nl.ecoquest.vk.model
+nl.ecoquest.vk.runner
+nl.ecoquest.vk.simulation
+nl.ecoquest.vk.view

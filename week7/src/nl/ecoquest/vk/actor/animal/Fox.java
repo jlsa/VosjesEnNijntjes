@@ -17,8 +17,8 @@ public class Fox extends Animal implements Actor {
 	
 	/**
 	 * The fox constructor
-	 * @param field
-	 * @param location
+	 * @param field The field on which the fox resides
+	 * @param location The location on the field
 	 */
 	 public Fox(Field field, Location location)
 	    {
@@ -30,7 +30,7 @@ public class Fox extends Animal implements Actor {
 	        foodValue = 6;
 	        age = rand.nextInt(maxAge);
 	        maxFoodLevel = 9;
-	        foodLevel = rand.nextInt(foodValue);
+	        foodLevel = 9;
 	    }
 	 
 	 @Override

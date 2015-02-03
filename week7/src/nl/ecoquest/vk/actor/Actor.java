@@ -10,7 +10,6 @@ import nl.ecoquest.vk.simulation.Location;
  * knows how to act, where it is on the field and if it's active or not.
  * 
  * @author Jeroen, Joel en Angela
- * @since 
  * @version 2015-02-01
  */
 public interface Actor {
@@ -47,7 +46,7 @@ public interface Actor {
 	
 	/**
 	 * Sets the field on which the actor resides.
-	 * @param field
+	 * @param field the Field
 	 */
 	public void setField(Field field);
 	

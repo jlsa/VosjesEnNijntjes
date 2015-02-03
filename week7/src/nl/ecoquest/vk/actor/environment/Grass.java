@@ -103,6 +103,7 @@ public class Grass implements Actor {
 	
 	/**
 	 * Grow to another location
+	 * @param newActors The list for new actors
 	 */
 	private void grow(List<Actor> newActors) {
 		Field field = getField();
