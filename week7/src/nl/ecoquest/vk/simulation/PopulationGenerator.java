@@ -30,25 +30,25 @@ public class PopulationGenerator
 	 */
 	private PopulationGenerator(){
 		rabbitSettings = new LinkedHashMap<String, Number>();
-		rabbitSettings.put("breedingAge", Integer.valueOf(Rabbit.breedingAge));
-		rabbitSettings.put("maxAge", Integer.valueOf(Rabbit.maxAge));
-		rabbitSettings.put("breedingProbability", Double.valueOf(Rabbit.breedingProbability));
-		rabbitSettings.put("maxLitterSize", Integer.valueOf(Rabbit.maxLitterSize));
-		rabbitSettings.put("foodValue", Integer.valueOf(Rabbit.foodValue));
+		rabbitSettings.put("breedingAge", Integer.valueOf(5));
+		rabbitSettings.put("maxAge", Integer.valueOf(40));
+		rabbitSettings.put("breedingProbability", Double.valueOf(0.12));
+		rabbitSettings.put("maxLitterSize", Integer.valueOf(3));
+		rabbitSettings.put("foodValue", Integer.valueOf(4));
 		
 		foxSettings = new LinkedHashMap<String, Number>();
-		foxSettings.put("breedingAge", Integer.valueOf(Fox.breedingAge));
-		foxSettings.put("maxAge", Integer.valueOf(Fox.maxAge));
-		foxSettings.put("breedingProbability", Double.valueOf(Fox.breedingProbability));
-		foxSettings.put("maxLitterSize", Integer.valueOf(Fox.maxLitterSize));
-		foxSettings.put("foodValue", Integer.valueOf(Fox.foodValue));
+		foxSettings.put("breedingAge", Integer.valueOf(10));
+		foxSettings.put("maxAge", Integer.valueOf(150));
+		foxSettings.put("breedingProbability", Double.valueOf(0.12));
+		foxSettings.put("maxLitterSize", Integer.valueOf(3));
+		foxSettings.put("foodValue", Integer.valueOf(6));
 		
 		bearSettings = new LinkedHashMap<String, Number>();
-		bearSettings.put("breedingAge", Integer.valueOf(Bear.breedingAge));
-		bearSettings.put("maxAge", Integer.valueOf(Bear.maxAge));
-		bearSettings.put("breedingProbability", Double.valueOf(Bear.breedingProbability));
-		bearSettings.put("maxLitterSize", Integer.valueOf(Bear.maxLitterSize));
-		bearSettings.put("foodValue", Integer.valueOf(Bear.foodValue));
+		bearSettings.put("breedingAge", Integer.valueOf(20));
+		bearSettings.put("maxAge", Integer.valueOf(200));
+		bearSettings.put("breedingProbability", Double.valueOf(0.07));
+		bearSettings.put("maxLitterSize", Integer.valueOf(2));
+		bearSettings.put("foodValue", Integer.valueOf(18));
 		
 		hunterSettings = new LinkedHashMap<String, Number>();
 	}

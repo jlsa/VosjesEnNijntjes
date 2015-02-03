@@ -19,15 +19,15 @@ import nl.ecoquest.vk.simulation.Randomizer;
 public abstract class Animal implements Actor 
 {
 	// The breeding age of the animal
-	public static int breedingAge = 5;
+	public int breedingAge = 5;
 	// The max age of the animal
-    public static int maxAge = 40;
+    public int maxAge = 40;
     // The breeding probability
-    public static double breedingProbability = 0.85;
+    public double breedingProbability = 0.85;
     // The max litter size of the animal
-    public static int maxLitterSize = 4;
+    public int maxLitterSize = 4;
     // The food value if being eaten.
-    public static int foodValue = 1;
+    public int foodValue = 1;
     // The age of the animal
     protected int age = 1;
     

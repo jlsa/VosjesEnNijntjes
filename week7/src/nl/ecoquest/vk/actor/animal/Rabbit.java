@@ -127,7 +127,7 @@ public class Rabbit extends Animal implements Sickness {
 		@Override
 		public void incrementSickness() {
 			if(isSick()) {
-				sicknessLevel+=2;
+				sicknessLevel+=0;
 				infectionRate += 0.01f;
 				//spreadSickness();
 				if(sicknessLevel >= maxSicknessLevel) {

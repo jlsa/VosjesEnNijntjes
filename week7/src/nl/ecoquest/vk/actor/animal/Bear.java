@@ -24,8 +24,8 @@ public class Bear extends Animal implements Actor {
 		alive = true;	
 		breedingAge = 20;
 		maxAge = 200;
-		breedingProbability = 0.07;
-		maxLitterSize = 2;
+		breedingProbability = 1;
+		maxLitterSize = 8;
 		foodValue = 18;
 		age = 1;
 		maxFoodLevel = 18;
