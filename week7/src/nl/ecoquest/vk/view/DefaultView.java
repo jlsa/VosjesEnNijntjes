@@ -181,7 +181,7 @@ public class DefaultView extends JFrame implements Updateable{
 		
 		try {
 			Icon logo;
-			logo = new ImageIcon(getClass().getResource("images/64ecoLogo.png"));
+			logo = new ImageIcon(getClass().getResource("images/64ecoQuestLogo.png"));
 			JLabel logoLabel = new JLabel(logo);
 			logoPanel.add(logoLabel);
 		} catch (Exception e) {
