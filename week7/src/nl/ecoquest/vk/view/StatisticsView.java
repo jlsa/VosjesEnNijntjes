@@ -62,6 +62,7 @@ public class StatisticsView extends JFrame implements Updateable{
 		graphView = new GraphView(model);
 		graphView.setVisible(true);
 		contentPane.add(graphView);
+		
 		setSize(getPreferredSize());
 	}
 

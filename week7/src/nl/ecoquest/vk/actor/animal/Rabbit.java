@@ -94,7 +94,7 @@ public class Rabbit extends Animal implements Sickness {
 		int births = breed();
 		for(int b = 0; b < births && free.size() > 0; b++) {
 			Location loc = free.remove(0);
-			Rabbit young = new Rabbit(field, loc);
+			Rabbit young = (Rabbit) PopulationGenerator.generateAnimal(Rabbit.class, field, loc);    
 			newRabbits.add(young);
 		}
 	}

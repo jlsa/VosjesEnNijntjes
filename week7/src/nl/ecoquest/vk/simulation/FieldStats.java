@@ -127,4 +127,18 @@ public class FieldStats
         }
         countsValid = true;
     }
+    
+    /**
+     * Get the number of individuals in the population of a given class.
+     * @return  An int with the number for this class.
+     */
+    public int getPopulationCount(Field field, Class<?> key)
+    {
+        if(!countsValid) {
+            generateCounts(field);
+        }
+
+        Counter counter = counters.get(key);
+        return counter.getCount();
+    }
 }

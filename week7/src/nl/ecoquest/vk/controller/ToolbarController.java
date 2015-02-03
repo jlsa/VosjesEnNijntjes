@@ -25,7 +25,7 @@ public class ToolbarController extends AbstractController {
 	}
 
 	private void addButtonListeners(){
-		view.addActionListeners(new Run(), new OneStep(), new Step100(), new Stop(), new Stats(), new Options());
+		view.addActionListeners(new Run(), new OneStep(), new Step100(), new Stop(), new Reset(), new Stats(), new Options());
 	}
 	
 	private class Run implements ActionListener{
@@ -61,6 +61,14 @@ public class ToolbarController extends AbstractController {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			model.stop();
+		}
+		
+	}
+	private class Reset implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			model.reset();
 		}
 		
 	}

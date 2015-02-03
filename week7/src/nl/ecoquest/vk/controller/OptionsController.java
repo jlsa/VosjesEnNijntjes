@@ -17,7 +17,11 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.event.*;
 
+import nl.ecoquest.vk.actor.animal.Rabbit;
+import nl.ecoquest.vk.actor.animal.Fox;
+import nl.ecoquest.vk.actor.animal.Bear;
 import nl.ecoquest.vk.model.*;
+import nl.ecoquest.vk.simulation.PopulationGenerator;
 
 /**
  * OptionsController is the controller meant to control the options window
@@ -63,8 +67,9 @@ public class OptionsController extends AbstractController implements ChangeListe
 	
 	//TODO update fields in animal
 	
-	private void rabbitEvents(){
+	private void rabbitEvents() {
 		if("rabbitBreedingAge".equals(name)){
+			PopulationGenerator.getInstance().setBreedingAge(Rabbit.class, 10);
 			System.out.println("rabbit breeding age changed!");
 		}else if ("rabbitMaxAge".equals(name)){
 			System.out.println("rabbit max age changed!");
@@ -75,13 +80,11 @@ public class OptionsController extends AbstractController implements ChangeListe
 		}else if ("rabbitFoodValue".equals(name)){
 			System.out.println("rabbit food value changed");
 		}
-		
 	}
-
 
 	private void foxEvents() {
 		if("foxBreedingAge".equals(name)){
-			System.out.println("fox breeding age changed!");
+			PopulationGenerator.getInstance().setBreedingAge(Fox.class, 10);
 		}else if ("foxMaxAge".equals(name)){
 			System.out.println("fox max age changed!");
 		}else if ("foxBabyChance".equals(name)){
@@ -95,7 +98,7 @@ public class OptionsController extends AbstractController implements ChangeListe
 
 	private void bearEvents() {
 		if("bearBreedingAge".equals(name)){
-			System.out.println("bear breeding age changed!");
+			PopulationGenerator.getInstance().setBreedingAge(Bear.class, 10);
 		}else if ("bearMaxAge".equals(name)){
 			System.out.println("bear max age changed!");
 		}else if ("bearBabyChance".equals(name)){

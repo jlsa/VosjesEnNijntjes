@@ -18,9 +18,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import nl.ecoquest.vk.actor.animal.Bear;
+import nl.ecoquest.vk.actor.animal.Fox;
+import nl.ecoquest.vk.actor.animal.Rabbit;
 import nl.ecoquest.vk.controller.OptionsController;
 import nl.ecoquest.vk.model.SimulatorModel;
 
@@ -76,6 +80,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner rabbitBreedingAge = new JSpinner();
 		rabbitBreedingAge.setName("rabbitBreedingAge");
+		rabbitBreedingAge.setValue(Rabbit.breedingAge);
 		lblRabbitBreedingAge.setLabelFor(rabbitBreedingAge);
 		rabbitBreedingAge.addChangeListener(new OptionsController(model));
 		rabbitPanel.add(rabbitBreedingAge);
@@ -86,6 +91,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner rabbitMaxAge = new JSpinner();
 		rabbitMaxAge.setName("rabbitMaxAge");
+		rabbitMaxAge.setValue(Rabbit.maxAge);
 		lblRabbitMaxAge.setLabelFor(rabbitMaxAge);
 		rabbitMaxAge.addChangeListener(new OptionsController(model));
 		rabbitPanel.add(rabbitMaxAge);
@@ -94,8 +100,12 @@ public class OptionsView extends JFrame {
 		lblRabbitBabyChance.setHorizontalAlignment(SwingConstants.TRAILING);
 		rabbitPanel.add(lblRabbitBabyChance);
 		
-		JSpinner rabbitBabyChance = new JSpinner();
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0.0,-1000.0 ,1000.0,0.1);
+		JSpinner rabbitBabyChance = new JSpinner(spinnerModel);
+		JSpinner.NumberEditor editor = new JSpinner.NumberEditor(rabbitBabyChance);
+		rabbitBabyChance.setEditor(editor);
 		rabbitBabyChance.setName("rabbitBabyChance");
+		rabbitBabyChance.setValue(Rabbit.breedingProbability);
 		rabbitBabyChance.addChangeListener(new OptionsController(model));
 		lblRabbitBabyChance.setLabelFor(rabbitBabyChance);
 		rabbitPanel.add(rabbitBabyChance);
@@ -106,6 +116,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner rabbitMaxBabies = new JSpinner();
 		rabbitMaxBabies.setName("rabbitMaxBabies");
+		rabbitMaxBabies.setValue(Rabbit.maxLitterSize);
 		rabbitMaxBabies.addChangeListener(new OptionsController(model));
 		lblRabbitMaxBabies.setLabelFor(rabbitMaxBabies);
 		rabbitPanel.add(rabbitMaxBabies);
@@ -116,6 +127,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner rabbitFoodValue = new JSpinner();
 		rabbitFoodValue.setName("rabbitFoodValue");
+		rabbitFoodValue.setValue(Rabbit.foodValue);
 		rabbitFoodValue.addChangeListener(new OptionsController(model));
 		lblRabbitFoodValue.setLabelFor(rabbitFoodValue);
 		rabbitPanel.add(rabbitFoodValue);
@@ -154,6 +166,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner foxBreedingAge = new JSpinner();
 		foxBreedingAge.setName("foxBreedingAge");
+		foxBreedingAge.setValue(Fox.breedingAge);
 		foxBreedingAge.addChangeListener(new OptionsController(model));
 		lblFoxBreedingAge.setLabelFor(foxBreedingAge);
 		foxPanel.add(foxBreedingAge);
@@ -164,6 +177,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner foxMaxAge = new JSpinner();
 		foxMaxAge.setName("foxMaxAge");
+		foxMaxAge.setValue(Fox.maxAge);
 		foxMaxAge.addChangeListener(new OptionsController(model));
 		lblFoxMaxAge.setLabelFor(foxMaxAge);
 		foxPanel.add(foxMaxAge);	
@@ -172,8 +186,12 @@ public class OptionsView extends JFrame {
 		lblFoxBabyChance.setHorizontalAlignment(SwingConstants.TRAILING);
 		foxPanel.add(lblFoxBabyChance);
 		
-		JSpinner foxBabyChance = new JSpinner();
-		foxBabyChance.setName("foxBabyChance");
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0.0,-1000.0 ,1000.0,0.1);
+		JSpinner foxBabyChance = new JSpinner(spinnerModel);
+		JSpinner.NumberEditor editor = new JSpinner.NumberEditor(foxBabyChance);
+		foxBabyChance.setEditor(editor);
+		foxBabyChance.setName("foxBabyChance"); 
+		foxBabyChance.setValue(Fox.breedingProbability);
 		foxBabyChance.addChangeListener(new OptionsController(model));
 		lblFoxBabyChance.setLabelFor(foxBabyChance);
 		foxPanel.add(foxBabyChance);
@@ -185,6 +203,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner foxMaxBabies = new JSpinner();
 		foxMaxBabies.setName("foxMaxBabies");
+		foxMaxBabies.setValue(Fox.maxLitterSize);
 		foxMaxBabies.addChangeListener(new OptionsController(model));
 		lblFoxMaxBabies.setLabelFor(foxMaxBabies);
 		foxPanel.add(foxMaxBabies);
@@ -195,6 +214,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner foxFoodValue = new JSpinner();
 		foxFoodValue.setName("foxFoodValue");
+		foxFoodValue.setValue(Fox.foodValue);
 		foxFoodValue.addChangeListener(new OptionsController(model));
 		lblFoxFoodValue.setLabelFor(foxFoodValue);
 		foxPanel.add(foxFoodValue);
@@ -218,6 +238,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner bearBreedingAge = new JSpinner();
 		bearBreedingAge.setName("bearBreedingAge");
+		bearBreedingAge.setValue(Bear.breedingAge);
 		bearBreedingAge.addChangeListener(new OptionsController(model));
 		bearPanel.add(bearBreedingAge);
 		
@@ -228,15 +249,21 @@ public class OptionsView extends JFrame {
 		
 		JSpinner bearMaxAge = new JSpinner();
 		bearMaxAge.setName("bearMaxAge");
+		bearMaxAge.setValue(Bear.maxAge);
 		bearMaxAge.addChangeListener(new OptionsController(model));
 		bearPanel.add(bearMaxAge);
+		
 		
 		JLabel lblBearBabyChance = new JLabel("Baby Chance");
 		lblBearBabyChance.setHorizontalAlignment(SwingConstants.TRAILING);
 		bearPanel.add(lblBearBabyChance);
 		
-		JSpinner bearBabyChance = new JSpinner();
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0.0,-1000.0 ,1000.0,0.1);
+		JSpinner bearBabyChance = new JSpinner(spinnerModel);
+		JSpinner.NumberEditor editor = new JSpinner.NumberEditor(bearBabyChance);
+		bearBabyChance.setEditor(editor);
 		bearBabyChance.setName("bearBabyChance");
+		bearBabyChance.setValue(Bear.breedingProbability);
 		bearBabyChance.addChangeListener(new OptionsController(model));
 		bearPanel.add(bearBabyChance);
 		
@@ -246,6 +273,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner bearMaxBabies = new JSpinner();
 		bearMaxBabies.setName("bearMaxBabies");
+		bearMaxBabies.setValue(Bear.maxLitterSize);
 		bearMaxBabies.addChangeListener(new OptionsController(model));
 		bearPanel.add(bearMaxBabies);
 		
@@ -255,6 +283,7 @@ public class OptionsView extends JFrame {
 		
 		JSpinner bearFoodValue = new JSpinner();
 		bearFoodValue.setName("bearFoodValue");
+		bearFoodValue.setValue(Bear.foodValue);
 		bearFoodValue.addChangeListener(new OptionsController(model));
 		bearPanel.add(bearFoodValue);
 		

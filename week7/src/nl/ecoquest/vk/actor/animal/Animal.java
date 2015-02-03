@@ -19,15 +19,15 @@ import nl.ecoquest.vk.simulation.Randomizer;
 public abstract class Animal implements Actor 
 {
 	// The breeding age of the animal
-	protected int breedingAge = 5;
+	public static int breedingAge = 5;
 	// The max age of the animal
-    protected int maxAge = 40;
+    public static int maxAge = 40;
     // The breeding probability
-    protected double breedingProbability = 0.85;
+    public static double breedingProbability = 0.85;
     // The max litter size of the animal
-    protected int maxLitterSize = 4;
+    public static int maxLitterSize = 4;
     // The food value if being eaten.
-    protected int foodValue = 1;
+    public static int foodValue = 1;
     // The age of the animal
     protected int age = 1;
     
@@ -250,16 +250,10 @@ public abstract class Animal implements Actor
 	}
 
 	/**
-	 * @return the foodLevel
+	 * Every animal is energy for another animal to live on. 
+	 * @param The value if being eaten!
 	 */
-	public int getFoodLevel() {
-		return foodLevel;
-	}
-
-	/**
-	 * @param foodLevel the foodLevel to set
-	 */
-	public void setFoodLevel(int foodLevel) {
-		this.foodLevel = foodLevel;
+	public void setFoodValue(int foodLevel) {
+		this.foodValue = foodValue;
 	}
 }

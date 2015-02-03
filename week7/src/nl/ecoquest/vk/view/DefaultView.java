@@ -42,6 +42,7 @@ public class DefaultView extends JFrame implements Updateable{
 	private JButton btnStep;
 	private JButton btnSteps;
 	private JButton btnStop;
+	private JButton btnReset;
 	private JButton btnStatistics;
 	private JButton btnOptions;
 	private JPanel buttonPanel;
@@ -139,6 +140,9 @@ public class DefaultView extends JFrame implements Updateable{
 		btnStop = new JButton("Stop");
 		buttonPanel.add(btnStop);
 		
+		btnReset = new JButton("Reset");
+		buttonPanel.add(btnReset);
+		
 		JSeparator separator = new JSeparator();
 		buttonPanel.add(separator);
 		
@@ -149,12 +153,18 @@ public class DefaultView extends JFrame implements Updateable{
 		buttonPanel.add(btnOptions);
 		}
 	
-	public void addActionListeners(ActionListener run, ActionListener oneStep, ActionListener step100, ActionListener stop, 
-									ActionListener stats, ActionListener options){
+	public void addActionListeners(ActionListener run, 
+									ActionListener oneStep, 
+									ActionListener step100, 
+									ActionListener stop,
+									ActionListener reset, 
+									ActionListener stats, 
+									ActionListener options){
 		btnRun.addActionListener(run);
 		btnStep.addActionListener(oneStep);
 		btnSteps.addActionListener(step100);
 		btnStop.addActionListener(stop);
+		btnReset.addActionListener(reset);
 		btnStatistics.addActionListener(stats);
 		btnOptions.addActionListener(options);
 	}

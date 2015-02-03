@@ -17,6 +17,7 @@ import nl.ecoquest.vk.simulation.Field;
 import nl.ecoquest.vk.simulation.FieldStats;
 import nl.ecoquest.vk.simulation.Location;
 import nl.ecoquest.vk.simulation.Randomizer;
+import nl.ecoquest.vk.simulation.PopulationGenerator;
 import nl.ecoquest.vk.view.FieldView;
 
 
@@ -57,7 +58,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	private boolean runInfinite;
 	
 	// the time in microseconds the thread sleeps each cycle (Cannot be lower then 10)
-	private int sleepTime = 10; // 1000 is 1 second
+	private int sleepTime = 100; // 1000 is 1 second
 	
 	private LinkedHashMap<Class<?>, Color> colors;
 		
@@ -123,6 +124,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	public void stop() 
 	{
 		run = false;
+		runInfinite = false;
 	}
 	
 	/**
@@ -130,6 +132,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	 */
 	public void reset()
 	{
+		stop();
 		step = 0;
 		actors.clear();
 		populate();
@@ -155,17 +158,17 @@ public class SimulatorModel extends AbstractModel implements Runnable
 			for(int col = 0; col < field.getWidth(); col++) {
 				if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
 					Location location = new Location(row, col);
-					Fox fox = new Fox(field, location);
+					Fox fox = (Fox) PopulationGenerator.generateAnimal(Fox.class, field, location);
 					actors.add(fox);
 				}
 				if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
 					Location location = new Location(row, col);
-					Rabbit rabbit = new Rabbit(field, location);
+					Rabbit rabbit = (Rabbit) PopulationGenerator.generateAnimal(Rabbit.class, field, location);//new Rabbit(field, location);
 					actors.add(rabbit);
 				}
 				if(rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
 					Location location = new Location(row, col);
-					Bear bear = new Bear(field, location);
+					Bear bear = (Bear) PopulationGenerator.generateAnimal(Bear.class, field, location);
 					actors.add(bear);
 				}
 				if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
@@ -218,8 +221,7 @@ public class SimulatorModel extends AbstractModel implements Runnable
 		}
 		
 		notifyViews();
-		System.out.println("updating");
-		
+		//System.out.println("updating");
 	}
 	
 	private void render(int col, int row, Color color) {
@@ -291,11 +293,22 @@ public class SimulatorModel extends AbstractModel implements Runnable
 	}
 
 	/**
+	 * Returns the colors used in the simulation
 	 * @return the colors
 	 */
 	public LinkedHashMap<Class<?>, Color> getColors() {
 		return colors;
 	}
 	
-	
+	/**
+	 * Returns the field statistics
+	 * @return field statistics.
+	 */
+	public FieldStats getFieldStats() {
+		return fieldStats;
+	}
+
+	public List<Actor> getActors() {
+		return actors;
+	}	
 }
